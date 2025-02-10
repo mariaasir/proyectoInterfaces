@@ -5,11 +5,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
@@ -19,70 +21,84 @@
    <children>
       <Pane prefHeight="629.0" prefWidth="400.0" style="-fx-background-color: white;">
          <children>
-            <Text fill="#131a8e" layoutX="157.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTRO">
+            <Text fill="#131a8e" layoutX="156.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTRO">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <ImageView fitHeight="159.0" fitWidth="158.0" layoutX="121.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="120.0" fitWidth="129.0" layoutX="141.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Imagenes/logo.jpg" />
                </image>
             </ImageView>
-            <TextField fx:id="nombre" layoutX="46.0" layoutY="290.0" prefHeight="25.0" prefWidth="117.0" />
-            <TextField fx:id="apellidos" layoutX="178.0" layoutY="290.0" prefHeight="25.0" prefWidth="202.0" />
-            <TextField fx:id="dni" layoutX="46.0" layoutY="338.0" prefHeight="25.0" prefWidth="135.0" />
-            <DatePicker fx:id="fechaNacimiento" layoutX="190.0" layoutY="338.0" prefHeight="25.0" prefWidth="189.0" />
-            <TextField fx:id="telefono" layoutX="46.0" layoutY="387.0" prefHeight="25.0" prefWidth="135.0" />
-            <TextField fx:id="email" layoutX="190.0" layoutY="387.0" prefHeight="25.0" prefWidth="189.0" />
-            <TextField fx:id="direccion" layoutX="46.0" layoutY="436.0" prefHeight="25.0" prefWidth="231.0" />
-            <TextField fx:id="codigoPostal" layoutX="285.0" layoutY="436.0" prefHeight="25.0" prefWidth="94.0" />
-            <Text fill="#0000009e" layoutX="46.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
+            <TextField fx:id="nombre" layoutX="44.0" layoutY="236.0" prefHeight="25.0" prefWidth="117.0" />
+            <TextField fx:id="apellidos" layoutX="176.0" layoutY="236.0" prefHeight="25.0" prefWidth="202.0" />
+            <TextField fx:id="dni" layoutX="44.0" layoutY="284.0" prefHeight="25.0" prefWidth="135.0" />
+            <DatePicker fx:id="fechaNacimiento" layoutX="188.0" layoutY="284.0" prefHeight="25.0" prefWidth="189.0" />
+            <TextField fx:id="telefono" layoutX="44.0" layoutY="333.0" prefHeight="25.0" prefWidth="135.0" />
+            <TextField fx:id="email" layoutX="188.0" layoutY="333.0" prefHeight="25.0" prefWidth="189.0" />
+            <TextField fx:id="direccion" layoutX="44.0" layoutY="382.0" prefHeight="25.0" prefWidth="231.0" />
+            <TextField fx:id="codigoPostal" layoutX="283.0" layoutY="382.0" prefHeight="25.0" prefWidth="94.0" />
+            <Text fill="#0000009e" layoutX="44.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
                <font>
                   <Font size="9.0" />
                </font>
             </Text>
-            <Text fill="#0000009e" layoutX="181.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellidos">
+            <Text fill="#0000009e" layoutX="179.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellidos">
                <font>
                   <Font size="9.0" />
                </font>
             </Text>
-            <Text fill="#0000009e" layoutX="49.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DNI / NIE">
+            <Text fill="#0000009e" layoutX="47.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DNI / NIE">
                <font>
                   <Font size="9.0" />
                </font>
             </Text>
-            <Text fill="#0000009e" layoutX="193.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de Nacimiento">
+            <Text fill="#0000009e" layoutX="191.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de Nacimiento">
                <font>
                   <Font size="9.0" />
                </font>
             </Text>
-            <Text fill="#0000009e" layoutX="49.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de Teléfono">
+            <Text fill="#0000009e" layoutX="47.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de Teléfono">
                <font>
                   <Font size="9.0" />
                </font>
             </Text>
-            <Text fill="#0000009e" layoutX="192.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo Electrónico">
+            <Text fill="#0000009e" layoutX="190.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo Electrónico">
                <font>
                   <Font size="9.0" />
                </font>
             </Text>
-            <Text fill="#0000009e" layoutX="49.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirección">
+            <Text fill="#0000009e" layoutX="47.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirección">
                <font>
                   <Font size="9.0" />
                </font>
             </Text>
-            <Text fill="#0000009e" layoutX="288.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Código Postal">
+            <Text fill="#0000009e" layoutX="286.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Código Postal">
                <font>
                   <Font size="9.0" />
                </font>
             </Text>
-            <TextFlow fx:id="textFlow" layoutX="54.0" layoutY="491.0" prefHeight="27.0" prefWidth="293.0">
+            <TextFlow fx:id="textFlow" layoutX="54.0" layoutY="568.0" prefHeight="27.0" prefWidth="293.0">
                <children>
                   <Label fx:id="crearCuenta" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="168.0" text="¿Ya tienes cuenta?" textAlignment="CENTER" />
                   <Button fx:id="createAccount" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Iniciar Sesión" textAlignment="CENTER" textFill="#131a8e" />
                </children>
             </TextFlow>
+            <PasswordField fx:id="password" layoutX="85.0" layoutY="453.0" prefHeight="25.0" prefWidth="231.0" />
+            <PasswordField fx:id="password1" layoutX="85.0" layoutY="488.0" prefHeight="25.0" prefWidth="231.0" />
+            <Text fill="#0000009d" layoutX="140.0" layoutY="441.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Establezca su contraseña">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
+            <Line endX="91.20001220703125" endY="3.0517578125E-5" layoutX="46.0" layoutY="438.0" startX="-7.700000762939453" startY="3.0517578125E-5" stroke="#0000009e" />
+            <Line endX="91.20001220703125" endY="3.0517578125E-5" layoutX="271.0" layoutY="438.0" startX="-7.700000762939453" startY="3.0517578125E-5" stroke="#0000009e" />
+            <Button fx:id="botonRegistrarse" layoutX="133.0" layoutY="526.0" mnemonicParsing="false" onMouseClicked="#registrarse" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px;" text="REGISTRARSE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <MenuButton fx:id="idiomas" layoutX="309.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Idiomas" textFill="#131a8e">
