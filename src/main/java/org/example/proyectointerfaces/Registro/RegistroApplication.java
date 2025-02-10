@@ -1,4 +1,4 @@
-package org.example.proyectointerfaces;
+package org.example.proyectointerfaces.Registro;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class RegistroApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(RegistroApplication.class.getResource("/org/example/proyectointerfaces/registro.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 646);
+        stage.setTitle("Registro");
         stage.setScene(scene);
         stage.show();
     }

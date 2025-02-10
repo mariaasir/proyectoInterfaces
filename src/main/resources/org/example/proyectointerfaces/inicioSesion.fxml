@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="629.0" prefWidth="400.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fitHeight="159.0" fitWidth="158.0" layoutX="121.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Imagenes/logo.jpg" />
+               </image>
+            </ImageView>
+            <TextField fx:id="usuario" layoutX="88.0" layoutY="309.0" prefHeight="31.0" prefWidth="225.0" />
+            <PasswordField fx:id="password" layoutX="88.0" layoutY="373.0" prefHeight="31.0" prefWidth="225.0" />
+            <Text fill="#131a8e" layoutX="123.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INICIO DE SESIÓN">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0000009d" layoutX="88.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Text>
+            <Text fill="#0000009d" layoutX="88.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Text>
+            <TextFlow fx:id="textFlow" layoutX="53.0" layoutY="434.0" prefHeight="27.0" prefWidth="293.0">
+               <children>
+                  <Label fx:id="crearCuenta" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="168.0" text="¿No tienes cuenta?" textAlignment="CENTER" />
+                  <Button fx:id="createAccount" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Registrarse" textAlignment="CENTER" textFill="#131a8e" />
+               </children>
+            </TextFlow>
+            <MenuButton fx:id="idiomas" layoutX="309.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Idiomas" textFill="#131a8e">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Action 2" />
+               </items>
+            </MenuButton>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
