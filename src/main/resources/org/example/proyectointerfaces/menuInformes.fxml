@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="629.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyectointerfaces.SelectorInformes.SelectorInformesController">
+
+    <children>
+        <!-- Contenedor principal  -->
+        <Pane prefHeight="629.0" prefWidth="400.0" style="-fx-background-color: white;">
+            <children>
+                <!-- Logo Orion-->
+                <ImageView fitHeight="142.0" fitWidth="159.0" layoutX="136.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Imagenes/logo.jpg" />
+                    </image>
+                </ImageView>
+
+                <!-- Título de la página -->
+                <Text fill="#131a8e" layoutX="87.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INFORMES ORIÓN" textAlignment="CENTER" wrappingWidth="224.31365966796875">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Text>
+
+                <!-- Menú desplegable para seleccionar el informe deseado (posibilidad de cambiar butones) -->
+                <MenuButton fx:id="tipoInforme" layoutX="135.0" layoutY="315.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;" text="Seleccionar Informe" textFill="#131a8e">
+                    <!-- <items>
+                         <MenuItem mnemonicParsing="false" text="Informe de X" />
+                         <MenuItem mnemonicParsing="false" text="Informe de Y" />
+                         <MenuItem mnemonicParsing="false" text="Informe de Z" />
+                     </items> -->
+                </MenuButton>
+
+                <!-- Botón para confirmar  -->
+                <Button fx:id="botonConfirmar" layoutX="125.0" layoutY="367.0" mnemonicParsing="false" onAction="#confirmarSeleccion" prefHeight="30.0" prefWidth="170.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="CONFIRMAR" />
+            </children>
+        </Pane>
+
+        <!-- Menú desplegable de idiomas -->
+        <MenuButton fx:id="idiomas" layoutX="300.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Idiomas" textFill="#131a8e">
+            <!-- <items>
+                 <MenuItem mnemonicParsing="false" text="Español" />
+                 <MenuItem mnemonicParsing="false" text="Inglés" />
+             </items> -->
+         </MenuButton>
+     </children>
+ </AnchorPane>
