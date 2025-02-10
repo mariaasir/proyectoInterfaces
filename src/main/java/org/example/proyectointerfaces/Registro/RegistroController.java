@@ -1,10 +1,11 @@
 package org.example.proyectointerfaces.Registro;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
+import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDTO;
+
+import java.time.LocalDate;
 
 public class RegistroController {
     @FXML
@@ -27,6 +28,13 @@ public class RegistroController {
 
     @FXML
     private DatePicker fechaNacimiento;
+
+    @FXML
+    private PasswordField password;
+
+    @FXML
+    private PasswordField password1;
+
 
 
     @FXML
@@ -58,6 +66,24 @@ public class RegistroController {
 
     private void cambiarIdioma(String idiomaSeleccionado) {
 
+
+    }
+
+
+    public void registrarse(){
+        String nombre = this.nombre.getText();
+        String apellidos = this.apellidos.getText();
+        String dni = this.dni.getText();
+        String telefono = this.telefono.getText();
+        String email = this.email.getText();
+        String direccion = this.direccion.getText();
+        String codigoPostal = this.codigoPostal.getText();
+        String password = this.password.getText();
+        LocalDate fechaNacimiento = this.fechaNacimiento.getValue();
+
+        TutoresLegalesDTO tutorLegal = new TutoresLegalesDTO(nombre,apellidos,dni,fechaNacimiento,telefono,email,direccion,codigoPostal, password);
+        TutoresLegalesDAO tutoresLegalesDAO = new TutoresLegalesDAO();
+        tutoresLegalesDAO.insertTutorLegal(tutorLegal);
 
     }
 
