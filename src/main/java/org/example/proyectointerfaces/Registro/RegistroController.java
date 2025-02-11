@@ -94,7 +94,6 @@ public class RegistroController {
 
         // Si todos los campos están vacíos, mostrar el mensaje global
         if (todosCamposVacios) {
-            errorGlobal.setText("Todos los campos deben estar rellenos.");
             errorGlobal.setVisible(true);
             return; // Terminar el método para no continuar con la validación
         } else {
@@ -104,49 +103,41 @@ public class RegistroController {
 
         // Validaciones individuales para cada campo
         if (nombre.isEmpty()) {
-            errorNombre.setText("El nombre es obligatorio.");
             errorNombre.setVisible(true);
             hayErrores = true;
         }
 
         if (apellidos.isEmpty()) {
-            errorApellidos.setText("Los apellidos son obligatorios.");
             errorApellidos.setVisible(true);
             hayErrores = true;
         }
 
         if (!dni.matches("\\d{8}[A-Za-z]")) {
-            errorDNI.setText("Formato incorrecto (Ej: 12345678A).");
             errorDNI.setVisible(true);
             hayErrores = true;
         }
 
         if (!telefono.matches("\\d{9}")) {
-            errorTelefono.setText("Debe tener 9 dígitos.");
             errorTelefono.setVisible(true);
             hayErrores = true;
         }
 
         if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-            errorEmail.setText("Correo inválido.");
             errorEmail.setVisible(true);
             hayErrores = true;
         }
 
         if (direccion.isEmpty()) {
-            errorDireccion.setText("La dirección es obligatoria.");
             errorDireccion.setVisible(true);
             hayErrores = true;
         }
 
         if (!codigoPostal.matches("\\d{5}")) {
-            errorCodigoPostal.setText("Código postal inválido.");
             errorCodigoPostal.setVisible(true);
             hayErrores = true;
         }
 
         if (password.length() < 6) {
-            errorPassword.setText("Mínimo 6 caracteres.");
             errorPassword.setVisible(true);
             hayErrores = true;
         }
