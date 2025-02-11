@@ -1,40 +1,37 @@
 package org.example.proyectointerfaces.Informes;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.HashMap;
-import java.util.Map;
 
-public class InformeZController {
+public class InformeSeccionController {
 
     @FXML
-    private TextField doctorField;
+    private ComboBox<String> seccionComboBox;
 
     @FXML
-    private TextField departamentoField;
+    private Button generarInformeButton;
 
+    @FXML
+    private Button volverButton;
 
     @FXML
     private void generarInforme() {
-        //try {
+        String seleccionada = seccionComboBox.getValue();
 
-
-        //CAMBIAR
-        String doctor = doctorField.getText();
-        String departamento = departamentoField.getText();
-
-        if (doctor.isEmpty() || departamento.isEmpty()) {
-            System.out.println("Por favor, completa todos los campos.");
+        if (seleccionada == null) {
+            System.out.println("Por favor, selecciona una sección.");
             return;
         }
+        System.out.println("Generando informe para la sección: " + seleccionada);
+    }
             /*
             // Conexión con la base de datos
             Class.forName("org.mariadb.jdbc.Driver");
@@ -66,6 +63,24 @@ public class InformeZController {
         System.out.println("Generando informe Z con Doctor: " + doctor + " y Departamento: " + departamento);
     }
     */
+            @FXML
+            private void volverASelector(ActionEvent event) {
+                try {
+                    // Cargar la pantalla del selector de informes
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/menuInformes.fxml"));
+                    Parent root = loader.load();
+
+                    // Obtener la ventana actual y cerrarla
+                    Stage stageActual = (Stage) volverButton.getScene().getWindow();
+                    stageActual.setScene(new Scene(root));
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Error al volver a la pantalla de selección de informes.");
+                }
     }
-}
+
+    }
+
+
 

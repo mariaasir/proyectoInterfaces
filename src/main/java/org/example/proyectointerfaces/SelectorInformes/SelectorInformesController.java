@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Button;
@@ -25,6 +26,9 @@ public class SelectorInformesController {
     @FXML
     private Button botonConfirmar;
 
+  //  private String informeSeleccionado = null;
+
+
     @FXML
     private Text textoInformes;
 
@@ -34,7 +38,7 @@ public class SelectorInformesController {
     // Creación de los elementos del menú
     private MenuItem informeX = new MenuItem("Informe de X");
     private MenuItem informeY = new MenuItem("Informe de Y");
-    private MenuItem informeZ = new MenuItem("Informe de Z");
+    private MenuItem informeZ = new MenuItem("Informe de Secciones");
 
     private MenuItem espaniol = new MenuItem("Español");
     private MenuItem ingles = new MenuItem("Inglés");
@@ -45,9 +49,9 @@ public class SelectorInformesController {
         tipoInforme.getItems().addAll(informeX, informeY, informeZ);
 
         // Agregar eventos a cada informe para actualizar el texto del MenuButton
-        informeX.setOnAction(event -> tipoInforme.setText("Informe de X "));
+        informeX.setOnAction(event -> tipoInforme.setText("Informe de X"));
         informeY.setOnAction(event -> tipoInforme.setText("Informe de Y"));
-        informeZ.setOnAction(event -> tipoInforme.setText("Informe de Z"));
+        informeZ.setOnAction(event -> tipoInforme.setText("Informe de Secciones"));
 
         //Agregar los idiomas al MenuButton
          idiomas.getItems().addAll(espaniol, ingles);
@@ -62,13 +66,13 @@ public class SelectorInformesController {
             String selectedInforme = tipoInforme.getText();
 
           if("Informe de X".equals(selectedInforme)) {
-              cargarPantalla("/fxml/informeX.fxml");
+              cargarPantalla("/org/example/proyectointerfaces/informeX.fxml");
           } else if("Informe de Y".equals(selectedInforme)) {
-              cargarPantalla("/fxml/informeY.fxml");
-          }else if("Informe de Z".equals(selectedInforme)) {
-              cargarPantalla("/fxml/informeZ.fxml");
+              cargarPantalla("/org/example/proyectointerfaces/informeY.fxml");
+          }else if("Informe de Secciones".equals(selectedInforme)) {
+              cargarPantalla("/org/example/proyectointerfaces/informeSecciones.fxml");
           }else {
-              System.out.println("Por favor seleccione un informe para generar.");
+              mostrarAlerta();
           }
         }
 
@@ -88,18 +92,27 @@ public class SelectorInformesController {
                 break;
 
         }
+
+
+    }
+    private void mostrarAlerta() {
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setTitle("Selección requerida");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Por favor, selecciona un informe antes de continuar.");
+        alerta.showAndWait();
     }
     private void cargarPantalla(String rutaFXML) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFXML));
             Parent root = loader.load();
-            Stage stage = new Stage();
+            Stage stage = (Stage) tipoInforme.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error al cargar la pantalla: " + rutaFXML);
         }
     }
+
 
 }
