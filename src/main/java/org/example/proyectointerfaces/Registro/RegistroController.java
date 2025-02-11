@@ -1,10 +1,15 @@
 package org.example.proyectointerfaces.Registro;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDTO;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class RegistroController {
@@ -163,7 +168,26 @@ public class RegistroController {
         alert.setTitle("Credenciales");
         alert.setContentText("Su usuario es su DNI y la contraseña la que ha establecido");
         alert.show();
+
+        // Cerrar la ventana de registro y abrir la de inicio de sesión
+        try {
+            // Obtener la ventana actual y cerrarla
+            Stage stage = (Stage) this.nombre.getScene().getWindow();
+            stage.close();
+
+            // Cargar la ventana de inicio de sesión
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/inicioSesion.fxml"));
+            Parent root = loader.load();
+            Stage loginStage = new Stage();
+            loginStage.setTitle("Iniciar Sesión");
+            loginStage.setScene(new Scene(root, 400, 600));
+            loginStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
 
     /**

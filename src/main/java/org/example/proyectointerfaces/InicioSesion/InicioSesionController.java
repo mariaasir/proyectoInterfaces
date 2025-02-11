@@ -1,12 +1,18 @@
 package org.example.proyectointerfaces.InicioSesion;
 
+import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.example.proyectointerfaces.Monitores.MonitoresDAO;
 import org.example.proyectointerfaces.Registro.RegistroController;
 import org.example.proyectointerfaces.SelectorInformes.SelectorInformesController;
@@ -17,6 +23,8 @@ import org.example.proyectointerfaces.VentanaTutoresLegales.VentanaTutoresContro
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class InicioSesionController {
     @FXML
@@ -71,6 +79,69 @@ public class InicioSesionController {
     }
 
 
+    //Pantalla de carga de Orion con su logotipo.
+    private void pantallaCarga() {
+        Stage cargaStage = new Stage();
+        VBox cargaVBox = new VBox();
+        cargaVBox.setSpacing(20);
+        cargaVBox.setStyle("-fx-background-color: white; -fx-alignment: center;");
+
+        // Cargar la imagen
+        Image cargaLogoOrion = new Image(getClass().getResourceAsStream("/org/example/proyectointerfaces/Imagenes/estrellas.jpg"));
+        ImageView cargaImagen = new ImageView(cargaLogoOrion);
+        cargaImagen.setFitWidth(150);
+        cargaImagen.setFitHeight(150);
+
+        // Crear la animación de rebote en la imagen
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(1), cargaImagen);
+        scaleTransition.setCycleCount(ScaleTransition.INDEFINITE);
+        scaleTransition.setInterpolator(javafx.animation.Interpolator.EASE_BOTH);
+        scaleTransition.setFromX(1.0);
+        scaleTransition.setToX(1.2);
+        scaleTransition.setFromY(1.0);
+        scaleTransition.setToY(1.2);
+        scaleTransition.setAutoReverse(true);
+        scaleTransition.play(); // Iniciar la animación
+
+        // Etiqueta de carga con efecto de desvanecimiento
+        Label loadingLabel = new Label("Cargando, por favor espere...");
+        loadingLabel.setStyle("-fx-text-fill: #131a8e; -fx-font-size: 18px; -fx-font-weight: bold;");
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), loadingLabel);
+        fadeTransition.setCycleCount(FadeTransition.INDEFINITE);
+        fadeTransition.setFromValue(0.5);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setAutoReverse(true);
+        fadeTransition.play(); // Iniciar la animación
+
+        // Añadir elementos al VBox
+        cargaVBox.getChildren().addAll(cargaImagen, loadingLabel);
+
+        // Crear la escena y configurarla
+        Scene loadingScene = new Scene(cargaVBox, 400, 629);
+        cargaStage.setScene(loadingScene);
+        cargaStage.setTitle("Cargando...");
+        cargaStage.initModality(Modality.APPLICATION_MODAL);
+        cargaStage.show();
+
+        // Usar un ExecutorService para manejar la espera en un hilo separado
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(() -> {
+            try {
+                Thread.sleep(5000); // Mantener la pantalla de carga por 5 segundos
+                Platform.runLater(() -> {
+                    cargaStage.close(); // Cerrar la pantalla de carga en el hilo de JavaFX
+                    nuevaPagina(); // Cargar la nueva página
+                });
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                executor.shutdown();
+            }
+        });
+    }
+
+
 
     //Cargar una nueva página cuando haces click en el botón de INICIAR SESIÓN.
     //Si el DNI introducido coincide con un Tutor Legal ( que no tiene permisos para generar informes,
@@ -78,6 +149,7 @@ public class InicioSesionController {
     //Si el DNI coincide con un Monitor ( que SI tiene permisos para generar informes, la página te llevará a la ventana de generar informes).
     @FXML
     public void nuevaPagina() {
+
 
         if (usuario.getText().isEmpty() || password.getText().isEmpty()) {
             errorGlobal.setText("Ningún campo puede estar vacio");
@@ -128,25 +200,21 @@ public class InicioSesionController {
                 errorPassword.setVisible(true);
                 password.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
             } else {
-
-
-                FXMLLoader cargaLI = new FXMLLoader(getClass().
-                        getResource("/org/example/proyectointerfaces/menuInformes.fxml"));
-                Parent root = null;
-                try {
-                    root = cargaLI.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                //Inicia el controlador
-                SelectorInformesController controladorLI = cargaLI.getController();
-                //Crea un nuevo escenario
-                Stage escenarioSecundario = new Stage();
-                escenarioSecundario.initModality(Modality.APPLICATION_MODAL);
-                escenarioSecundario.setScene(new Scene(root));
-                Stage ventanaActual = (Stage) usuario.getScene().getWindow();
-                ventanaActual.close();      //Cierra la ventana actual
-                escenarioSecundario.showAndWait();      //Muestra el nuevo escenario
+                Platform.runLater(() -> {
+                    try {
+                        FXMLLoader cargaLI = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/menuInformes.fxml"));
+                        Parent root = cargaLI.load();
+                        SelectorInformesController controladorLI = cargaLI.getController();
+                        Stage escenarioSecundario = new Stage();
+                        escenarioSecundario.initModality(Modality.APPLICATION_MODAL);
+                        escenarioSecundario.setScene(new Scene(root));
+                        Stage ventanaActual = (Stage) usuario.getScene().getWindow();
+                        ventanaActual.close();
+                        escenarioSecundario.showAndWait();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         }
 
