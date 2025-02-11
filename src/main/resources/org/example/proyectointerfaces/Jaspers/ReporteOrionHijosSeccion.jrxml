@@ -1,0 +1,270 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="ReprotOrionGeneral" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ae7d825a-c283-4511-a3fb-6316f87ee295">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OrionBD"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="Seccion" class="java.lang.String"/>
+	<query language="sql"><![CDATA[SELECT * 
+FROM hijos
+WHERE Seccion_Nombre =  $P{Seccion} ]]></query>
+	<field name="Id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hijos"/>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hijos"/>
+	</field>
+	<field name="Apellidos" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Apellidos"/>
+		<property name="com.jaspersoft.studio.field.label" value="Apellidos"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hijos"/>
+	</field>
+	<field name="DNI_NIE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DNI_NIE"/>
+		<property name="com.jaspersoft.studio.field.label" value="DNI_NIE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hijos"/>
+	</field>
+	<field name="Fecha_Nacimiento" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="Fecha_Nacimiento"/>
+		<property name="com.jaspersoft.studio.field.label" value="Fecha_Nacimiento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hijos"/>
+	</field>
+	<field name="Direccion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Direccion"/>
+		<property name="com.jaspersoft.studio.field.label" value="Direccion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hijos"/>
+	</field>
+	<field name="Codigo_Postal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Codigo_Postal"/>
+		<property name="com.jaspersoft.studio.field.label" value="Codigo_Postal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hijos"/>
+	</field>
+	<field name="Telefono_Emergencia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Telefono_Emergencia"/>
+		<property name="com.jaspersoft.studio.field.label" value="Telefono_Emergencia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hijos"/>
+	</field>
+	<field name="Seccion_Nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Seccion_Nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="Seccion_Nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="hijos"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="150" splitType="Stretch">
+		<element kind="frame" uuid="639476a0-2780-4fc4-ac5d-ce8138c35144" stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="800" height="150" backcolor="#030303">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<element kind="staticText" uuid="073a2d77-49fe-4874-8a1f-57724b855935" x="20" y="40" width="640" height="70" forecolor="#FFFFFF" fontSize="45.0" hTextAlign="Left">
+				<text><![CDATA[Asociación Juvenil Grupo Orión]]></text>
+			</element>
+			<element kind="staticText" uuid="5735bbe4-eff8-4aa9-bb57-0a12f2268e0e" x="20" y="20" width="230" height="20" forecolor="#FFFFFF">
+				<text><![CDATA[AVDA. REYES CATÓLICOS, 35   28904 Getafe]]></text>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			</element>
+			<element kind="image" uuid="83d5af34-4887-449b-b14a-f6c202c5f1e8" x="360" y="0" width="75" height="75">
+				<expression><![CDATA["estrellaPremSinFondo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			</element>
+			<element kind="image" uuid="7deba2c8-345e-41c5-934e-2dd1ccf1db4f" x="31" y="90" width="50" height="50">
+				<expression><![CDATA["estrellaPremSinFondo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="image" uuid="9b613951-df86-4675-a72f-4cb23b2558db" x="197" y="81" width="55" height="55">
+				<expression><![CDATA["estrellaPremSinFondo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="image" uuid="2ade719e-8ff6-4f04-8895-7cfb469669e1" x="505" y="74" width="60" height="60">
+				<expression><![CDATA["estrellaPremSinFondo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="image" uuid="4c71bc1b-5390-4cb4-8d23-065033a534f0" x="567" y="8" width="40" height="40">
+				<expression><![CDATA["estrellaPremSinFondo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="image" uuid="890df1ca-eca9-448e-9e0c-5bd48a58d312" x="278" y="10" width="30" height="30">
+				<expression><![CDATA["estrellaPremSinFondo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="image" uuid="6a44c8c1-63b3-47c7-b984-31029a2ce58e" x="387" y="96" width="50" height="50">
+				<expression><![CDATA["estrellaPremSinFondo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="image" uuid="31a91410-ecc2-4ee8-b1ae-b5c79c1255a6" x="660" y="10" width="130" height="130">
+				<expression><![CDATA["logoOrionSinFondo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="image" uuid="9b526e99-1dc9-4f95-9081-56ef7acbe18f" x="480" y="25" width="30" height="30">
+				<expression><![CDATA["estrellaPremSinFondo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="image" uuid="aa28bbc3-a525-4689-ae3a-81b73c5af272" x="302" y="98" width="30" height="30">
+				<expression><![CDATA["estrellaPremSinFondo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</title>
+	<pageHeader height="35" splitType="Stretch"/>
+	<columnHeader height="80" splitType="Stretch">
+		<element kind="staticText" uuid="7760e549-40b4-4fc3-aa5f-58768e38031a" x="30" y="30" width="100" height="30">
+			<text><![CDATA[ID]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="09d77107-6c66-4158-8457-bdf31f7c0faa"/>
+			<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+		</element>
+		<element kind="staticText" uuid="61ab9bbc-3c64-42de-941e-6c00b7965732" x="90" y="30" width="100" height="30">
+			<text><![CDATA[Nombre]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5be9d009-b0e4-4521-abc9-9b102454daa0"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+		</element>
+		<element kind="staticText" uuid="4bbe47ca-1bce-4055-bc5c-b3dd3ed93ee0" x="150" y="30" width="100" height="30">
+			<text><![CDATA[Apellidos]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7648340-cc62-47e4-9e70-e1eaf9b18fca"/>
+		</element>
+		<element kind="staticText" uuid="fb8c38e6-8e6d-4537-bb36-4a4407486f01" x="260" y="30" width="100" height="30">
+			<text><![CDATA[DNI/NIE]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9a30c208-7abf-46bc-8b48-b1812f7ee3a7"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+		</element>
+		<element kind="staticText" uuid="ff7aa488-d5af-434c-b8e1-3ba3fc5673a4" x="355" y="30" width="100" height="30">
+			<text><![CDATA[Fecha de nacimiento]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da3bba1e-74da-4792-93e9-f70a67e6f427"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+		</element>
+		<element kind="staticText" uuid="d6092162-ef39-45fc-9926-333ddc383796" x="470" y="30" width="100" height="30">
+			<text><![CDATA[Direccion]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8832af86-3132-429b-9f90-379a2a059baa"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+		</element>
+		<element kind="staticText" uuid="b70c8d36-87c5-460f-97ab-e5aed196cea1" x="575" y="30" width="100" height="30">
+			<text><![CDATA[Codigo postal]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="359e8770-f101-4cc3-adce-bd076139abdc"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+		</element>
+		<element kind="staticText" uuid="fb9d551b-b1bb-4685-beb4-7505cca8a554" x="660" y="30" width="120" height="30">
+			<text><![CDATA[Telefono de emergencia]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="23bf7fc4-852d-4a4a-a157-fa4b78c6cbcb"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+		</element>
+		<element kind="staticText" uuid="d5e8a4db-19d2-4c3c-95e9-980ca2fabec6" x="15" y="0" width="100" height="30" fontSize="12.0">
+			<text><![CDATA[Sección]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="369f202d-2cc3-4426-8bf6-e906191219c9"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+		</element>
+		<element kind="frame" uuid="a46f92d2-47bf-4466-b747-e476ae930f89" mode="Opaque" x="0" y="50" width="800" height="5" forecolor="#000000" backcolor="#030000">
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="textField" uuid="b6fff4c3-3aac-4179-847d-41956b8af6ca" x="65" y="0" width="100" height="30" fontSize="12.0">
+			<expression><![CDATA[$F{Seccion_Nombre}]]></expression>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="369f202d-2cc3-4426-8bf6-e906191219c9"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<element kind="textField" uuid="a2d0a589-a8ec-4f24-8905-377336ae166e" x="90" y="0" width="100" height="30">
+				<expression><![CDATA[$F{Nombre}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5be9d009-b0e4-4521-abc9-9b102454daa0"/>
+			</element>
+			<element kind="textField" uuid="d0494edb-027e-434c-b204-0ea74e2beb97" x="150" y="0" width="100" height="30">
+				<expression><![CDATA[$F{Apellidos}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7648340-cc62-47e4-9e70-e1eaf9b18fca"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="textField" uuid="31f171e3-0fe7-4eb2-8fec-89b32782374e" x="260" y="0" width="100" height="30" blankWhenNull="true">
+				<expression><![CDATA[$F{DNI_NIE}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9a30c208-7abf-46bc-8b48-b1812f7ee3a7"/>
+				<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+			</element>
+			<element kind="textField" uuid="7e0aec58-7856-4f84-b470-65405e0e2771" x="355" y="0" width="100" height="30" pattern="dd/MM/YYYY">
+				<expression><![CDATA[$F{Fecha_Nacimiento}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da3bba1e-74da-4792-93e9-f70a67e6f427"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="textField" uuid="d07aaf9b-1b8c-4deb-96d3-5c82ab117e82" x="470" y="0" width="100" height="30">
+				<expression><![CDATA[$F{Direccion}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8832af86-3132-429b-9f90-379a2a059baa"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="textField" uuid="44cc76c0-e5bb-44a1-be4e-0184df74c37d" x="575" y="0" width="100" height="30">
+				<expression><![CDATA[$F{Codigo_Postal}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="359e8770-f101-4cc3-adce-bd076139abdc"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="textField" uuid="95336a83-8f34-4499-934b-92a179675607" x="660" y="0" width="100" height="30">
+				<expression><![CDATA[$F{Telefono_Emergencia}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="23bf7fc4-852d-4a4a-a157-fa4b78c6cbcb"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="frame" uuid="d5eaa549-4259-4246-af6e-edbaa54a5434" mode="Opaque" x="0" y="30" width="800" height="2" forecolor="#000000" backcolor="#030000">
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="textField" uuid="991d07f4-194d-4b8c-8a88-691dca39ffcc" x="30" y="0" width="100" height="30">
+				<expression><![CDATA[$F{Id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a97dec92-4f75-4e68-a2c7-24e8544ba688"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</detail>
+	<columnFooter height="10" splitType="Stretch">
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</columnFooter>
+	<pageFooter height="30" splitType="Stretch">
+		<element kind="frame" uuid="0f374e6e-b693-4020-b287-0cf16f0bcc14" mode="Opaque" x="0" y="0" width="800" height="30" backcolor="#030000">
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<element kind="staticText" uuid="be246fe3-3722-4daf-8d19-936544312ee0" x="300" y="0" width="200" height="30" forecolor="#FFFFFF" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[https://www.instagram.com/alh_orion/]]></text>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			</element>
+			<element kind="textField" uuid="b09c9827-7f91-488c-9f19-1921e207a259" x="713" y="5" width="54" height="20" forecolor="#FFFFFF" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA["Página " + $V{PAGE_NUMBER} + " de " + $V{PAGE_COUNT}]]></expression>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			</element>
+			<element kind="textField" uuid="417419e2-abe4-48e2-83ea-23735df77292" x="753" y="5" width="44" height="20" forecolor="#FFFFFF" evaluationTime="Report" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="textField" uuid="d4659e17-a83b-4818-8615-d209c820ff31" x="20" y="0" width="170" height="30" forecolor="#FFFFFF" pattern="EEEEE dd MMMMM yyyy" blankWhenNull="false" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</pageFooter>
+	<summary height="10" splitType="Stretch">
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</summary>
+</jasperReport>
