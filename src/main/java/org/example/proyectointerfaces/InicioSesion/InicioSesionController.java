@@ -80,7 +80,7 @@ public class InicioSesionController {
 
 
     //Pantalla de carga de Orion con su logotipo.
-    private void pantallaCarga() {
+    private void pantallaCarga(Runnable onfinish) {
         Stage cargaStage = new Stage();
         VBox cargaVBox = new VBox();
         cargaVBox.setSpacing(20);
@@ -131,7 +131,9 @@ public class InicioSesionController {
                 Thread.sleep(5000); // Mantener la pantalla de carga por 5 segundos
                 Platform.runLater(() -> {
                     cargaStage.close(); // Cerrar la pantalla de carga en el hilo de JavaFX
-                    nuevaPagina(); // Cargar la nueva página
+                    if (onfinish != null) {
+                        onfinish.run();
+                    }
                 });
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -149,85 +151,59 @@ public class InicioSesionController {
     //Si el DNI coincide con un Monitor ( que SI tiene permisos para generar informes, la página te llevará a la ventana de generar informes).
     @FXML
     public void nuevaPagina() {
-
-
         if (usuario.getText().isEmpty() || password.getText().isEmpty()) {
-            errorGlobal.setText("Ningún campo puede estar vacio");
+            errorGlobal.setText("Ningún campo puede estar vacío");
             errorGlobal.setVisible(true);
             return;
-        } else {
-            errorGlobal.setVisible(false);
         }
+        errorGlobal.setVisible(false);
 
-
-
-
-        if (sincronizacion.getTutores(usuario.getText())) {   //Si el DNI coincide con un tutor legal
-
-            //Comprueba que la contraseña introducida es la correcta para ese usuario
-            if (!sincronizacion.comprobarContrasenaTutores(usuario.getText(), password.getText())) {
-                errorPassword.setText("La contraseña es incorrecta.");
-                errorPassword.setVisible(true);
-                password.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
-            } else {
-
-                FXMLLoader cargaLI = new FXMLLoader(getClass().
-                        getResource("/org/example/proyectointerfaces/ventanaTutores.fxml"));
-                Parent root = null;
-                try {
-                    root = cargaLI.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+        pantallaCarga(() -> {
+            if (sincronizacion.getTutores(usuario.getText())) {
+                if (!sincronizacion.comprobarContrasenaTutores(usuario.getText(), password.getText())) {
+                    Platform.runLater(() -> {
+                        errorPassword.setText("La contraseña es incorrecta.");
+                        errorPassword.setVisible(true);
+                        password.setStyle("-fx-border-color: red;");
+                    });
+                } else {
+                    Platform.runLater(() -> abrirVentana("/org/example/proyectointerfaces/ventanaTutores.fxml"));
                 }
-
-                VentanaTutoresController controladorLI = cargaLI.getController();
-                Stage escenarioSecundario = new Stage();
-                escenarioSecundario.initModality(Modality.APPLICATION_MODAL);
-                escenarioSecundario.setScene(new Scene(root));
-                Stage ventanaActual = (Stage) usuario.getScene().getWindow();
-                ventanaActual.close();
-                escenarioSecundario.showAndWait();
-            }
-        }
-
-
-
-        if (sincronizacion.getMonitores(usuario.getText())) { //Si el DNI coincide con un Monitor
-
-            //Comprueba que la contraseña introducida es la correcta para ese usuario
-            if (!sincronizacion.comprobarContrasenaMonitores(usuario.getText(), password.getText())) {
-                errorPassword.setText("La contraseña es incorrecta.");
-                errorPassword.setVisible(true);
-                password.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
+            } else if (sincronizacion.getMonitores(usuario.getText())) {
+                if (!sincronizacion.comprobarContrasenaMonitores(usuario.getText(), password.getText())) {
+                    Platform.runLater(() -> {
+                        errorPassword.setText("La contraseña es incorrecta.");
+                        errorPassword.setVisible(true);
+                        password.setStyle("-fx-border-color: red;");
+                    });
+                } else {
+                    Platform.runLater(() -> abrirVentana("/org/example/proyectointerfaces/menuInformes.fxml"));
+                }
             } else {
                 Platform.runLater(() -> {
-                    try {
-                        FXMLLoader cargaLI = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/menuInformes.fxml"));
-                        Parent root = cargaLI.load();
-                        SelectorInformesController controladorLI = cargaLI.getController();
-                        Stage escenarioSecundario = new Stage();
-                        escenarioSecundario.initModality(Modality.APPLICATION_MODAL);
-                        escenarioSecundario.setScene(new Scene(root));
-                        Stage ventanaActual = (Stage) usuario.getScene().getWindow();
-                        ventanaActual.close();
-                        escenarioSecundario.showAndWait();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    usuario.setStyle("-fx-border-color: red;");
+                    errorUsuario.setText("El usuario es incorrecto.");
+                    errorUsuario.setVisible(true);
                 });
             }
-        }
-
-
-        if (!sincronizacion.getMonitores(usuario.getText()) && !sincronizacion.getTutores(usuario.getText()) ){
-            usuario.setStyle("-fx-border-color: red; -fx-border-width: 1px;");
-            errorUsuario.setText("El usuario es incorrecto.");
-            errorUsuario.setVisible(true);
-        }
-
+        });
     }
 
 
+    private void abrirVentana(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            Stage escenarioSecundario = new Stage();
+            escenarioSecundario.initModality(Modality.APPLICATION_MODAL);
+            escenarioSecundario.setScene(new Scene(root));
+            Stage ventanaActual = (Stage) usuario.getScene().getWindow();
+            ventanaActual.close();
+            escenarioSecundario.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
