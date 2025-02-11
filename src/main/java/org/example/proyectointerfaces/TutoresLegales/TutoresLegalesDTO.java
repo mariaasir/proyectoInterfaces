@@ -3,6 +3,7 @@ package org.example.proyectointerfaces.TutoresLegales;
 import java.time.LocalDate;
 
 public class TutoresLegalesDTO {
+    private int id;
     private String nombre;
     private String apellido;
     private String dni;
@@ -14,7 +15,9 @@ public class TutoresLegalesDTO {
 
     private String password;
 
-    public TutoresLegalesDTO(String nombre, String apellido, String dni, LocalDate fechaNacimiento, String telefono, String email, String direccion, String CP,  String password) {
+
+
+    public TutoresLegalesDTO(String nombre, String apellido, String dni, LocalDate fechaNacimiento, String telefono, String email, String direccion, String CP, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -23,8 +26,15 @@ public class TutoresLegalesDTO {
         this.email = email;
         this.direccion = direccion;
         this.CP = CP;
-
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

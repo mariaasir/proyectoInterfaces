@@ -10,6 +10,9 @@ module org.example.proyectointerfaces {
     exports org.example.proyectointerfaces.InicioSesion;
     opens org.example.proyectointerfaces.InicioSesion to javafx.fxml;
 
+    exports org.example.proyectointerfaces.VentanaTutoresLegales;
+    opens org.example.proyectointerfaces.VentanaTutoresLegales;
+
     exports org.example.proyectointerfaces.Registro;
     opens org.example.proyectointerfaces.Registro to javafx.fxml;
 

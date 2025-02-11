@@ -65,7 +65,6 @@ public class RegistroController {
 
         frances.setOnAction(e -> cambiarIdioma("Frances"));      //Si esta seleccionado el menuItem frances, ejecutará el código cambiarIdioma con el String frances
 
-
     }
 
     private void cambiarIdioma(String idiomaSeleccionado) {
@@ -164,10 +163,15 @@ public class RegistroController {
 
         if (hayErrores) return; // Si hay errores, no continúa
 
-        // Crear el objeto y guardar en la base de datos
+        //Crear el objeto y guardar en la base de datos
         TutoresLegalesDTO tutorLegal = new TutoresLegalesDTO(nombre, apellidos, dni, fechaNacimiento, telefono, email, direccion, codigoPostal, password);
         TutoresLegalesDAO tutoresLegalesDAO = new TutoresLegalesDAO();
         tutoresLegalesDAO.insertTutorLegal(tutorLegal);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Credenciales");
+        alert.setContentText("Su usuario es su DNI y la contraseña la que ha establecido");
+        alert.show();
     }
 
 
@@ -184,4 +188,8 @@ public class RegistroController {
         errorCodigoPostal.setVisible(false);
         errorPassword.setVisible(false);
     }
+
+
+
+
 }

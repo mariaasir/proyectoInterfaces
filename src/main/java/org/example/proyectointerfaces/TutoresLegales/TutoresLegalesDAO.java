@@ -2,15 +2,16 @@ package org.example.proyectointerfaces.TutoresLegales;
 
 import org.example.proyectointerfaces.Conexion;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TutoresLegalesDAO {
-    private Connection conexion = Conexion.getConexion();;
+    private Connection conexion = Conexion.getConexion();
+
 
 
     public TutoresLegalesDAO() {
@@ -36,5 +37,45 @@ public class TutoresLegalesDAO {
             throw new RuntimeException("Error al insertar el tutor legal", e);
         }
     }
+
+
+
+
+    public List<TutoresLegalesDTO> getTutores() {
+        List<TutoresLegalesDTO> listaTutores = new ArrayList<>();
+        String select = "SELECT * from tutoreslegales";
+
+        try (Statement sentencia = conexion.createStatement();
+             ResultSet rs = sentencia.executeQuery(select)) {
+
+            while (rs.next()) {
+                // Extrae los datos y crea los objetos
+                int id = rs.getInt("Id");
+                String nombre = rs.getString("Nombre");
+                String apellido = rs.getString("Apellidos");
+                String dni = rs.getString("DNI_NIE");
+                LocalDate fechaNacimiento = rs.getObject("Fecha_Nacimiento", LocalDate.class);
+                String telefono = rs.getString("Telefono");
+                String email = rs.getString("Email");
+                String direccion = rs.getString("Direccion");
+                String CP = rs.getString("Codigo_Postal");
+                String password = rs.getString("Password");
+
+                TutoresLegalesDTO nuevoTutor = new TutoresLegalesDTO(nombre, apellido, dni, fechaNacimiento, telefono, email, direccion, CP, password);
+                nuevoTutor.setId(id);
+                listaTutores.add(nuevoTutor);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+
+
+        return listaTutores;
+    }
+
+
+
 
 }

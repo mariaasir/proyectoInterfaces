@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyectointerfaces.InicioSesion.InicioSesionController">
    <children>
       <Pane prefHeight="629.0" prefWidth="400.0" style="-fx-background-color: white;">
          <children>
@@ -23,8 +23,8 @@
                   <Image url="@Imagenes/logo.jpg" />
                </image>
             </ImageView>
-            <TextField fx:id="usuario" layoutX="88.0" layoutY="309.0" prefHeight="31.0" prefWidth="225.0" />
-            <PasswordField fx:id="password" layoutX="88.0" layoutY="373.0" prefHeight="31.0" prefWidth="225.0" />
+            <TextField fx:id="usuario" layoutX="88.0" layoutY="309.0" prefHeight="31.0" prefWidth="225.0" promptText="23456789C" />
+            <PasswordField fx:id="password" layoutX="88.0" layoutY="373.0" prefHeight="31.0" prefWidth="225.0" promptText="moni1234" />
             <Text fill="#131a8e" layoutX="123.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INICIO DE SESIÓN">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -42,8 +42,8 @@
             </Text>
             <TextFlow fx:id="textFlow" layoutX="53.0" layoutY="434.0" prefHeight="27.0" prefWidth="293.0">
                <children>
-                  <Label fx:id="crearCuenta" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="168.0" text="¿No tienes cuenta?" textAlignment="CENTER" />
-                  <Button fx:id="createAccount" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Registrarse" textAlignment="CENTER" textFill="#131a8e" />
+                  <Label fx:id="labelCrearCuenta" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="168.0" text="¿No tienes cuenta?" textAlignment="CENTER" />
+                  <Button fx:id="botonRegistrarse" mnemonicParsing="false" onMouseClicked="#registrarse" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Registrarse" textAlignment="CENTER" textFill="#131a8e" />
                </children>
             </TextFlow>
             <MenuButton fx:id="idiomas" layoutX="309.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Idiomas" textFill="#131a8e">
@@ -52,6 +52,25 @@
                   <MenuItem mnemonicParsing="false" text="Action 2" />
                </items>
             </MenuButton>
+            <Button fx:id="botonInicioSesion" layoutX="134.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#nuevaPagina" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px;" text="INICIAR SESIÓN" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Label fx:id="errorGlobal" layoutX="109.0" layoutY="519.0" prefHeight="17.0" prefWidth="193.0" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font size="11.0" />
+               </font></Label>
+            <Label fx:id="errorUsuario" layoutX="89.0" layoutY="340.0" prefHeight="16.0" prefWidth="225.0" textFill="RED">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorPassword" layoutX="87.0" layoutY="410.0" prefHeight="16.0" prefWidth="225.0" textFill="RED">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

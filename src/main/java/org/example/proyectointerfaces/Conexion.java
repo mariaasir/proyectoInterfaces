@@ -19,7 +19,6 @@ public class Conexion {
         try {
             Class.forName("org.mariadb.jdbc.Driver"); //Cargar el driver de MariaDB
             conexion = DriverManager.getConnection(URL, USUARIO, PASSWD); //Intentar la conexión
-            System.out.println("Conexión exitosa a la base de datos.");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Error: No se encontró el driver de MariaDB.", e);
         } catch (SQLException e) {
