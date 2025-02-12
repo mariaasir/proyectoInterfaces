@@ -1,6 +1,6 @@
 <!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
 <jasperReport name="ReprotOrionGeneral" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ae7d825a-c283-4511-a3fb-6316f87ee295">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OrionBD"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="orion"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<query language="sql"><![CDATA[SELECT * 
 FROM hijos
@@ -84,38 +84,57 @@ ORDER BY Seccion_Nombre]]></query>
 				<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 			</element>
-			<element kind="image" uuid="86faa6f0-6ab9-4029-954a-1ccda1e7f8fc" x="40" y="100" width="40" height="40">
+			<element kind="image" uuid="83d5af34-4887-449b-b14a-f6c202c5f1e8" x="360" y="0" width="75" height="75">
 				<expression><![CDATA["estrella.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
 			</element>
-			<element kind="image" uuid="23c6513c-faa2-4a91-a3be-7db6e821d6de" x="197" y="80" width="60" height="60">
+			<element kind="image" uuid="7deba2c8-345e-41c5-934e-2dd1ccf1db4f" x="31" y="90" width="50" height="50">
 				<expression><![CDATA["estrella.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			</element>
-			<element kind="image" uuid="4dc01aea-3fb7-4a53-acb6-5697b6278402" x="280" y="0" width="40" height="37">
+			<element kind="image" uuid="9b613951-df86-4675-a72f-4cb23b2558db" x="197" y="81" width="55" height="55">
 				<expression><![CDATA["estrella.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			</element>
-			<element kind="image" uuid="b9737f33-ceed-4fd0-b6f8-c847e518c627" x="360" y="0" width="75" height="72">
+			<element kind="image" uuid="2ade719e-8ff6-4f04-8895-7cfb469669e1" x="505" y="74" width="60" height="60">
 				<expression><![CDATA["estrella.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			</element>
-			<element kind="image" uuid="eb08c78a-b4fe-464e-bf56-260fc9cceac3" x="460" y="20" width="40" height="35">
+			<element kind="image" uuid="4c71bc1b-5390-4cb4-8d23-065033a534f0" x="567" y="8" width="40" height="40">
 				<expression><![CDATA["estrella.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			</element>
-			<element kind="image" uuid="22f1e1bb-42b6-48d7-8d06-fab2f958cbf0" x="600" y="14" width="40" height="33">
+			<element kind="image" uuid="890df1ca-eca9-448e-9e0c-5bd48a58d312" x="278" y="10" width="30" height="30">
 				<expression><![CDATA["estrella.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			</element>
-			<element kind="image" uuid="40d14fdf-89a0-4dd4-a4ce-faa42c65843c" x="310" y="89" width="36" height="42">
+			<element kind="image" uuid="6a44c8c1-63b3-47c7-b984-31029a2ce58e" x="387" y="96" width="50" height="50">
 				<expression><![CDATA["estrella.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			</element>
-			<element kind="image" uuid="8212d5e4-6a57-4d44-9720-6c2339f5774b" x="385" y="90" width="50" height="50">
+			<element kind="image" uuid="31a91410-ecc2-4ee8-b1ae-b5c79c1255a6" x="660" y="10" width="130" height="130">
+				<expression><![CDATA["logo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="image" uuid="9b526e99-1dc9-4f95-9081-56ef7acbe18f" x="480" y="25" width="30" height="30">
 				<expression><![CDATA["estrella.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			</element>
-			<element kind="image" uuid="5044c92f-372f-4a52-b43a-926a79299708" x="510" y="80" width="60" height="60">
+			<element kind="image" uuid="aa28bbc3-a525-4689-ae3a-81b73c5af272" x="302" y="98" width="30" height="30">
 				<expression><![CDATA["estrella.png"]]></expression>
-			</element>
-			<element kind="image" uuid="f1a4ab2b-f083-4315-b504-cb60a3b04692" x="520" y="10" width="40" height="37">
-				<expression><![CDATA["estrella.png"]]></expression>
-			</element>
-			<element kind="image" uuid="b458faeb-6973-4a32-8166-a6c1c1bc8c20" x="672" y="14" width="119" height="105">
-				<expression><![CDATA["logoOrion.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			</element>
 		</element>
 		<property name="com.jaspersoft.studio.unit.height" value="px"/>
