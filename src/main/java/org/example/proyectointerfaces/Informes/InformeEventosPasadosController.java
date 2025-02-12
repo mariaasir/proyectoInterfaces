@@ -11,13 +11,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.time.Instant;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 import net.sf.jasperreports.engine.*;
 
 public class InformeEventosPasadosController {
@@ -36,7 +41,7 @@ public class InformeEventosPasadosController {
 
     private static final String RUTA_INFORME = "src/main/resources/org/example/proyectointerfaces/Jaspers/ReportOrionEventosPasados.jasper";
 
-     private String ruta;
+    private String ruta;
 
     @FXML
     public void initialize() {
@@ -45,22 +50,13 @@ public class InformeEventosPasadosController {
                 "Tribu", "Mambos", "Rhygings"
         );
 
-        // Configurar el DatePicker para que solo acepte fechas pasadas
-        datePicker.setDayCellFactory(datePicker -> new javafx.scene.control.DateCell() {
-            @Override
-            public void updateItem(java.time.LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                if (date.isAfter(java.time.LocalDate.now())) {
-                    setStyle("-fx-background-color: #ffc0cb; -fx-text-fill: #808080;");
-                    setDisable(true); // Deshabilitar fechas futuras
-                }
-            }
-        });
+
     }
 
     public void generarInforme() {
         String seccionSeleccionada = seccionComboBox.getSelectionModel().getSelectedItem();
-        java.time.LocalDate fechaSeleccionada = datePicker.getValue();
+        Date fecha = Date.from(Instant.now());
+
 
         // Validar si se ha seleccionado una sección y fecha
         if (seccionSeleccionada == null || seccionSeleccionada.isEmpty()) {
@@ -68,23 +64,26 @@ public class InformeEventosPasadosController {
             return;
         }
 
-        if (fechaSeleccionada == null) {
-            mostrarAlerta("Complete los campos", "Debe seleccionar una fecha para poder generar el informe");
-            return;
-        }
 
         // Pasar parámetros al informe
-        Map<String, Object> parametro = new HashMap<>();
-        parametro.put("Seccion", seccionSeleccionada);
-        parametro.put("FechaPasada", fechaSeleccionada);
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("Seccion", seccionSeleccionada);
+        parametros.put("FechaPasada", fecha);
 
         try {
             // Cargar el driver JDBC y establecer la conexión
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/orion", "root", "");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/orion", "root", "");
+
+            if (con == null) {
+                mostrarAlerta("Error", "No se pudo establecer conexión con la base de datos.");
+                generarInformeButton.setDisable(false);
+                return;
+            }
+
 
             // Cargar el informe con los parámetros y la conexión
-            JasperPrint jasperPrint = JasperFillManager.fillReport(RUTA_INFORME, parametro, connection);
+            JasperPrint jasperPrint = JasperFillManager.fillReport("src/main/resources/org/example/proyectointerfaces/Jaspers/ReportOrionEventosPasados.jasper", parametros, con);
 
             // Mostrar el diálogo para guardar el archivo
             FileChooser fileChooser = new FileChooser();
@@ -111,6 +110,7 @@ public class InformeEventosPasadosController {
             mostrarAlerta("Error", "Hubo un error al generar el informe: " + e.getMessage());
         }
     }
+
 
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);

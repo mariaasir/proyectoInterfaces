@@ -1,5 +1,7 @@
 package org.example.proyectointerfaces;
 
+import org.example.proyectointerfaces.Hijos.HijosDAO;
+import org.example.proyectointerfaces.Hijos.HijosDTO;
 import org.example.proyectointerfaces.Monitores.MonitoresDAO;
 import org.example.proyectointerfaces.Monitores.MonitoresDTO;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
@@ -7,95 +9,112 @@ import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.example.proyectointerfaces.Monitores.MonitoresDAO;
+import org.example.proyectointerfaces.Monitores.MonitoresDTO;
+import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
+import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDTO;
+import org.example.proyectointerfaces.Tutores_hijos.Tutores_hijosDAO;
+import org.example.proyectointerfaces.Tutores_hijos.Tutores_hijosDTO;
 
-/**
- * Clase encargada de la gestión y sincronización de la información de Tutores legales y Monitores.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class Sincronizacion {
     private List<TutoresLegalesDTO> tutores = new ArrayList<>();
     private List<MonitoresDTO> monitores = new ArrayList<>();
+    private List<HijosDTO> hijos = new ArrayList<>();
+    private List<Tutores_hijosDTO> tutores_hijos = new ArrayList<>();
+
+    private Tutores_hijosDAO tutoresHijosDAO;
+    private HijosDAO hijosDAO;
     private TutoresLegalesDAO tutoresDAO;
     private MonitoresDAO monitoresDAO;
 
-    /**
-     * Constructor de la clase Sincronizacion.
-     *
-     * @param tutoresDAO   DAO para la gestión de tutores legales.
-     * @param monitoresDAO DAO para la gestión de monitores.
-     */
-    public Sincronizacion(TutoresLegalesDAO tutoresDAO, MonitoresDAO monitoresDAO) {
+    // Constructor con parámetros correctamente tipados
+    public Sincronizacion(TutoresLegalesDAO tutoresDAO, MonitoresDAO monitoresDAO, HijosDAO hijosDAO, Tutores_hijosDAO tutoresHijosDAO) {
         this.tutoresDAO = tutoresDAO;
         this.monitoresDAO = monitoresDAO;
+        this.tutoresHijosDAO = tutoresHijosDAO;
+        this.hijosDAO = hijosDAO;
         sincronizar();
     }
 
-    /**
-     * Metodo para actualizar las listas de tutores y monitores con los datos de la base de datos.
-     */
+    // Método para actualizar las listas
     public void sincronizar() {
         tutores = tutoresDAO.getTutores();
-        monitores = monitoresDAO.getMonitores();
+        monitores = monitoresDAO.getMonitores(); // Asegúrate de que este método exista en MonitoresDAO
+        hijos = hijosDAO.obtenerHijos();
+        tutores_hijos = tutoresHijosDAO.getTutores_hijos();
     }
 
-    /**
-     * Verifica si un tutor legal existe en la base de datos según su DNI.
-     *
-     * @param DNI para identificar al turor legal
-     * @return true si el tutor existe, false en caso contrario.
-     */
+    // Verifica si un tutor existe por su DNI
     public boolean getTutores(String DNI) {
         for (TutoresLegalesDTO tutor : tutores) {
             if (tutor.getDni().equals(DNI)) {
                 return true;
             }
+
         }
         return false;
     }
 
-    /**
-     * Verifica si un monitor existe en la base de datos según su DNI/NIE.
-     *
-     * @param DNI para identificar al monitor.
-     * @return true si el monitor existe, false en caso contrario.
-     */
+    // Verifica si un monitor existe por su DNI
     public boolean getMonitores(String DNI) {
         for (MonitoresDTO monitor : monitores) {
             if (monitor.getDNI_NIE().equals(DNI)) {
                 return true;
             }
+
         }
         return false;
     }
 
-    /**
-     * Comprueba si la contraseña de un tutor es correcta.
-     *
-     * @param DNI        para identificar al tutor.
-     * @param Contrasena Contraseña ingresada para verificación.
-     * @return true si la contraseña es correcta, false en caso contrario.
-     */
     public boolean comprobarContrasenaTutores(String DNI, String Contrasena) {
         for (TutoresLegalesDTO tutor : tutores) {
             if (tutor.getDni().equals(DNI)) {
+                // Si el DNI coincide, comprobamos la contraseña
                 return tutor.getPassword().equals(Contrasena);
             }
         }
+        // Si no se encuentra ningún tutor con ese DNI, devolvemos false
         return false;
     }
 
-    /**
-     * Comprueba si la contraseña de un monitor es correcta.
-     *
-     * @param DNI        para identificar al monitor.
-     * @param Contrasena Contraseña ingresada para verificación.
-     * @return true si la contraseña es correcta, false en caso contrario.
-     */
+
     public boolean comprobarContrasenaMonitores(String DNI, String Contrasena) {
         for (MonitoresDTO monitor : monitores) {
             if (monitor.getDNI_NIE().equals(DNI)) {
+                // Si el DNI coincide, comprobamos la contraseña
                 return monitor.getPassword().equals(Contrasena);
             }
         }
+        // Si no se encuentra ningún tutor con ese DNI, devolvemos false
         return false;
     }
+
+    public TutoresLegalesDTO dameUnTutor(String DNI) {
+        for (TutoresLegalesDTO tutor : tutores) {
+            if (tutor.getDni().equals(DNI)) {
+                return tutor;
+            }
+        }
+        throw new RuntimeException("¿No hay tutor?");
+    }
+
+    public List<HijosDTO> devolverHijosDeUnPadre(int id){
+        List<HijosDTO> hijos = new ArrayList<>();
+        List<Integer> idsHijos = new ArrayList<>();
+        for (Tutores_hijosDTO tuhi : tutoresHijosDAO.getTutores_hijos()){
+            if (tuhi.getId_padre() == id){
+                idsHijos.add(tuhi.getId_hijo());
+            }
+        }
+        for (HijosDTO hijo : hijosDAO.obtenerHijos()){
+            if (idsHijos.contains(hijo.getId())){
+                hijos.add(hijo);
+            }
+        }
+        return hijos;
+    }
+
 }

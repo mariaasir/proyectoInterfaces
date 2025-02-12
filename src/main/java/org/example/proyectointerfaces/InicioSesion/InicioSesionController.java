@@ -13,20 +13,21 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.proyectointerfaces.Hijos.HijosDAO;
 import org.example.proyectointerfaces.Monitores.MonitoresDAO;
 import org.example.proyectointerfaces.Registro.RegistroController;
+import org.example.proyectointerfaces.SelectorInformes.SelectorInformesController;
 import org.example.proyectointerfaces.Sincronizacion;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
+import org.example.proyectointerfaces.Tutores_hijos.Tutores_hijosDAO;
+import org.example.proyectointerfaces.VentanaTutoresLegales.VentanaTutoresController;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * Controlador de la pantalla de inicio de sesión.
- * Gestiona la lógica de inicio de sesión, carga de pantalla,
- * cambio de idioma, y redirección a las ventanas correspondientes según el rol del usuario.
- */
 public class InicioSesionController {
     @FXML
     private TextField usuario;
@@ -39,49 +40,50 @@ public class InicioSesionController {
 
     @FXML
     private Label errorGlobal, labelCrearCuenta, errorUsuario, errorPassword;
-
     @FXML
     private Button botonRegistrarse;
+
 
     @FXML
     private Button botonIniciarSesion;
 
     TutoresLegalesDAO tutoresDAO = new TutoresLegalesDAO();
     MonitoresDAO monitoresDAO = new MonitoresDAO();
-    Sincronizacion sincronizacion = new Sincronizacion(tutoresDAO, monitoresDAO);
+    HijosDAO hijosDAO = new HijosDAO();
+    Tutores_hijosDAO tutoresHijosDAO = new Tutores_hijosDAO();
+    Sincronizacion sincronizacion = new Sincronizacion(tutoresDAO, monitoresDAO, hijosDAO, tutoresHijosDAO);
 
+    //Crea 3 items para el menuButton
     MenuItem español = new MenuItem("Español");
-    MenuItem ingles = new MenuItem("Inglés");
-    MenuItem frances = new MenuItem("Francés");
+    MenuItem ingles = new MenuItem("Ingles");
+    MenuItem frances = new MenuItem("Frances");
 
-    /**
-     * Inicializa los elementos de la interfaz, como el menu de idiomas.
-     * Asocia las acciones de los items de menú con el método cambiarIdioma.
-     */
+    //Crea el resource para establecer el idioma por defecto
+    // ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
+
+
+    //Metodo para iniciar las variables
     @FXML
     public void initialize() {
         //Añade los menuItems al MenuButton
         idiomas.getItems().addAll(español, ingles, frances);
-        español.setOnAction(e -> cambiarIdioma("Español"));
-        ingles.setOnAction(e -> cambiarIdioma("Ingles"));
-        frances.setOnAction(e -> cambiarIdioma("Frances"));
+        español.setOnAction(e -> cambiarIdioma("Español"));       //Si esta seleccionado el menuItem español, ejecutará el código cambiarIdioma con el String español
+
+        ingles.setOnAction(e -> cambiarIdioma("Ingles"));        //Si esta seleccionado el menuItem ingles, ejecutará el código cambiarIdioma con el String ingles
+
+        frances.setOnAction(e -> cambiarIdioma("Frances"));      //Si esta seleccionado el menuItem frances, ejecutará el código cambiarIdioma con el String frances
+
+
     }
 
-    /**
-     * Cambia el idioma de la interfaz según la opción seleccionada.
-     *
-     * @param idiomaSeleccionado El idioma que el usuario elige.
-     */
+
     private void cambiarIdioma(String idiomaSeleccionado) {
 
 
     }
 
-    /**
-     * Muestra una pantalla de carga con animaciones mientras se realiza una acción en segundo plano.
-     *
-     * @param onfinish Acción a ejecutar una vez que la pantalla de carga haya finalizado.
-     */
+
+    //Pantalla de carga de Orion con su logotipo.
     private void pantallaCarga(Runnable onfinish) {
         Stage cargaStage = new Stage();
         VBox cargaVBox = new VBox();
@@ -93,11 +95,12 @@ public class InicioSesionController {
         ImageView cargaImagen = new ImageView(cargaLogoOrion);
         cargaImagen.setFitWidth(150);
         cargaImagen.setFitHeight(150);
+        cargaImagen.setStyle("-fx-background-color: white; -fx-alignment: center;");
 
         // Crear la animación de rebote en la imagen
         ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(1), cargaImagen);
         scaleTransition.setCycleCount(ScaleTransition.INDEFINITE);
-        scaleTransition.setInterpolator(javafx.animation.Interpolator.EASE_BOTH);
+        scaleTransition.setInterpolator(Interpolator.EASE_BOTH);
         scaleTransition.setFromX(1.0);
         scaleTransition.setToX(1.2);
         scaleTransition.setFromY(1.0);
@@ -146,82 +149,70 @@ public class InicioSesionController {
     }
 
 
-    /**
-     * Controla la lógica de inicio de sesión. Valida los datos ingresados por el usuario
-     * y redirige a la ventana correspondiente dependiendo del tipo de usuario.
-     */
+    //Cargar una nueva página cuando haces click en el botón de INICIAR SESIÓN.
+    //Si el DNI introducido coincide con un Tutor Legal ( que no tiene permisos para generar informes,
+    // te llevará a una ventana que mostrará toda su información)
+    //Si el DNI coincide con un Monitor ( que SI tiene permisos para generar informes, la página te llevará a la ventana de generar informes).
     @FXML
     public void nuevaPagina() {
         if (usuario.getText().isEmpty() || password.getText().isEmpty()) {
-            mostrarErrorGlobal();
+            errorGlobal.setText("Ningún campo puede estar vacío");
+            errorGlobal.setVisible(true);
             return;
         }
         errorGlobal.setVisible(false);
 
+        if (sincronizacion.getTutores(usuario.getText())) {
+            if (!sincronizacion.comprobarContrasenaTutores(usuario.getText(), password.getText())) {
+                errorPassword.setText("La contraseña es incorrecta.");
+                errorPassword.setVisible(true);
+                password.setStyle("-fx-border-color: red;");
+                return;
+            }
+            abrirVentana("/org/example/proyectointerfaces/ventanaTutores.fxml");
+        } else if (sincronizacion.getMonitores(usuario.getText())) {
+            if (!sincronizacion.comprobarContrasenaMonitores(usuario.getText(), password.getText())) {
+                errorPassword.setText("La contraseña es incorrecta.");
+                errorPassword.setVisible(true);
+                password.setStyle("-fx-border-color: red;");
+                return;
+            }
+            abrirVentana("/org/example/proyectointerfaces/menuInformes.fxml");
+        } else {
+            usuario.setStyle("-fx-border-color: red;");
+            errorUsuario.setText("El usuario es incorrecto.");
+            errorUsuario.setVisible(true);
+        }
+    }
+
+    private void abrirVentana(String fxmlPath) {
         pantallaCarga(() -> {
-            if (sincronizacion.getTutores(usuario.getText())) {
-                if (!sincronizacion.comprobarContrasenaTutores(usuario.getText(), password.getText())) {
-                    Platform.runLater(() -> {
-                        errorPassword.setText("La contraseña es incorrecta.");
-                        errorPassword.setVisible(true);
-                        password.setStyle("-fx-border-color: red;");
-                    });
-                } else {
-                    Platform.runLater(() -> abrirVentana("/org/example/proyectointerfaces/ventanaTutores.fxml"));
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+                Parent root = loader.load();
+                Stage escenarioSecundario = new Stage();
+                escenarioSecundario.initModality(Modality.APPLICATION_MODAL);
+                escenarioSecundario.setScene(new Scene(root));
+
+                // Si la ventana es la de tutores, inicializa el controlador correctamente
+                if (fxmlPath.equals("/org/example/proyectointerfaces/ventanaTutores.fxml")) {
+                    VentanaTutoresController controllerTutores = loader.getController();
+                    controllerTutores.cargarVentana(usuario.getText(), sincronizacion);
                 }
-            } else if (sincronizacion.getMonitores(usuario.getText())) {
-                if (!sincronizacion.comprobarContrasenaMonitores(usuario.getText(), password.getText())) {
-                    Platform.runLater(() -> {
-                        errorPassword.setText("La contraseña es incorrecta.");
-                        errorPassword.setVisible(true);
-                        password.setStyle("-fx-border-color: red;");
-                    });
-                } else {
-                    Platform.runLater(() -> abrirVentana("/org/example/proyectointerfaces/menuInformes.fxml"));
-                }
-            } else {
-                Platform.runLater(() -> {
-                    usuario.setStyle("-fx-border-color: red;");
-                    errorUsuario.setText("El usuario es incorrecto.");
-                    errorUsuario.setVisible(true);
-                });
+
+                // Cerrar ventana actual y abrir nueva
+                Stage ventanaActual = (Stage) usuario.getScene().getWindow();
+                ventanaActual.close();
+                escenarioSecundario.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
 
-    /**
-     * Metodo para mostrar el error y hacer que a los 5 segundos desaparezca
-     */
-    public void mostrarErrorGlobal() {
-        errorGlobal.setVisible(true);
-        PauseTransition pausa = new PauseTransition(Duration.seconds(5));
-        pausa.setOnFinished(event -> errorGlobal.setVisible(false));
-        pausa.play();
-    }
 
-    /**
-     * Abre una nueva ventana en la aplicación.
-     *
-     * @param fxmlPath La ruta del archivo FXML que define la interfaz de la nueva ventana.
-     */
-    private void abrirVentana(String fxmlPath) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
-            Stage escenarioSecundario = new Stage();
-            escenarioSecundario.initModality(Modality.APPLICATION_MODAL);
-            escenarioSecundario.setScene(new Scene(root));
-            Stage ventanaActual = (Stage) usuario.getScene().getWindow();
-            ventanaActual.close();
-            escenarioSecundario.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    /**
-     * Abre la ventana de registro cuando el usuario hace clic en el botón de registrarse.
-     */
+    //Metodo para que al hacer click en el botón de Registrase si aún no tienes cuenta, este botón te lleve a la página de registro.
     public void registrarse() {
         FXMLLoader cargaLI = new FXMLLoader(getClass().
                 getResource("/org/example/proyectointerfaces/registro.fxml"));
@@ -239,4 +230,6 @@ public class InicioSesionController {
         ventanaActual.close();
         escenarioSecundario.showAndWait();
     }
+
+
 }

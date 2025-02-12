@@ -3,24 +3,20 @@ package org.example.proyectointerfaces.TutoresLegales;
 import org.example.proyectointerfaces.Conexion;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-/**
- * Clase que gestiona las operaciones de base de datos relacionadas con los tutores legales, como insertar y recuperar datos.
- */
 public class TutoresLegalesDAO {
     private Connection conexion = Conexion.getConexion();
+
+
 
     public TutoresLegalesDAO() {
     }
 
-    /**
-     * Inserta un nuevo tutor legal en la base de datos.
-     *
-     * @param tutoresLegal El objeto que contiene los datos del tutor.
-     */
     public void insertTutorLegal(TutoresLegalesDTO tutoresLegal) {
         String insertSql = "INSERT INTO tutoreslegales (Nombre, Apellidos, Password, DNI_NIE, Fecha_Nacimiento, Direccion, Codigo_Postal, Telefono, Email) VALUES (?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement insertStmt = conexion.prepareStatement(insertSql)) {
@@ -34,17 +30,17 @@ public class TutoresLegalesDAO {
             insertStmt.setString(8, tutoresLegal.getTelefono());
             insertStmt.setString(9, tutoresLegal.getEmail());
 
+            // Aquí agregamos el executeUpdate() para ejecutar la inserción
             insertStmt.executeUpdate();
         } catch (SQLException e) {
+            // Manejo del error: puedes imprimir el stack trace o lanzar una excepción
             throw new RuntimeException("Error al insertar el tutor legal", e);
         }
     }
 
-    /**
-     * Recupera todos los tutores legales de la base de datos.
-     *
-     * @return Lista de tutores legales.
-     */
+
+
+
     public List<TutoresLegalesDTO> getTutores() {
         List<TutoresLegalesDTO> listaTutores = new ArrayList<>();
         String select = "SELECT * from tutoreslegales";
@@ -53,6 +49,7 @@ public class TutoresLegalesDAO {
              ResultSet rs = sentencia.executeQuery(select)) {
 
             while (rs.next()) {
+                // Extrae los datos y crea los objetos
                 int id = rs.getInt("Id");
                 String nombre = rs.getString("Nombre");
                 String apellido = rs.getString("Apellidos");
@@ -74,6 +71,11 @@ public class TutoresLegalesDAO {
             return new ArrayList<>();
         }
 
+
         return listaTutores;
     }
+
+
+
+
 }

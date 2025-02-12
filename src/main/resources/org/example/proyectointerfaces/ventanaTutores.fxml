@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
@@ -9,7 +11,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane prefHeight="629.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyectointerfaces.VentanaTutoresLegales.VentanaTutoresController">
    <children>
@@ -35,6 +36,32 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </MenuButton>
+            <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#1f93ff00" height="150.0" layoutX="18.0" layoutY="135.0" stroke="#131a8e" strokeType="INSIDE" strokeWidth="2.0" width="365.0" />
+            <Label fx:id="labelSaludo" layoutX="32.0" layoutY="78.0" prefHeight="40.0" prefWidth="336.0" text=" " textFill="#131a8e">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelHijos" alignment="TOP_LEFT" layoutX="18.0" layoutY="306.0" prefWidth="365.0" style="-fx-border-color: #131a8e; -fx-border-radius: 20px; -fx-border-width: 2;">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Label>
+            <Label fx:id="labelDatosTutor" alignment="TOP_LEFT" layoutX="32.0" layoutY="146.0" prefHeight="121.0" prefWidth="336.0">
+               <padding>
+                  <Insets bottom="20.0" right="20.0" top="20.0" />
+               </padding></Label>
+            <Rectangle fill="WHITE" height="25.0" layoutX="51.0" layoutY="122.0" stroke="WHITE" strokeType="INSIDE" width="106.0" />
+            <Text fill="#131a8e" layoutX="55.0" layoutY="140.0" stroke="#03000000" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos del Padre">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Rectangle fill="WHITE" height="25.0" layoutX="51.0" layoutY="294.0" stroke="WHITE" strokeType="INSIDE" width="118.0" />
+            <Text fill="#131a8e" layoutX="55.0" layoutY="312.0" stroke="#03000000" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos de los hijos">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>

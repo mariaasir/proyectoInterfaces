@@ -5,11 +5,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InformeSeccionController {
 
@@ -22,62 +33,124 @@ public class InformeSeccionController {
     @FXML
     private Button volverButton;
 
-    @FXML
-    private void generarInforme() {
-        String seleccionada = seccionComboBox.getValue();
+    private String ruta;
 
-        if (seleccionada == null) {
-            System.out.println("Por favor, selecciona una sección.");
+    @FXML
+    public void initialize() {
+        // Agregar las secciones al ComboBox
+        seccionComboBox.getItems().addAll(
+                "Tribu", "Mambos", "Rhygings"
+        );
+
+    }
+
+    public void generarInforme() {
+        String seccionSeleccionada = seccionComboBox.getSelectionModel().getSelectedItem();
+
+
+        // Validar si se ha seleccionado una sección y fecha
+        if (seccionSeleccionada == null || seccionSeleccionada.isEmpty()) {
+            mostrarAlerta("Complete los campos", "Debe seleccionar una sección para poder generar el informe");
             return;
         }
-        System.out.println("Generando informe para la sección: " + seleccionada);
-    }
-            /*
-            // Conexión con la base de datos
-            Class.forName("org.mariadb.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/hospital", "giftiliano", "giftilian");
 
-            // Parámetros para JasperReports (cambiar cuando termine reportes)
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("idPaciente", patientId);  // Cambiado el nombre del parámetro a "idPaciente"
+        // Pasar parámetros al informe
+        Map<String, Object> parametro = new HashMap<>();
+        parametro.put("Seccion", seccionSeleccionada);
 
-            // Cargar el archivo del informe desde el classpath
-            String reportPath = getClass().getResource("/informes/HistorialPacientes.jasper").getPath();
-            if (reportPath == null) {
-                throw new IOException("No se encontró el archivo HistorialPacientes.jasper");
+        try {
+            // Cargar el driver JDBC y establecer la conexión
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/orion", "root", "");
+
+            // Cargar el informe con los parámetros y la conexión
+            JasperPrint jasperPrint = JasperFillManager.fillReport("src/main/resources/org/example/proyectointerfaces/Jaspers/ReporteOrionHijosSeccion.jasper", parametro, connection);
+
+            // Mostrar el diálogo para guardar el archivo
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar Informe");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+            fileChooser.setInitialFileName("informe_secciones.pdf");
+
+            Stage stage = (Stage) generarInformeButton.getScene().getWindow();
+            File file = fileChooser.showSaveDialog(stage);
+
+            if (file != null) {
+                // Exportar el informe a un archivo PDF
+                JasperExportManager.exportReportToPdfFile(jasperPrint, file.getAbsolutePath());
+                System.out.println("¡Informe generado exitosamente en: " + file.getAbsolutePath() + "!");
+            } else {
+                System.out.println("Guardado cancelado por el usuario.");
             }
 
-            // Generar el informe con la conexión a la base de datos
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportPath, parametros, con);
+            ruta = file.getAbsolutePath();
+            mostrarAlerta("Informe Generado", "El informe se ha generado correctamente.");
 
-            // Guardar el informe en un archivo PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "historial_medico.pdf");
-
-            // Mensaje de confirmación
-            System.out.println("¡Informe del historial médico generado exitosamente!");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             e.printStackTrace();
-            System.out.println("Error al generar el informe del historial médico.");
+            mostrarAlerta("Error", "Hubo un error al generar el informe: " + e.getMessage());
+        }
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
+
+    @FXML
+    private void volverASelector(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/menuInformes.fxml"));
+            Parent root = loader.load();
+
+            Stage stageActual = (Stage) volverButton.getScene().getWindow();
+            stageActual.setScene(new Scene(root));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al volver a la pantalla de selección de informes.");
+        }
+    }
+
+    public void visualizarInforme() {
+        // Usamos la variable ruta que contiene la ruta del archivo generado
+        if (ruta == null || ruta.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No se ha generado el informe. Asegúrese de haberlo guardado correctamente.");
+            alert.showAndWait();
+            return;
         }
 
-        System.out.println("Generando informe Z con Doctor: " + doctor + " y Departamento: " + departamento);
-    }
-    */
-            @FXML
-            private void volverASelector(ActionEvent event) {
-                try {
-                    // Cargar la pantalla del selector de informes
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/menuInformes.fxml"));
-                    Parent root = loader.load();
+        // Crear el archivo PDF desde la ruta
+        File archivoPDF = new File(ruta);
 
-                    // Obtener la ventana actual y cerrarla
-                    Stage stageActual = (Stage) volverButton.getScene().getWindow();
-                    stageActual.setScene(new Scene(root));
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("Error al volver a la pantalla de selección de informes.");
-                }
+        // Comprobar si el archivo existe
+        if (archivoPDF.exists()) {
+            try {
+                // Abre el archivo PDF usando la aplicación predeterminada del sistema
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(archivoPDF);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error al abrir el PDF");
+                alert.setHeaderText(null);
+                alert.setContentText("Hubo un problema al abrir el informe: " + e.getMessage());
+                alert.showAndWait();
+            }
+        } else {
+            // Si el archivo no existe, muestra un mensaje de error
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Archivo no encontrado");
+            alert.setHeaderText(null);
+            alert.setContentText("El archivo PDF no se encuentra en la ubicación especificada.");
+            alert.showAndWait();
+        }
     }
 
     }

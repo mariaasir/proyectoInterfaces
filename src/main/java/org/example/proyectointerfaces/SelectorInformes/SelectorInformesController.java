@@ -36,8 +36,9 @@ public class SelectorInformesController {
     private ImageView logo;
 
     // Creación de los elementos del menú
-    private MenuItem informeX = new MenuItem("Informe de X");
-    private MenuItem informeY = new MenuItem("Informe de Y");
+    private MenuItem informeX = new MenuItem("Informe de Eventos Pasados");
+    private MenuItem informeY = new MenuItem("Informe de Eventos Futuros");
+    private MenuItem informeA = new MenuItem("Informe General");
     private MenuItem informeZ = new MenuItem("Informe de Secciones");
 
     private MenuItem espaniol = new MenuItem("Español");
@@ -46,11 +47,12 @@ public class SelectorInformesController {
     @FXML
     public void initialize() {
         // Agregar los informes al MenuButton
-        tipoInforme.getItems().addAll(informeX, informeY, informeZ);
+        tipoInforme.getItems().addAll(informeA, informeX, informeY, informeZ);
 
         // Agregar eventos a cada informe para actualizar el texto del MenuButton
-        informeX.setOnAction(event -> tipoInforme.setText("Informe de X"));
-        informeY.setOnAction(event -> tipoInforme.setText("Informe de Y"));
+        informeX.setOnAction(event -> tipoInforme.setText("Informe de Eventos Pasados"));
+        informeY.setOnAction(event -> tipoInforme.setText("Informe de Eventos Futuros"));
+        informeA.setOnAction(event -> tipoInforme.setText("Informe General"));
         informeZ.setOnAction(event -> tipoInforme.setText("Informe de Secciones"));
 
         //Agregar los idiomas al MenuButton
@@ -65,10 +67,12 @@ public class SelectorInformesController {
         private void confirmarSeleccion(ActionEvent event) {
             String selectedInforme = tipoInforme.getText();
 
-          if("Informe de X".equals(selectedInforme)) {
-              cargarPantalla("/org/example/proyectointerfaces/informeX.fxml");
-          } else if("Informe de Y".equals(selectedInforme)) {
-              cargarPantalla("/org/example/proyectointerfaces/informeY.fxml");
+          if("Informe de Eventos Pasados".equals(selectedInforme)) {
+              cargarPantalla("/org/example/proyectointerfaces/informeEventosPasados.fxml");
+          } else if("Informe de Eventos Futuros".equals(selectedInforme)) {
+              cargarPantalla("/org/example/proyectointerfaces/informesEventosFuturos.fxml");
+          }else if("Informe General".equals(selectedInforme)) {
+              cargarPantalla("/org/example/proyectointerfaces/informeGeneral.fxml");
           }else if("Informe de Secciones".equals(selectedInforme)) {
               cargarPantalla("/org/example/proyectointerfaces/informeSecciones.fxml");
           }else {

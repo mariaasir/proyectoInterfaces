@@ -20,5 +20,7 @@ module org.example.proyectointerfaces {
     exports org.example.proyectointerfaces.SelectorInformes;
     opens org.example.proyectointerfaces.SelectorInformes to javafx.fxml;
 
+
+
     opens org.example.proyectointerfaces.Informes to javafx.fxml;
 }

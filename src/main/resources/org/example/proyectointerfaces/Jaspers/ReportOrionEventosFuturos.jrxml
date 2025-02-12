@@ -172,7 +172,7 @@ AND s.Nombre =  $P{Seccion}
 			<property name="com.jaspersoft.studio.unit.x" value="px"/>
 		</element>
 		<element kind="staticText" uuid="23d104d7-f726-4795-b46d-d9b03db56ae1" x="0" y="0" width="180" height="30">
-			<text><![CDATA[Actividades pasadas de la seccion]]></text>
+			<text><![CDATA[Actividades futuras de la seccion]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ce9d5883-7c33-481c-99b6-6bdd5e72ae74"/>
 		</element>
 		<element kind="textField" uuid="7a8abefc-166c-4efd-baac-8cfc38cb39c8" x="157" y="0" width="100" height="30">
