@@ -153,8 +153,7 @@ public class InicioSesionController {
     @FXML
     public void nuevaPagina() {
         if (usuario.getText().isEmpty() || password.getText().isEmpty()) {
-            errorGlobal.setText("Ningún campo puede estar vacío");
-            errorGlobal.setVisible(true);
+            mostrarErrorGlobal();
             return;
         }
         errorGlobal.setVisible(false);
@@ -188,6 +187,16 @@ public class InicioSesionController {
                 });
             }
         });
+    }
+
+    /**
+     * Metodo para mostrar el error y hacer que a los 5 segundos desaparezca
+     */
+    public void mostrarErrorGlobal() {
+        errorGlobal.setVisible(true);
+        PauseTransition pausa = new PauseTransition(Duration.seconds(5));
+        pausa.setOnFinished(event -> errorGlobal.setVisible(false));
+        pausa.play();
     }
 
     /**
