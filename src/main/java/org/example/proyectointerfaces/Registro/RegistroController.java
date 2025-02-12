@@ -182,11 +182,6 @@ public class RegistroController {
         TutoresLegalesDAO tutoresLegalesDAO = new TutoresLegalesDAO();
         tutoresLegalesDAO.insertTutorLegal(tutorLegal);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Credenciales");
-        alert.setContentText("Su usuario es su DNI y la contraseña la que ha establecido");
-        alert.show();
-
         // Cerrar la ventana de registro y abrir la de inicio de sesión
         try {
             Stage stage = (Stage) this.nombre.getScene().getWindow();
