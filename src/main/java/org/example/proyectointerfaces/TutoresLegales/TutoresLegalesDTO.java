@@ -1,6 +1,9 @@
 package org.example.proyectointerfaces.TutoresLegales;
 
+import org.example.proyectointerfaces.Hijos.HijosDTO;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class TutoresLegalesDTO {
     private int id;
@@ -12,7 +15,6 @@ public class TutoresLegalesDTO {
     private String email;
     private String direccion;
     private String CP;
-
     private String password;
 
 

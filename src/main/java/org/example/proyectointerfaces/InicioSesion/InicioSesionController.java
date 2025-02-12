@@ -13,11 +13,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.proyectointerfaces.Hijos.HijosDAO;
 import org.example.proyectointerfaces.Monitores.MonitoresDAO;
 import org.example.proyectointerfaces.Registro.RegistroController;
 import org.example.proyectointerfaces.SelectorInformes.SelectorInformesController;
 import org.example.proyectointerfaces.Sincronizacion;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
+import org.example.proyectointerfaces.Tutores_hijos.Tutores_hijosDAO;
 import org.example.proyectointerfaces.VentanaTutoresLegales.VentanaTutoresController;
 
 import java.io.IOException;
@@ -47,7 +49,9 @@ public class InicioSesionController {
 
     TutoresLegalesDAO tutoresDAO = new TutoresLegalesDAO();
     MonitoresDAO monitoresDAO = new MonitoresDAO();
-    Sincronizacion sincronizacion = new Sincronizacion(tutoresDAO, monitoresDAO);
+    HijosDAO hijosDAO = new HijosDAO();
+    Tutores_hijosDAO tutoresHijosDAO= new Tutores_hijosDAO();
+    Sincronizacion sincronizacion = new Sincronizacion(tutoresDAO, monitoresDAO, hijosDAO, tutoresHijosDAO);
 
     //Crea 3 items para el menuButton
     MenuItem español = new MenuItem("Español");
