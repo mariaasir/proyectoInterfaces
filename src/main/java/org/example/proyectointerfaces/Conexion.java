@@ -4,17 +4,22 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Clase encargada de la conexión
+ */
 public class Conexion {
-
-    //Parámetros de conexión
+    /**
+     * Párametros para la conexión
+     */
     private static final String USUARIO = "root";
     private static final String PASSWD = "";
     private static final String URL = "jdbc:mariadb://localhost:3306/orion";
 
-    // Singleton para la conexión
     private static Connection conexion = null;
 
-    //Constructor privado para evitar instancias múltiples
+    /**
+     * Constructor privado para evitar instancias múltiples
+     */
     private Conexion() {
         try {
             Class.forName("org.mariadb.jdbc.Driver"); //Cargar el driver de MariaDB
@@ -26,7 +31,11 @@ public class Conexion {
         }
     }
 
-    //Método para obtener la conexión (Singleton)
+    /**
+     * Metodo para obtener la conexión (Singleton)
+     *
+     * @return la conexión
+     */
     public static Connection getConexion() {
         if (conexion == null) {
             new Conexion();  //Crear la conexión si no existe
@@ -34,7 +43,10 @@ public class Conexion {
         return conexion;
     }
 
-    //Método para cerrar la conexión (opcional)
+
+    /**
+     * Metodo para cerrar la conexión
+     */
     public static void cerrarConexion() {
         if (conexion != null) {
             try {

@@ -2,6 +2,10 @@ package org.example.proyectointerfaces.TutoresLegales;
 
 import java.time.LocalDate;
 
+/**
+ * Representa un Tutor Legal dentro del sistema.
+ * Contiene información personal y de contacto del tutor.
+ */
 public class TutoresLegalesDTO {
     private int id;
     private String nombre;
@@ -15,8 +19,19 @@ public class TutoresLegalesDTO {
 
     private String password;
 
-
-
+    /**
+     * Constructor para inicializar un objeto TutoresLegalesDTO con la información del tutor.
+     *
+     * @param nombre          Nombre del tutor.
+     * @param apellido        Apellido del tutor.
+     * @param dni             Documento Nacional de Identidad del tutor.
+     * @param fechaNacimiento Fecha de nacimiento del tutor.
+     * @param telefono        Número de teléfono del tutor.
+     * @param email           Dirección de correo electrónico del tutor.
+     * @param direccion       Dirección de residencia del tutor.
+     * @param CP              Código postal de la dirección del tutor.
+     * @param password        Contraseña de acceso del tutor.
+     */
     public TutoresLegalesDTO(String nombre, String apellido, String dni, LocalDate fechaNacimiento, String telefono, String email, String direccion, String CP, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
