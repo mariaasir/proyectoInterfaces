@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="629.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyectointerfaces.Informes.InformeEventosFuturosController">
+
+    <children>
+        <!-- Contenedor principal fondo blanco -->
+        <Pane prefHeight="629.0" prefWidth="400.0" style="-fx-background-color: white;">
+            <children>
+                <!-- Logo de Orion -->
+                <ImageView fitHeight="120.0" fitWidth="129.0" layoutX="136.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Imagenes/logo.jpg" />
+                    </image>
+                </ImageView>
+
+                <!-- Título de la página -->
+                <Text fill="#131a8e" layoutX="69.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INFORME DE EVENTOS FUTUROS">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Text>
+
+                <!-- ComboBox para las Secciones -->
+                <ComboBox fx:id="seccionComboBox" layoutX="75.0" layoutY="270.0" prefWidth="250.0" style="-fx-border-color: #131a8e; -fx-background-color: #f2f2f2; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-padding: 5px;">
+                    <promptText>
+                        <String fx:value="Selecciona una sección" />
+                    </promptText>
+                </ComboBox>
+
+                <!-- Etiqueta para la fecha -->
+                <Label layoutX="75.0" layoutY="310.0" text="Selecciona la fecha (Formato: YYYY-MM-DD)" textFill="#131a8e" />
+
+                <!-- Selector de fecha (DatePicker) -->
+                <DatePicker fx:id="fechaFuturoDatePicker" layoutX="75.0" layoutY="330.0" prefWidth="250.0" style="-fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;" />
+
+                <!-- Botón para generar el informe -->
+                <Button fx:id="generarInformeButton" layoutX="132.0" layoutY="400.0" mnemonicParsing="false" onAction="#generarInforme" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="GENERAR INFORME">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+
+                <!-- Botón para volver -->
+                <Button fx:id="volverButton" layoutX="305.0" layoutY="580.0" mnemonicParsing="false" onAction="#volverASelector" prefHeight="27.0" prefWidth="78.0" style="-fx-background-color: white; -fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="VOLVER" textFill="#131a8e">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

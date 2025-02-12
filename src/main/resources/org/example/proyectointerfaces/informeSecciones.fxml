@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,6 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ComboBox?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <AnchorPane prefHeight="629.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyectointerfaces.Informes.InformeSeccionController">
 
     <children>
@@ -19,14 +19,14 @@
         <Pane prefHeight="629.0" prefWidth="400.0" style="-fx-background-color: white;">
             <children>
                 <!-- Logo de Orion -->
-                <ImageView fitHeight="120.0" fitWidth="129.0" layoutX="140.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="120.0" fitWidth="129.0" layoutX="136.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@Imagenes/logo.jpg" />
                     </image>
                 </ImageView>
 
                 <!-- Título de la página -->
-                <Text fill="#131a8e" layoutX="109.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INFORME SECCIONES">
+                <Text fill="#131a8e" layoutX="152.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INFORME Z">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -34,7 +34,7 @@
 
                 <!-- Campo  -->
                 <!-- ComboBox para las Secciones -->
-                <ComboBox fx:id="seccionComboBox" layoutX="75.0" layoutY="280.0" prefWidth="250.0" style="-fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;">
+                <ComboBox fx:id="seccionComboBox" layoutX="75.0" layoutY="270.0" prefWidth="250.0" style="-fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Tribu" />
@@ -48,18 +48,17 @@
                 </ComboBox>
 
                 <!-- Botón para generar el informe -->
-                <Button fx:id="generarInformeButton" defaultButton="true" layoutX="133.0" layoutY="391.0" mnemonicParsing="false" onAction="#generarInforme" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="GENERAR INFORME">
+                <Button fx:id="generarInformeButton" layoutX="216.0" layoutY="400.0" mnemonicParsing="false" onAction="#generarInforme" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="GENERAR INFORME">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
                 <!-- Botón para volver -->
-                <Button fx:id="volverButton" layoutX="155.0" layoutY="441.0" mnemonicParsing="false" onAction="#volverASelector" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #d32f2f; -fx-background-radius: 20px; -fx-text-fill: white;" text="VOLVER">
+                <Button fx:id="volverButton" layoutX="75.0" layoutY="400.0" mnemonicParsing="false" onAction="#volverASelector" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #d32f2f; -fx-background-radius: 20px; -fx-text-fill: white;" text="VOLVER">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-            <MenuButton fx:id="idiomas" layoutX="309.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Idiomas" textFill="#131a8e" />
 
             </children>
         </Pane>

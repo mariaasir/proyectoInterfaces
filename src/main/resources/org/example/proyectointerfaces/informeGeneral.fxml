@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="629.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyectointerfaces.Informes.InformeGeneralController">
+
+    <children>
+        <!-- Contenedor principal fondo blanco -->
+        <Pane prefHeight="629.0" prefWidth="400.0" style="-fx-background-color: white;">
+            <children>
+                <!-- Logo de Orion -->
+                <ImageView fitHeight="152.0" fitWidth="156.0" layoutX="122.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Imagenes/logo.jpg" />
+                    </image>
+                </ImageView>
+
+                <!-- Título de la página -->
+                <Text fill="#131a8e" layoutX="116.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INFORME GENERAL">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Text>
+
+                <!-- Mensaje sobre el botón (indica que se generará el informe) -->
+                <Text fill="#131a8e" layoutX="95.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se generará el informe separado por Secciones">
+                    <font>
+                        <Font name="System" size="12.0" />
+                    </font>
+                </Text>
+
+                <!-- Botón para generar el informe -->
+                <Button fx:id="generarInformeButton" layoutX="132.0" layoutY="400.0" mnemonicParsing="false" onAction="#generarInforme" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="GENERAR INFORME">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+
+                <!-- Botón para volver -->
+                <Button fx:id="volverButton" layoutX="305.0" layoutY="580.0" mnemonicParsing="false" onAction="#volverASelector" prefHeight="27.0" prefWidth="78.0" style="-fx-background-color: white; -fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="VOLVER" textFill="#131a8e">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
