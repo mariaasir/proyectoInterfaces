@@ -5,37 +5,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.example.proyectointerfaces.InicioSesion.InicioSesionController;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDTO;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * Controlador para la pantalla de registro de un tutor legal.
+ * Permite registrar un nuevo tutor, validar los campos y gestionar los mensajes de error.
+ */
 public class RegistroController {
     @FXML
-    private TextField nombre;
-
-    @FXML
-    private TextField apellidos;
-
-    @FXML
-    private TextField dni;
-
-    @FXML
-    private TextField telefono;
-
-    @FXML
-    private TextField email;
-
-    @FXML
-    private TextField direccion;
-
-    @FXML
-    private TextField codigoPostal;
+    private TextField nombre, apellidos, dni, telefono, email, direccion, codigoPostal;
 
     @FXML
     private DatePicker fechaNacimiento;
@@ -55,38 +38,39 @@ public class RegistroController {
     @FXML
     private Label errorGlobal, errorNombre, errorApellidos, errorDNI, errorFecha, errorTelefono, errorEmail, errorDireccion, errorCodigoPostal, errorPassword;
 
-
-    //Crea 3 items para el menuButton
     MenuItem español = new MenuItem("Español");
     MenuItem ingles = new MenuItem("Ingles");
     MenuItem frances = new MenuItem("Frances");
 
-    //Crea el resource para establecer el idioma por defecto
-    // ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
-
-
-    //Metodo para iniciar las variables
+    /**
+     * Inicializa los elementos de la interfaz y configura los eventos de los menús.
+     */
     @FXML
     public void initialize() {
-        //Añade los menuItems al MenuButton
         idiomas.getItems().addAll(español, ingles, frances);
-        español.setOnAction(e -> cambiarIdioma("Español"));       //Si esta seleccionado el menuItem español, ejecutará el código cambiarIdioma con el String español
-
-        ingles.setOnAction(e -> cambiarIdioma("Ingles"));        //Si esta seleccionado el menuItem ingles, ejecutará el código cambiarIdioma con el String ingles
-
-        frances.setOnAction(e -> cambiarIdioma("Frances"));      //Si esta seleccionado el menuItem frances, ejecutará el código cambiarIdioma con el String frances
-
+        español.setOnAction(e -> cambiarIdioma("Español"));
+        ingles.setOnAction(e -> cambiarIdioma("Ingles"));
+        frances.setOnAction(e -> cambiarIdioma("Frances"));
     }
 
+    /**
+     * Metodo para cambiar el idioma de la interfaz.
+     *
+     * @param idiomaSeleccionado El idioma que se selecciona.
+     */
     private void cambiarIdioma(String idiomaSeleccionado) {
 
 
     }
 
+    /**
+     * Método que se ejecuta al registrar al tutor.
+     * Realiza validaciones de los campos y registra al tutor si no hay errores.
+     */
     public void registrarse() {
-        // Limpiar mensajes de error anteriores
-        limpiarErrores();
+        limpiarErrores(); // Limpiar mensajes de error anteriores
 
+        // Obtener valores de los campos
         String nombre = this.nombre.getText().trim();
         String apellidos = this.apellidos.getText().trim();
         String dni = this.dni.getText().trim();
@@ -98,17 +82,14 @@ public class RegistroController {
         LocalDate fechaNacimiento = this.fechaNacimiento.getValue();
 
         boolean hayErrores = false;
-
-        // Verificar si todos los campos están vacíos
         boolean todosCamposVacios = nombre.isEmpty() && apellidos.isEmpty() && dni.isEmpty() && telefono.isEmpty() && email.isEmpty()
                 && direccion.isEmpty() && codigoPostal.isEmpty() && password.isEmpty() && fechaNacimiento == null;
 
         // Si todos los campos están vacíos, mostrar el mensaje global
         if (todosCamposVacios) {
             errorGlobal.setVisible(true);
-            return; // Terminar el método para no continuar con la validación
+            return;
         } else {
-            // Si hay al menos un campo relleno, ocultamos el mensaje global
             errorGlobal.setVisible(false);
         }
 
@@ -181,7 +162,6 @@ public class RegistroController {
             Stage stage = (Stage) this.nombre.getScene().getWindow();
             stage.close();
 
-            // Cargar la ventana de inicio de sesión
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/inicioSesion.fxml"));
             Parent root = loader.load();
             Stage loginStage = new Stage();
@@ -208,6 +188,9 @@ public class RegistroController {
         errorPassword.setVisible(false);
     }
 
+    /**
+     * Metodo para redirigir al usuario a la pantalla de inicio de sesión.
+     */
     @FXML
     private void inicioSesion() {
         try {
@@ -222,7 +205,6 @@ public class RegistroController {
             // Cerrar la ventana actual
             Stage ventanaActual = (Stage) createAccount.getScene().getWindow();
             ventanaActual.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

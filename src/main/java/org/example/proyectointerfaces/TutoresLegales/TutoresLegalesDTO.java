@@ -124,6 +124,11 @@ public class TutoresLegalesDTO {
         this.password = password;
     }
 
+    /**
+     * Metodo toString que devuelve una representación textual del objeto.
+     *
+     * @return Una cadena que describe el objeto TutoresDTO.
+     */
     @Override
     public String toString() {
         return "TutoresLegalesDTO{" +

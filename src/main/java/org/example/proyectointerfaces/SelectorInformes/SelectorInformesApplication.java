@@ -7,9 +7,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Aplicación que muestra la ventana principal para seleccionar informes.
+ */
 public class SelectorInformesApplication extends Application {
-
-
+    /**
+     * Inicia la aplicación, carga el archivo FXML y muestra la ventana principal.
+     *
+     * @param stage La ventana principal de la aplicación.
+     * @throws IOException Si no se puede cargar el archivo FXML.
+     */
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -19,6 +26,12 @@ public class SelectorInformesApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * Metodo principal para lanzar la aplicación.
+     *
+     * @param args Argumentos de la línea de comandos.
+     */
     public static void main(String[] args) {
         launch(args);
     }

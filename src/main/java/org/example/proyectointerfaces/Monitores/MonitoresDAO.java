@@ -1,25 +1,30 @@
 package org.example.proyectointerfaces.Monitores;
 
 import org.example.proyectointerfaces.Conexion;
-import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDTO;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase DAO para gestionar la obtención de monitores desde la base de datos.
+ */
 public class MonitoresDAO {
     private Connection conexion = Conexion.getConexion();
 
     public MonitoresDAO() {
     }
 
-
+    /**
+     * Obtiene todos los monitores de la base de datos.
+     *
+     * @return Lista de MonitoresDTO.
+     */
     public List<MonitoresDTO> getMonitores() {
         List<MonitoresDTO> listaMonitores = new ArrayList<>();
         String select = "SELECT * from monitores";
 
-        //Creamos la sentencia para sacar los datos de cada autor y meterlo en la lista
         try (Statement sentencia = conexion.createStatement();
              ResultSet rs = sentencia.executeQuery(select)) {
 

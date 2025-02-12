@@ -15,17 +15,18 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.proyectointerfaces.Monitores.MonitoresDAO;
 import org.example.proyectointerfaces.Registro.RegistroController;
-import org.example.proyectointerfaces.SelectorInformes.SelectorInformesController;
 import org.example.proyectointerfaces.Sincronizacion;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
-import org.example.proyectointerfaces.VentanaTutoresLegales.VentanaTutoresController;
 
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Controlador de la pantalla de inicio de sesión.
+ * Gestiona la lógica de inicio de sesión, carga de pantalla,
+ * cambio de idioma, y redirección a las ventanas correspondientes según el rol del usuario.
+ */
 public class InicioSesionController {
     @FXML
     private TextField usuario;
@@ -49,37 +50,38 @@ public class InicioSesionController {
     MonitoresDAO monitoresDAO = new MonitoresDAO();
     Sincronizacion sincronizacion = new Sincronizacion(tutoresDAO, monitoresDAO);
 
-    //Crea 3 items para el menuButton
     MenuItem español = new MenuItem("Español");
     MenuItem ingles = new MenuItem("Ingles");
     MenuItem frances = new MenuItem("Frances");
 
-    //Crea el resource para establecer el idioma por defecto
-    // ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
-
-
-    //Metodo para iniciar las variables
+    /**
+     * Inicializa los elementos de la interfaz, como el menu de idiomas.
+     * Asocia las acciones de los items de menú con el método cambiarIdioma.
+     */
     @FXML
     public void initialize() {
         //Añade los menuItems al MenuButton
         idiomas.getItems().addAll(español, ingles, frances);
-        español.setOnAction(e -> cambiarIdioma("Español"));       //Si esta seleccionado el menuItem español, ejecutará el código cambiarIdioma con el String español
-
-        ingles.setOnAction(e -> cambiarIdioma("Ingles"));        //Si esta seleccionado el menuItem ingles, ejecutará el código cambiarIdioma con el String ingles
-
-        frances.setOnAction(e -> cambiarIdioma("Frances"));      //Si esta seleccionado el menuItem frances, ejecutará el código cambiarIdioma con el String frances
-
-
+        español.setOnAction(e -> cambiarIdioma("Español"));
+        ingles.setOnAction(e -> cambiarIdioma("Ingles"));
+        frances.setOnAction(e -> cambiarIdioma("Frances"));
     }
 
-
+    /**
+     * Cambia el idioma de la interfaz según la opción seleccionada.
+     *
+     * @param idiomaSeleccionado El idioma que el usuario elige.
+     */
     private void cambiarIdioma(String idiomaSeleccionado) {
 
 
     }
 
-
-    //Pantalla de carga de Orion con su logotipo.
+    /**
+     * Muestra una pantalla de carga con animaciones mientras se realiza una acción en segundo plano.
+     *
+     * @param onfinish Acción a ejecutar una vez que la pantalla de carga haya finalizado.
+     */
     private void pantallaCarga(Runnable onfinish) {
         Stage cargaStage = new Stage();
         VBox cargaVBox = new VBox();
@@ -144,11 +146,10 @@ public class InicioSesionController {
     }
 
 
-
-    //Cargar una nueva página cuando haces click en el botón de INICIAR SESIÓN.
-    //Si el DNI introducido coincide con un Tutor Legal ( que no tiene permisos para generar informes,
-    // te llevará a una ventana que mostrará toda su información)
-    //Si el DNI coincide con un Monitor ( que SI tiene permisos para generar informes, la página te llevará a la ventana de generar informes).
+    /**
+     * Controla la lógica de inicio de sesión. Valida los datos ingresados por el usuario
+     * y redirige a la ventana correspondiente dependiendo del tipo de usuario.
+     */
     @FXML
     public void nuevaPagina() {
         if (usuario.getText().isEmpty() || password.getText().isEmpty()) {
@@ -189,7 +190,11 @@ public class InicioSesionController {
         });
     }
 
-
+    /**
+     * Abre una nueva ventana en la aplicación.
+     *
+     * @param fxmlPath La ruta del archivo FXML que define la interfaz de la nueva ventana.
+     */
     private void abrirVentana(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -205,10 +210,10 @@ public class InicioSesionController {
         }
     }
 
-
-
-    //Metodo para que al hacer click en el botón de Registrase si aún no tienes cuenta, este botón te lleve a la página de registro.
-    public void registrarse(){
+    /**
+     * Abre la ventana de registro cuando el usuario hace clic en el botón de registrarse.
+     */
+    public void registrarse() {
         FXMLLoader cargaLI = new FXMLLoader(getClass().
                 getResource("/org/example/proyectointerfaces/registro.fxml"));
         Parent root = null;
@@ -225,6 +230,4 @@ public class InicioSesionController {
         ventanaActual.close();
         escenarioSecundario.showAndWait();
     }
-
-
 }

@@ -2,6 +2,10 @@ package org.example.proyectointerfaces.Monitores;
 
 import java.time.LocalDate;
 
+/**
+ * Contiene información personal y de contacto del Monitor.
+ * Representa un monitor dentro del sistema.
+ */
 public class MonitoresDTO {
     private int id;
     private String nombre;
@@ -15,6 +19,20 @@ public class MonitoresDTO {
     private String email;
     private String seccion;
 
+    /**
+     * Constructor de la clase MonitoresDTO. Inicializa todos los atributos con los valores proporcionados.
+     *
+     * @param nombre           Nombre del monitor.
+     * @param apellidos        Apellidos del monitor.
+     * @param password         Contraseña del monitor.
+     * @param DNI_NIE          DNI o NIE del monitor.
+     * @param fecha_nacimiento Fecha de nacimiento del monitor.
+     * @param direccion        Dirección del monitor.
+     * @param CP               Código postal del monitor.
+     * @param telefono         Teléfono del monitor.
+     * @param email            Email del monitor.
+     * @param seccion          Sección asignada al monitor.
+     */
     public MonitoresDTO(String nombre, String apellidos, String password, String DNI_NIE, LocalDate fecha_nacimiento, String direccion, String CP, String telefono, String email, String seccion) {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -116,6 +134,11 @@ public class MonitoresDTO {
         this.seccion = seccion;
     }
 
+    /**
+     * Metodo toString que devuelve una representación textual del objeto.
+     *
+     * @return Una cadena que describe el objeto MonitoresDTO.
+     */
     @Override
     public String toString() {
         return "MonitoresDTO{" +
@@ -133,3 +156,6 @@ public class MonitoresDTO {
                 '}';
     }
 }
+
+
+
