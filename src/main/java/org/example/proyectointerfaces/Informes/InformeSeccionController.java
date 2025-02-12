@@ -5,11 +5,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.example.proyectointerfaces.Conexion;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sf.jasperreports.engine.*;
 
 public class InformeSeccionController {
 
@@ -24,63 +35,95 @@ public class InformeSeccionController {
 
     @FXML
     private void generarInforme() {
-        String seleccionada = seccionComboBox.getValue();
+        generarInformeButton.setDisable(true); // Evitar múltiples clics
 
+        String seleccionada = seccionComboBox.getValue();
         if (seleccionada == null) {
-            System.out.println("Por favor, selecciona una sección.");
+            mostrarAlerta("Error", "Debe seleccionar una sección antes de generar el informe.");
+            generarInformeButton.setDisable(false);
             return;
         }
+
         System.out.println("Generando informe para la sección: " + seleccionada);
-    }
-            /*
-            // Conexión con la base de datos
-            Class.forName("org.mariadb.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/hospital", "giftiliano", "giftilian");
 
-            // Parámetros para JasperReports (cambiar cuando termine reportes)
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("idPaciente", patientId);  // Cambiado el nombre del parámetro a "idPaciente"
+        JasperPrint jasperPrint = null;
 
-            // Cargar el archivo del informe desde el classpath
-            String reportPath = getClass().getResource("/informes/HistorialPacientes.jasper").getPath();
-            if (reportPath == null) {
-                throw new IOException("No se encontró el archivo HistorialPacientes.jasper");
+        try (Connection con = Conexion.getConexion()) {
+            if (con == null) {
+                mostrarAlerta("Error", "No se pudo establecer conexión con la base de datos.");
+                generarInformeButton.setDisable(false);
+                return;
             }
 
-            // Generar el informe con la conexión a la base de datos
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportPath, parametros, con);
+            // Parámetros para JasperReports
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("Seccion", seleccionada);
 
-            // Guardar el informe en un archivo PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "historial_medico.pdf");
+            // Cargar el archivo del informe
+            InputStream reportStream = getClass().getResourceAsStream("/org/example/proyectointerfaces/Jaspers/ReporteOrionHijosSeccion.jasper");
+            if (reportStream == null) {
+                mostrarAlerta("Error", "No se encontró el archivo del informe.");
+                generarInformeButton.setDisable(false);
+                return;
+            }
 
-            // Mensaje de confirmación
-            System.out.println("¡Informe del historial médico generado exitosamente!");
-        } catch (Exception e) {
+            // Generar el informe
+            jasperPrint = JasperFillManager.fillReport(reportStream, parametros, con);
+
+            if (jasperPrint == null) {
+                mostrarAlerta("Error", "No se pudo generar el informe.");
+                generarInformeButton.setDisable(false);
+                return;
+            }
+
+            // Usar FileChooser para seleccionar la ubicación de guardado
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar Informe");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+            fileChooser.setInitialFileName("secciones_orion.pdf");
+
+            Stage stage = (Stage) generarInformeButton.getScene().getWindow();
+            File file = fileChooser.showSaveDialog(stage);
+
+            if (file != null) {
+                JasperExportManager.exportReportToPdfFile(jasperPrint, file.getAbsolutePath());
+                System.out.println("¡Informe generado exitosamente en: " + file.getAbsolutePath() + "!");
+            } else {
+                System.out.println("Guardado cancelado por el usuario.");
+            }
+
+        } catch (JRException e) {
+            mostrarAlerta("Error de JasperReports", "No se pudo generar el informe.");
             e.printStackTrace();
-            System.out.println("Error al generar el informe del historial médico.");
+        } catch (Exception e) {
+            mostrarAlerta("Error inesperado", "Ocurrió un error inesperado.");
+            e.printStackTrace();
+        } finally {
+            generarInformeButton.setDisable(false);
         }
-
-        System.out.println("Generando informe Z con Doctor: " + doctor + " y Departamento: " + departamento);
-    }
-    */
-            @FXML
-            private void volverASelector(ActionEvent event) {
-                try {
-                    // Cargar la pantalla del selector de informes
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/menuInformes.fxml"));
-                    Parent root = loader.load();
-
-                    // Obtener la ventana actual y cerrarla
-                    Stage stageActual = (Stage) volverButton.getScene().getWindow();
-                    stageActual.setScene(new Scene(root));
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("Error al volver a la pantalla de selección de informes.");
-                }
-    }
-
     }
 
 
+    @FXML
+    private void volverASelector(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/menuInformes.fxml"));
+            Parent root = loader.load();
 
+            Stage stageActual = (Stage) volverButton.getScene().getWindow();
+            stageActual.setScene(new Scene(root));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al volver a la pantalla de selección de informes.");
+        }
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
+}
