@@ -134,7 +134,7 @@
                 </Text>
                 <Line endX="91.20001220703125" endY="3.0517578125E-5" layoutX="46.0" layoutY="451.0" startX="-7.700000762939453" startY="3.0517578125E-5" stroke="#0000009e" />
                 <Line endX="91.20001220703125" endY="3.0517578125E-5" layoutX="271.0" layoutY="451.0" startX="-7.700000762939453" startY="3.0517578125E-5" stroke="#0000009e" />
-                <Button fx:id="botonRegistrarse" layoutX="133.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#registrarse" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px;" text="REGISTRATE" textFill="WHITE">
+                <Button fx:id="botonRegistrarse" layoutX="133.0" layoutY="552.0" mnemonicParsing="false" onAction="#registrarse" defaultButton="true" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px;" text="REGISTRATE" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
