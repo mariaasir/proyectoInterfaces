@@ -48,7 +48,7 @@
                 </ComboBox>
 
                 <!-- Botón para generar el informe -->
-                <Button fx:id="generarInformeButton" layoutX="216.0" layoutY="400.0" mnemonicParsing="false" onAction="#generarInforme" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="GENERAR INFORME">
+                <Button fx:id="generarInformeButton" layoutX="216.0" layoutY="400.0" mnemonicParsing="false" onAction="#generarInforme" defaultButton="true" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="GENERAR INFORME">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>

@@ -46,13 +46,8 @@
                   <Button fx:id="botonRegistrarse" mnemonicParsing="false" onMouseClicked="#registrarse" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Registrarse" textAlignment="CENTER" textFill="#131a8e" />
                </children>
             </TextFlow>
-            <MenuButton fx:id="idiomas" layoutX="309.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Idiomas" textFill="#131a8e">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Action 1" />
-                  <MenuItem mnemonicParsing="false" text="Action 2" />
-               </items>
-            </MenuButton>
-            <Button fx:id="botonInicioSesion" layoutX="134.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#nuevaPagina" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px;" text="INICIAR SESIÓN" textFill="WHITE">
+            <MenuButton fx:id="idiomas" layoutX="309.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Idiomas" textFill="#131a8e"/>
+            <Button fx:id="botonInicioSesion" layoutX="134.0" layoutY="481.0" mnemonicParsing="false" onAction="#nuevaPagina" defaultButton="true" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px;" text="INICIAR SESIÓN" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

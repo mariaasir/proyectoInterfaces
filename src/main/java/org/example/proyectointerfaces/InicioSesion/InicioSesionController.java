@@ -51,8 +51,8 @@ public class InicioSesionController {
     Sincronizacion sincronizacion = new Sincronizacion(tutoresDAO, monitoresDAO);
 
     MenuItem español = new MenuItem("Español");
-    MenuItem ingles = new MenuItem("Ingles");
-    MenuItem frances = new MenuItem("Frances");
+    MenuItem ingles = new MenuItem("Inglés");
+    MenuItem frances = new MenuItem("Francés");
 
     /**
      * Inicializa los elementos de la interfaz, como el menu de idiomas.
