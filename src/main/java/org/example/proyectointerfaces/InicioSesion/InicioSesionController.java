@@ -194,6 +194,13 @@ public class InicioSesionController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
+
+            // Obtener el controlador desde el FXMLLoader
+            VentanaTutoresController controllerTutores = loader.getController();
+
+            // Llamar a recibirUsuario con los datos correctos
+            controllerTutores.cargarVentana(usuario.getText(), sincronizacion);
+
             Stage escenarioSecundario = new Stage();
             escenarioSecundario.initModality(Modality.APPLICATION_MODAL);
             escenarioSecundario.setScene(new Scene(root));

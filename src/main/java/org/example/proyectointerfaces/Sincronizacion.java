@@ -38,7 +38,6 @@ public class Sincronizacion {
     public boolean getTutores(String DNI) {
         for (TutoresLegalesDTO tutor : tutores) {
             if (tutor.getDni().equals(DNI)) {
-
                 return true;
             }
 
@@ -80,6 +79,14 @@ public class Sincronizacion {
         return false;
     }
 
+    public TutoresLegalesDTO dameUnTutor(String DNI) {
+        for (TutoresLegalesDTO tutor : tutores) {
+            if (tutor.getDni().equals(DNI)) {
+                return tutor;
+            }
+        }
+        throw new RuntimeException("¿No hay tutor?");
+    }
 
 
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
@@ -9,7 +10,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane prefHeight="629.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyectointerfaces.VentanaTutoresLegales.VentanaTutoresController">
    <children>
@@ -35,6 +35,12 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </MenuButton>
+            <Label fx:id="labelSaludo" layoutX="40.0" layoutY="80.0" prefHeight="30.0" prefWidth="250.0" text=" ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelDatosTutor" alignment="TOP_LEFT" layoutX="40.0" layoutY="110.0" prefHeight="150.0" prefWidth="300.0" />
          </children>
       </Pane>
    </children>
