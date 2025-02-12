@@ -38,9 +38,9 @@ public class InicioSesionController {
 
     @FXML
     private Label errorGlobal, labelCrearCuenta, errorUsuario, errorPassword;
+
     @FXML
     private Button botonRegistrarse;
-
 
     @FXML
     private Button botonIniciarSesion;

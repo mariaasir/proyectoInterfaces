@@ -5,10 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.proyectointerfaces.InicioSesion.InicioSesionController;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDTO;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -45,6 +48,9 @@ public class RegistroController {
 
     @FXML
     private MenuButton idiomas;
+
+    @FXML
+    private Button createAccount;
 
     @FXML
     private Label errorGlobal, errorNombre, errorApellidos, errorDNI, errorFecha, errorTelefono, errorEmail, errorDireccion, errorCodigoPostal, errorPassword;
@@ -188,8 +194,6 @@ public class RegistroController {
         }
     }
 
-
-
     /**
      * Limpia todos los mensajes de error antes de validar
      */
@@ -204,7 +208,23 @@ public class RegistroController {
         errorPassword.setVisible(false);
     }
 
+    @FXML
+    private void inicioSesion() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/inicioSesion.fxml"));
+            Parent root = loader.load();
 
+            Stage nuevaVentana = new Stage();
+            nuevaVentana.setScene(new Scene(root));
+            nuevaVentana.setTitle("Iniciar Sesión");
+            nuevaVentana.show();
 
+            // Cerrar la ventana actual
+            Stage ventanaActual = (Stage) createAccount.getScene().getWindow();
+            ventanaActual.close();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

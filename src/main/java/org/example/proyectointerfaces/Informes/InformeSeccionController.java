@@ -32,55 +32,56 @@ public class InformeSeccionController {
         }
         System.out.println("Generando informe para la sección: " + seleccionada);
     }
-            /*
-            // Conexión con la base de datos
-            Class.forName("org.mariadb.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/hospital", "giftiliano", "giftilian");
 
-            // Parámetros para JasperReports (cambiar cuando termine reportes)
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("idPaciente", patientId);  // Cambiado el nombre del parámetro a "idPaciente"
+    /*
+    // Conexión con la base de datos
+    Class.forName("org.mariadb.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/hospital", "giftiliano", "giftilian");
 
-            // Cargar el archivo del informe desde el classpath
-            String reportPath = getClass().getResource("/informes/HistorialPacientes.jasper").getPath();
-            if (reportPath == null) {
-                throw new IOException("No se encontró el archivo HistorialPacientes.jasper");
-            }
+    // Parámetros para JasperReports (cambiar cuando termine reportes)
+    Map<String, Object> parametros = new HashMap<>();
+    parametros.put("idPaciente", patientId);  // Cambiado el nombre del parámetro a "idPaciente"
 
-            // Generar el informe con la conexión a la base de datos
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportPath, parametros, con);
+    // Cargar el archivo del informe desde el classpath
+    String reportPath = getClass().getResource("/informes/HistorialPacientes.jasper").getPath();
+    if (reportPath == null) {
+        throw new IOException("No se encontró el archivo HistorialPacientes.jasper");
+    }
 
-            // Guardar el informe en un archivo PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "historial_medico.pdf");
+    // Generar el informe con la conexión a la base de datos
+    JasperPrint jasperPrint = JasperFillManager.fillReport(reportPath, parametros, con);
 
-            // Mensaje de confirmación
-            System.out.println("¡Informe del historial médico generado exitosamente!");
-        } catch (Exception e) {
+    // Guardar el informe en un archivo PDF
+    JasperExportManager.exportReportToPdfFile(jasperPrint, "historial_medico.pdf");
+
+    // Mensaje de confirmación
+    System.out.println("¡Informe del historial médico generado exitosamente!");
+} catch (Exception e) {
+    e.printStackTrace();
+    System.out.println("Error al generar el informe del historial médico.");
+}
+
+System.out.println("Generando informe Z con Doctor: " + doctor + " y Departamento: " + departamento);
+}
+*/
+    @FXML
+    private void volverASelector(ActionEvent event) {
+        try {
+            // Cargar la pantalla del selector de informes
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/menuInformes.fxml"));
+            Parent root = loader.load();
+
+            // Obtener la ventana actual y cerrarla
+            Stage stageActual = (Stage) volverButton.getScene().getWindow();
+            stageActual.setScene(new Scene(root));
+
+        } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error al generar el informe del historial médico.");
+            System.out.println("Error al volver a la pantalla de selección de informes.");
         }
-
-        System.out.println("Generando informe Z con Doctor: " + doctor + " y Departamento: " + departamento);
-    }
-    */
-            @FXML
-            private void volverASelector(ActionEvent event) {
-                try {
-                    // Cargar la pantalla del selector de informes
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectointerfaces/menuInformes.fxml"));
-                    Parent root = loader.load();
-
-                    // Obtener la ventana actual y cerrarla
-                    Stage stageActual = (Stage) volverButton.getScene().getWindow();
-                    stageActual.setScene(new Scene(root));
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("Error al volver a la pantalla de selección de informes.");
-                }
     }
 
-    }
+}
 
 
 

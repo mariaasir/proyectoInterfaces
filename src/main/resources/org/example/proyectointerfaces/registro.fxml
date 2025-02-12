@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,219 +17,185 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<?import javafx.scene.control.Tooltip?>
-<AnchorPane prefHeight="629.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.proyectointerfaces.Registro.RegistroController">
+<AnchorPane prefHeight="629.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyectointerfaces.Registro.RegistroController">
     <children>
         <Pane layoutY="1.0" prefHeight="629.0" prefWidth="400.0" style="-fx-background-color: white;">
             <children>
-                <Text fill="#131a8e" layoutX="156.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="REGISTRO">
+                <Text fill="#131a8e" layoutX="156.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTRO">
                     <font>
-                        <Font name="System Bold" size="18.0"/>
+                        <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
-                <ImageView fitHeight="120.0" fitWidth="129.0" layoutX="141.0" layoutY="42.0" pickOnBounds="true"
-                           preserveRatio="true">
+                <ImageView fitHeight="120.0" fitWidth="129.0" layoutX="141.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@Imagenes/logo.jpg"/>
+                        <Image url="@Imagenes/logo.jpg" />
                     </image>
                 </ImageView>
                 <TextField fx:id="nombre" layoutX="44.0" layoutY="230.0" prefHeight="25.0" prefWidth="117.0">
                     <tooltip>
-                        <Tooltip fx:id="tooltipNombre" text="Ingrese su nombre completo"/>
+                        <Tooltip fx:id="tooltipNombre" text="Ingrese su nombre completo" />
                     </tooltip>
                 </TextField>
                 <TextField fx:id="apellidos" layoutX="176.0" layoutY="230.0" prefHeight="25.0" prefWidth="202.0">
                     <tooltip>
-                        <Tooltip fx:id="tooltipapellidos" text="Ingrese sus apellidos completos."/>
+                        <Tooltip fx:id="tooltipapellidos" text="Ingrese sus apellidos completos." />
                     </tooltip>
                 </TextField>
-                <TextField fx:id="dni" layoutX="44.0" layoutY="288.0" prefHeight="25.0" prefWidth="135.0"
-                           promptText="DNI / NIE">
+                <TextField fx:id="dni" layoutX="44.0" layoutY="288.0" prefHeight="25.0" prefWidth="135.0" promptText="DNI / NIE">
                     <tooltip>
-                        <Tooltip fx:id="tooltipdni" text="Debe contener 8 números y 1 letra (Ej: 12345678A)."/>
+                        <Tooltip fx:id="tooltipdni" text="Debe contener 8 números y 1 letra (Ej: 12345678A)." />
                     </tooltip>
                 </TextField>
-                <DatePicker fx:id="fechaNacimiento" layoutX="188.0" layoutY="288.0" prefHeight="25.0"
-                            prefWidth="189.0">
+                <DatePicker fx:id="fechaNacimiento" layoutX="188.0" layoutY="288.0" prefHeight="25.0" prefWidth="189.0">
                     <tooltip>
-                        <Tooltip fx:id="tooltipfecha" text="Seleccione su fecha de nacimiento."/>
+                        <Tooltip fx:id="tooltipfecha" text="Seleccione su fecha de nacimiento." />
                     </tooltip>
                 </DatePicker>
-                <TextField fx:id="telefono" layoutX="44.0" layoutY="343.0" prefHeight="25.0" prefWidth="135.0">
+                <TextField fx:id="telefono" layoutX="44.0" layoutY="343.0" prefHeight="25.0" prefWidth="135.0" promptText="Ej: 668957421">
                     <tooltip>
-                        <Tooltip fx:id="tooltiptelefono" text="Debe contener 9 dígitos."/>
+                        <Tooltip fx:id="tooltiptelefono" text="Debe contener 9 dígitos." />
                     </tooltip>
                 </TextField>
-                <TextField fx:id="email" layoutX="188.0" layoutY="343.0" prefHeight="25.0" prefWidth="189.0"
-                           promptText="Ej: user@email.com.">
+                <TextField fx:id="email" layoutX="188.0" layoutY="343.0" prefHeight="25.0" prefWidth="189.0" promptText="Ej: user@email.com.">
                     <tooltip>
-                        <Tooltip fx:id="tooltipemail" text="Ingrese un correo válido."/>
+                        <Tooltip fx:id="tooltipemail" text="Ingrese un correo válido." />
                     </tooltip>
                 </TextField>
-                <TextField fx:id="direccion" layoutX="44.0" layoutY="399.0" prefHeight="25.0" prefWidth="231.0">
+                <TextField fx:id="direccion" layoutX="44.0" layoutY="399.0" prefHeight="25.0" prefWidth="231.0" promptText="Ej: Avenida Dulce Chacón 5">
                     <tooltip>
-                        <Tooltip fx:id="tooltipdireccion" text="Ingrese su dirección de residencia."/>
+                        <Tooltip fx:id="tooltipdireccion" text="Ingrese su dirección de residencia." />
                     </tooltip>
                 </TextField>
-                <TextField fx:id="codigoPostal" layoutX="283.0" layoutY="399.0" prefHeight="25.0" prefWidth="94.0">
+                <TextField fx:id="codigoPostal" layoutX="283.0" layoutY="399.0" prefHeight="25.0" prefWidth="94.0" promptText="Ej: 20001">
                     <tooltip>
-                        <Tooltip fx:id="tooltipcodigopostal" text="Ingrese su código postal."/>
+                        <Tooltip fx:id="tooltipcodigopostal" text="Ingrese su código postal." />
                     </tooltip>
                 </TextField>
-                <Text fill="#0000009e" layoutX="44.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Nombre">
+                <Text fill="#0000009e" layoutX="44.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
                     <font>
-                        <Font size="9.0"/>
+                        <Font size="9.0" />
                     </font>
                 </Text>
-                <Text fill="#0000009e" layoutX="179.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Apellidos">
+                <Text fill="#0000009e" layoutX="179.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellidos">
                     <font>
-                        <Font size="9.0"/>
+                        <Font size="9.0" />
                     </font>
                 </Text>
-                <Text fill="#0000009e" layoutX="47.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="DNI / NIE">
+                <Text fill="#0000009e" layoutX="47.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DNI / NIE">
                     <font>
-                        <Font size="9.0"/>
+                        <Font size="9.0" />
                     </font>
                 </Text>
-                <Text fill="#0000009e" layoutX="191.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Fecha de Nacimiento">
+                <Text fill="#0000009e" layoutX="191.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de Nacimiento">
                     <font>
-                        <Font size="9.0"/>
+                        <Font size="9.0" />
                     </font>
                 </Text>
-                <Text fill="#0000009e" layoutX="47.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Teléfono">
+                <Text fill="#0000009e" layoutX="47.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teléfono">
                     <font>
-                        <Font size="9.0"/>
+                        <Font size="9.0" />
                     </font>
                 </Text>
-                <Text fill="#0000009e" layoutX="190.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Correo Electrónico">
+                <Text fill="#0000009e" layoutX="190.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo Electrónico">
                     <font>
-                        <Font size="9.0"/>
+                        <Font size="9.0" />
                     </font>
                 </Text>
-                <Text fill="#0000009e" layoutX="47.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Dirección">
+                <Text fill="#0000009e" layoutX="47.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirección">
                     <font>
-                        <Font size="9.0"/>
+                        <Font size="9.0" />
                     </font>
                 </Text>
-                <Text fill="#0000009e" layoutX="286.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Código Postal">
+                <Text fill="#0000009e" layoutX="286.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Código Postal">
                     <font>
-                        <Font size="9.0"/>
+                        <Font size="9.0" />
                     </font>
                 </Text>
-                <TextFlow fx:id="textFlow" layoutX="46.0" layoutY="575.0" prefHeight="27.0" prefWidth="293.0">
+                <TextFlow fx:id="textFlow" layoutX="46.0" layoutY="583.0" prefHeight="27.0" prefWidth="293.0">
                     <children>
-                        <Label fx:id="crearCuenta" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0"
-                               prefWidth="168.0" text="¿Ya tienes cuenta?" textAlignment="CENTER"/>
-                        <Button fx:id="createAccount" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0"
-                                style="-fx-background-color: transparent; -fx-alignment: center-left;"
-                                text="Iniciar Sesión" textAlignment="CENTER" textFill="#131a8e"/>
+                        <Label fx:id="crearCuenta" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="168.0" text="¿Ya tienes cuenta?" textAlignment="CENTER" />
+                        <Button fx:id="createAccount" mnemonicParsing="false" onAction="#inicioSesion" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Iniciar Sesión" textAlignment="CENTER" textFill="#131a8e" />
                     </children>
                 </TextFlow>
-                <PasswordField fx:id="password" layoutX="85.0" layoutY="465.0" prefHeight="25.0" prefWidth="231.0">
+                <PasswordField fx:id="password" layoutX="85.0" layoutY="466.0" prefHeight="25.0" prefWidth="231.0">
                     <tooltip>
-                        <Tooltip fx:id="tooltippassword" text="Mínimo 6 caracteres, puede incluir números y letras."/>
+                        <Tooltip fx:id="tooltippassword" text="Mínimo 6 caracteres, puede incluir números y letras." />
                     </tooltip>
                 </PasswordField>
-                <PasswordField fx:id="password1" layoutX="85.0" layoutY="512.0" prefHeight="25.0" prefWidth="231.0">
+                <PasswordField fx:id="password1" layoutX="85.0" layoutY="512.0" prefHeight="25.0" prefWidth="231.0" promptText="Repita la contraseña">
                     <tooltip>
-                        <Tooltip fx:id="tooltippassword1" text="Repita la contraseña ingresada anteriormente."/>
+                        <Tooltip fx:id="tooltippassword1" text="Repita la contraseña ingresada anteriormente." />
                     </tooltip>
                 </PasswordField>
-                <Text fill="#0000009d" layoutX="140.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Establezca su contraseña">
+                <Text fill="#0000009d" layoutX="140.0" layoutY="454.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Establezca su contraseña">
                     <font>
-                        <Font size="11.0"/>
+                        <Font size="11.0" />
                     </font>
                 </Text>
-                <Line endX="91.20001220703125" endY="3.0517578125E-5" layoutX="46.0" layoutY="453.0"
-                      startX="-7.700000762939453" startY="3.0517578125E-5" stroke="#0000009e"/>
-                <Line endX="91.20001220703125" endY="3.0517578125E-5" layoutX="271.0" layoutY="453.0"
-                      startX="-7.700000762939453" startY="3.0517578125E-5" stroke="#0000009e"/>
-                <Button fx:id="botonRegistrarse" layoutX="133.0" layoutY="545.0" mnemonicParsing="false"
-                        onMouseClicked="#registrarse" prefHeight="25.0" prefWidth="135.0"
-                        style="-fx-background-color: #131a8e; -fx-background-radius: 20px;" text="REGISTRATE"
-                        textFill="WHITE">
+                <Line endX="91.20001220703125" endY="3.0517578125E-5" layoutX="46.0" layoutY="451.0" startX="-7.700000762939453" startY="3.0517578125E-5" stroke="#0000009e" />
+                <Line endX="91.20001220703125" endY="3.0517578125E-5" layoutX="271.0" layoutY="451.0" startX="-7.700000762939453" startY="3.0517578125E-5" stroke="#0000009e" />
+                <Button fx:id="botonRegistrarse" layoutX="133.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#registrarse" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px;" text="REGISTRATE" textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="12.0"/>
+                        <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-                <Label fx:id="errorGlobal" layoutX="100.0" layoutY="602.0" textFill="#ff0000bf" visible="false" text="Todos los campos deben estar rellenos.">
+                <Label fx:id="errorGlobal" layoutX="100.0" layoutY="602.0" text="Todos los campos deben estar rellenos." textFill="#ff0000bf" visible="false">
                     <font>
-                        <Font size="12.0"/>
+                        <Font size="12.0" />
                     </font>
                 </Label>
             </children>
         </Pane>
-        <MenuButton fx:id="idiomas" layoutX="309.0" layoutY="14.0" mnemonicParsing="false"
-                    style="-fx-background-color: transparent;" text="Idiomas">
+        <MenuButton fx:id="idiomas" layoutX="309.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Idiomas">
             <items>
-                <MenuItem mnemonicParsing="false" text="Español"/>
-                <MenuItem mnemonicParsing="false" text="Inglés"/>
-                <MenuItem mnemonicParsing="false" text="Francés"/>
+                <MenuItem mnemonicParsing="false" text="Español" />
+                <MenuItem mnemonicParsing="false" text="Inglés" />
+                <MenuItem mnemonicParsing="false" text="Francés" />
             </items>
         </MenuButton>
-        <Label fx:id="errorNombre" text="El nombre es obligatorio." layoutX="45.0" layoutY="254.0" textFill="#ff0000bf"
-               visible="false">
+        <Label fx:id="errorNombre" layoutX="45.0" layoutY="254.0" text="El nombre es obligatorio." textFill="#ff0000bf" visible="false">
             <font>
-                <Font size="11.0"/>
+                <Font size="11.0" />
             </font>
         </Label>
-        <Label fx:id="errorApellidos" text="Los apellidos son obligatorios." layoutX="190.0" layoutY="254.0"
-               textFill="#ff0000bf" visible="false">
+        <Label fx:id="errorApellidos" layoutX="190.0" layoutY="254.0" text="Los apellidos son obligatorios." textFill="#ff0000bf" visible="false">
             <font>
-                <Font size="11.0"/>
+                <Font size="11.0" />
             </font>
         </Label>
-        <Label fx:id="errorDNI" text="Formato incorrecto (Ej: 12345678A)." layoutX="44.0" layoutY="313.0" textFill="#ff0000bf"
-               visible="false">
+        <Label fx:id="errorDNI" layoutX="44.0" layoutY="313.0" text="Formato incorrecto (Ej: 12345678A)." textFill="#ff0000bf" visible="false">
             <font>
-                <Font size="11.0"/>
+                <Font size="11.0" />
             </font>
         </Label>
         <Label fx:id="errorFecha" layoutX="193.0" layoutY="313.0" textFill="#ff0000bf" visible="false">
             <font>
-                <Font size="11.0"/>
+                <Font size="11.0" />
             </font>
         </Label>
-        <Label fx:id="errorTelefono" text="Debe tener 9 dígitos." layoutX="44.0" layoutY="368.0" textFill="#ff0000bf"
-               visible="false">
+        <Label fx:id="errorTelefono" layoutX="44.0" layoutY="368.0" text="Debe tener 9 dígitos." textFill="#ff0000bf" visible="false">
             <font>
-                <Font size="11.0"/>
+                <Font size="11.0" />
             </font>
         </Label>
-        <Label fx:id="errorEmail" text="Correo inválido." layoutX="188.0" layoutY="368.0" textFill="#ff0000bf"
-               visible="false">
+        <Label fx:id="errorEmail" layoutX="188.0" layoutY="368.0" text="Correo inválido." textFill="#ff0000bf" visible="false">
             <font>
-                <Font size="11.0"/>
+                <Font size="11.0" />
             </font>
         </Label>
-        <Label fx:id="errorDireccion" text="La dirección es obligatoria." layoutX="44.0" layoutY="423.0"
-               textFill="#ff0000bf" visible="false">
+        <Label fx:id="errorDireccion" layoutX="44.0" layoutY="423.0" text="La dirección es obligatoria." textFill="#ff0000bf" visible="false">
             <font>
-                <Font size="11.0"/>
+                <Font size="11.0" />
             </font>
         </Label>
-        <Label fx:id="errorCodigoPostal" text="Código postal inválido." layoutX="283.0" layoutY="423.0"
-               textFill="#ff0000bf" visible="false">
+        <Label fx:id="errorCodigoPostal" layoutX="283.0" layoutY="423.0" text="Código postal inválido." textFill="#ff0000bf" visible="false">
             <font>
-                <Font size="11.0"/>
+                <Font size="11.0" />
             </font>
         </Label>
-        <Label fx:id="errorPassword" text="Mínimo 6 caracteres." layoutX="85.0" layoutY="489.0"
-               textFill="#ff0000bf" visible="false">
+        <Label fx:id="errorPassword" layoutX="85.0" layoutY="490.0" text="Mínimo 6 caracteres." textFill="#ff0000bf" visible="false">
             <font>
-                <Font size="11.0"/>
+                <Font size="11.0" />
             </font>
         </Label>
     </children>
