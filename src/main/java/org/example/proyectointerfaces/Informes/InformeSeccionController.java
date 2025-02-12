@@ -13,10 +13,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.proyectointerfaces.Conexion;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,50 +35,44 @@ public class InformeSeccionController {
     @FXML
     private Button volverButton;
 
-    @FXML
-    private void generarInforme() {
-        generarInformeButton.setDisable(true); // Evitar múltiples clics
+    String ruta;
 
-        String seleccionada = seccionComboBox.getValue();
-        if (seleccionada == null) {
-            mostrarAlerta("Error", "Debe seleccionar una sección antes de generar el informe.");
-            generarInformeButton.setDisable(false);
+    @FXML
+    public void initialize () {
+        // Agregar los departamentos al ComboBox
+        seccionComboBox.getItems().addAll(
+                "Tribu", "Mambos", "Rhygings"
+        );
+    }
+
+    public void generarInforme() {
+        String seccionSeleccionada = seccionComboBox.getSelectionModel().getSelectedItem();
+
+        // Validar si se ha seleccionado una sección
+        if (seccionSeleccionada == null || seccionSeleccionada.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Complete los campos");
+            alert.setHeaderText(null);
+            alert.setContentText("Debe seleccionar una sección para poder generar el informe");
+            alert.showAndWait();
             return;
         }
 
-        System.out.println("Generando informe para la sección: " + seleccionada);
+        // Pasar parámetros al informe
+        Map<String, Object> parametro = new HashMap<>();
+        parametro.put("Seccion", seccionSeleccionada);
 
-        JasperPrint jasperPrint = null;
+        System.out.println("Parámetros del informe: " + parametro);
 
-        try (Connection con = Conexion.getConexion()) {
-            if (con == null) {
-                mostrarAlerta("Error", "No se pudo establecer conexión con la base de datos.");
-                generarInformeButton.setDisable(false);
-                return;
-            }
+        try {
+            // Cargar el driver JDBC y establecer la conexión a la base de datos
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/orion", "root", "");
 
-            // Parámetros para JasperReports
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("Seccion", seleccionada);
+            // Llenar el informe con los parámetros y la conexión
+            JasperPrint print = JasperFillManager.fillReport("src/main/resources/org/example/proyectointerfaces/Jaspers/ReporteOrionHijosSeccion.jasper", parametro, connection);
 
-            // Cargar el archivo del informe
-            InputStream reportStream = getClass().getResourceAsStream("/org/example/proyectointerfaces/Jaspers/ReporteOrionHijosSeccion.jasper");
-            if (reportStream == null) {
-                mostrarAlerta("Error", "No se encontró el archivo del informe.");
-                generarInformeButton.setDisable(false);
-                return;
-            }
-
-            // Generar el informe
-            jasperPrint = JasperFillManager.fillReport(reportStream, parametros, con);
-
-            if (jasperPrint == null) {
-                mostrarAlerta("Error", "No se pudo generar el informe.");
-                generarInformeButton.setDisable(false);
-                return;
-            }
-
-            // Usar FileChooser para seleccionar la ubicación de guardado
+            // Mostrar el diálogo para guardar el archivo
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Guardar Informe");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
@@ -85,21 +81,71 @@ public class InformeSeccionController {
             Stage stage = (Stage) generarInformeButton.getScene().getWindow();
             File file = fileChooser.showSaveDialog(stage);
 
+            // Si el usuario selecciona una ubicación para guardar
             if (file != null) {
-                JasperExportManager.exportReportToPdfFile(jasperPrint, file.getAbsolutePath());
+                // Exportar el informe a un archivo PDF
+                JasperExportManager.exportReportToPdfFile(print, file.getAbsolutePath());
+
                 System.out.println("¡Informe generado exitosamente en: " + file.getAbsolutePath() + "!");
             } else {
                 System.out.println("Guardado cancelado por el usuario.");
             }
+            ruta = file.getAbsolutePath();
+            System.out.println(file.getAbsolutePath());
+            // Mostrar una alerta de éxito
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informe Generado");
+            alert.setHeaderText(null);
+            alert.setContentText("El informe se ha generado correctamente.");
+            alert.showAndWait();
 
-        } catch (JRException e) {
-            mostrarAlerta("Error de JasperReports", "No se pudo generar el informe.");
+        } catch (Throwable e) {
             e.printStackTrace();
-        } catch (Exception e) {
-            mostrarAlerta("Error inesperado", "Ocurrió un error inesperado.");
-            e.printStackTrace();
-        } finally {
-            generarInformeButton.setDisable(false);
+            // Mostrar una alerta de error si algo falla
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Hubo un error al generar el informe: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+
+    public void visualizarInforme() {
+        // Usamos la variable ruta que contiene la ruta del archivo generado
+        if (ruta == null || ruta.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No se ha generado el informe. Asegúrese de haberlo guardado correctamente.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Crear el archivo PDF desde la ruta
+        File archivoPDF = new File(ruta);
+
+        // Comprobar si el archivo existe
+        if (archivoPDF.exists()) {
+            try {
+                // Abre el archivo PDF usando la aplicación predeterminada del sistema
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(archivoPDF);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error al abrir el PDF");
+                alert.setHeaderText(null);
+                alert.setContentText("Hubo un problema al abrir el informe: " + e.getMessage());
+                alert.showAndWait();
+            }
+        } else {
+            // Si el archivo no existe, muestra un mensaje de error
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Archivo no encontrado");
+            alert.setHeaderText(null);
+            alert.setContentText("El archivo PDF no se encuentra en la ubicación especificada.");
+            alert.showAndWait();
         }
     }
 
