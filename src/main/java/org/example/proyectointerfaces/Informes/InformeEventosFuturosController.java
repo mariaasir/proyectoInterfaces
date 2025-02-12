@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.stage.FileChooser;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.Date;  // Importar java.sql.Date
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -36,11 +38,19 @@ public class InformeEventosFuturosController {
     @FXML
     private Button volverButton;
 
+    @FXML
+    private ComboBox<String> seccionComboBox; // Sección seleccionada
+
     // Formato para la fecha
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @FXML
     public void initialize() {
+        // Agregar las secciones al ComboBox
+        seccionComboBox.getItems().addAll(
+                "Tribu", "Mambos", "Rhygings"
+        );
+
         // Restringir el DatePicker para que solo permita fechas futuras
         fechaFuturoDatePicker.setDayCellFactory(new Callback<DatePicker, DateCell>() {
             @Override
@@ -49,7 +59,7 @@ public class InformeEventosFuturosController {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (item.isBefore(LocalDate.now().plusDays(1))) { // Solo fechas futuras
+                        if (item.isBefore(LocalDate.now())) { // Solo fechas futuras, no hoy
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;"); // Color visual para deshabilitados
                         }
@@ -64,6 +74,7 @@ public class InformeEventosFuturosController {
         generarInformeButton.setDisable(true); // Evitar múltiples clics
 
         LocalDate fechaSeleccionada = fechaFuturoDatePicker.getValue();
+        String seccionSeleccionada = seccionComboBox.getValue();
 
         if (fechaSeleccionada == null) {
             mostrarAlerta("Error", "Debe seleccionar una fecha antes de generar el informe.");
@@ -71,10 +82,16 @@ public class InformeEventosFuturosController {
             return;
         }
 
-        // Convertir la fecha seleccionada en formato yyyy-MM-dd
-        String fechaSeleccionadaStr = fechaSeleccionada.format(formatter);
+        if (seccionSeleccionada == null) {
+            mostrarAlerta("Error", "Debe seleccionar una sección antes de generar el informe.");
+            generarInformeButton.setDisable(false);
+            return;
+        }
 
-        System.out.println("Generando informe para la fecha: " + fechaSeleccionadaStr);
+        // Convertir LocalDate a java.sql.Date
+        Date fechaSql = Date.valueOf(fechaSeleccionada); // Conversión a java.sql.Date
+
+        System.out.println("Generando informe para la sección: " + seccionSeleccionada + " y la fecha: " + fechaSeleccionada);
 
         JasperPrint jasperPrint = null;
 
@@ -87,10 +104,11 @@ public class InformeEventosFuturosController {
 
             // Parámetros para JasperReports
             Map<String, Object> parametros = new HashMap<>();
-            parametros.put("FechaPasada", fechaSeleccionadaStr);
+            parametros.put("FechaPasada", fechaSql); // Usar java.sql.Date
+            parametros.put("Seccion", seccionSeleccionada);
 
             // Cargar el archivo del informe
-            InputStream reportStream = getClass().getResourceAsStream("/org/example/proyectointerfaces/Jaspers/ReporteEvento.jasper");
+            InputStream reportStream = getClass().getResourceAsStream("src/main/resources/org/example/proyectointerfaces/JaspersReportOrionEventosFuturos.jasper");
             if (reportStream == null) {
                 mostrarAlerta("Error", "No se encontró el archivo del informe.");
                 generarInformeButton.setDisable(false);

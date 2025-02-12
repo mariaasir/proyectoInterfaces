@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,35 +11,39 @@
 <AnchorPane prefHeight="629.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyectointerfaces.Informes.InformeGeneralController">
 
     <children>
+        <!-- Contenedor principal fondo blanco -->
         <Pane prefHeight="629.0" prefWidth="400.0" style="-fx-background-color: white;">
             <children>
-                <!-- Logo -->
-                <ImageView fitHeight="120.0" fitWidth="129.0" layoutX="136.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                <!-- Logo de Orion -->
+                <ImageView fitHeight="152.0" fitWidth="156.0" layoutX="122.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@Imagenes/logo.jpg" />
                     </image>
                 </ImageView>
 
-                <!-- Título -->
-                <Text fill="#131a8e" layoutX="145.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INFORME Y">
+                <!-- Título de la página -->
+                <Text fill="#131a8e" layoutX="116.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INFORME GENERAL">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
 
-                <!-- Campos de entrada -->
-                <TextField fx:id="especialidadField" layoutX="75.0" layoutY="270.0" prefWidth="250.0" promptText="Especialidad" style="-fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;" />
+                <!-- Mensaje sobre el botón (indica que se generará el informe) -->
+                <Text fill="#131a8e" layoutX="95.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se generará el informe separado por Secciones">
+                    <font>
+                        <Font name="System" size="12.0" />
+                    </font>
+                </Text>
 
-                <TextField fx:id="hospitalField" layoutX="75.0" layoutY="330.0" prefWidth="250.0" promptText="Hospital" style="-fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;" />
-
-                <!-- Botón de generar informes -->
-                <Button fx:id="generarInformeButton" layoutX="216.0" layoutY="400.0" mnemonicParsing="false" onAction="#generarInforme" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="GENERAR INFORME">
+                <!-- Botón para generar el informe -->
+                <Button fx:id="generarInformeButton" layoutX="132.0" layoutY="400.0" mnemonicParsing="false" onAction="#generarInforme" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="GENERAR INFORME">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
+
                 <!-- Botón para volver -->
-                <Button fx:id="volverButton" layoutX="75.0" layoutY="400.0" mnemonicParsing="false" onAction="#volverASelector" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #d32f2f; -fx-background-radius: 20px; -fx-text-fill: white;" text="VOLVER">
+                <Button fx:id="volverButton" layoutX="305.0" layoutY="580.0" mnemonicParsing="false" onAction="#volverASelector" prefHeight="27.0" prefWidth="78.0" style="-fx-background-color: white; -fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="VOLVER" textFill="#131a8e">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>

@@ -35,13 +35,6 @@
 
                 <!-- ComboBox para las Secciones -->
                 <ComboBox fx:id="seccionComboBox" layoutX="75.0" layoutY="270.0" prefWidth="250.0" style="-fx-border-color: #131a8e; -fx-background-color: #f2f2f2; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-padding: 5px;">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Tribu" />
-                            <String fx:value="Mambos" />
-                            <String fx:value="Rhygings" />
-                        </FXCollections>
-                    </items>
                     <promptText>
                         <String fx:value="Selecciona una sección" />
                     </promptText>
@@ -51,7 +44,7 @@
                 <Label layoutX="75.0" layoutY="310.0" text="Selecciona la fecha (Formato: YYYY-MM-DD)" textFill="#131a8e" />
 
                 <!-- Selector de fecha (DatePicker) -->
-                <DatePicker fx:id="fechaPasadaPicker" layoutX="75.0" layoutY="330.0" prefWidth="250.0" style="-fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;" />
+                <DatePicker fx:id="fechaFuturoDatePicker" layoutX="75.0" layoutY="330.0" prefWidth="250.0" style="-fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;" />
 
                 <!-- Botón para generar el informe -->
                 <Button fx:id="generarInformeButton" layoutX="132.0" layoutY="400.0" mnemonicParsing="false" onAction="#generarInforme" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="GENERAR INFORME">

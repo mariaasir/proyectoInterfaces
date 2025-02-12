@@ -68,9 +68,9 @@ public class SelectorInformesController {
             String selectedInforme = tipoInforme.getText();
 
           if("Informe de Eventos Futuros".equals(selectedInforme)) {
-              cargarPantalla("/org/example/proyectointerfaces/informeEventosPasados.fxml");
+              cargarPantalla("/org/example/proyectointerfaces/informesEventosFuturos.fxml");
           }else if("Informe de Eventos Pasados".equals(selectedInforme)) {
-            cargarPantalla("/org/example/proyectointerfaces/informesEventosFuturos.fxml");
+            cargarPantalla("/org/example/proyectointerfaces/informeEventosPasados.fxml");
 
           }else if("Informe General".equals(selectedInforme)) {
               cargarPantalla("/org/example/proyectointerfaces/informeGeneral.fxml");
