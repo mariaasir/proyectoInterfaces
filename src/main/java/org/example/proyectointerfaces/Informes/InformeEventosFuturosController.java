@@ -29,10 +29,10 @@ import java.util.Map;
 
 import net.sf.jasperreports.engine.*;
 
+/**
+ * Controlador para la generación de informes de eventos futuros en la aplicación.
+ */
 public class InformeEventosFuturosController {
-
-
-
     @FXML
     private Button generarInformeButton;
 
@@ -42,37 +42,33 @@ public class InformeEventosFuturosController {
     @FXML
     private ComboBox<String> seccionComboBox; // Sección seleccionada
 
-    // Formato para la fecha
-
     String ruta;
 
-
+    /**
+     * Metodo de inicialización del controlador.
+     * Se encarga de llenar el ComboBox con las secciones disponibles.
+     */
     @FXML
     public void initialize() {
-        // Agregar las secciones al ComboBox
         seccionComboBox.getItems().addAll(
                 "Tribu", "Mambos", "Rhygings"
         );
-
-
-
     }
 
-
+    /**
+     * Genera un informe de eventos futuros basado en la sección seleccionada.
+     * El informe se genera utilizando JasperReports y se guarda como un archivo PDF.
+     */
     @FXML
     private void generarInforme() {
-
         Date fecha = Date.from(Instant.now());
         String seccionSeleccionada = seccionComboBox.getValue();
-
-
 
         if (seccionSeleccionada == null) {
             mostrarAlerta("Error", "Debe seleccionar una sección antes de generar el informe.");
             generarInformeButton.setDisable(false);
             return;
         }
-
 
         // Parámetros para JasperReports
         Map<String, Object> parametros = new HashMap<>();
@@ -89,7 +85,6 @@ public class InformeEventosFuturosController {
                 generarInformeButton.setDisable(false);
                 return;
             }
-
 
             // Cargar el informe con los parámetros y la conexión
             JasperPrint jasperPrint = JasperFillManager.fillReport("src/main/resources/org/example/proyectointerfaces/Jaspers/ReportOrionEventosFuturos.jasper", parametros, con);
@@ -120,7 +115,11 @@ public class InformeEventosFuturosController {
         }
     }
 
-
+    /**
+     * Regresa a la pantalla de selección de informes.
+     *
+     * @param event Evento de acción que desencadena el cambio de pantalla.
+     */
     @FXML
     private void volverASelector(ActionEvent event) {
         try {
@@ -136,7 +135,9 @@ public class InformeEventosFuturosController {
         }
     }
 
-
+    /**
+     * Abre el informe generado en la aplicación predeterminada del sistema.
+     */
     public void visualizarInforme() {
         // Usamos la variable ruta que contiene la ruta del archivo generado
         if (ruta == null || ruta.isEmpty()) {
@@ -175,6 +176,12 @@ public class InformeEventosFuturosController {
         }
     }
 
+    /**
+     * Muestra una alerta informativa en la interfaz de usuario.
+     *
+     * @param titulo  Título de la alerta.
+     * @param mensaje Mensaje a mostrar en la alerta.
+     */
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle(titulo);

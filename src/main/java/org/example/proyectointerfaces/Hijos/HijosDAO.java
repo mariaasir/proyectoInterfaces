@@ -1,13 +1,15 @@
 package org.example.proyectointerfaces.Hijos;
 
 import org.example.proyectointerfaces.Conexion;
-import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDTO;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de acceso a datos para la entidad Hijos.
+ */
 public class HijosDAO {
 
     private Connection con = Conexion.getConexion();
@@ -15,6 +17,11 @@ public class HijosDAO {
     public HijosDAO() {
     }
 
+    /**
+     * Obtiene la lista de hijos almacenados en la base de datos.
+     *
+     * @return Lista de objetos HijosDTO con los datos obtenidos.
+     */
     public List<HijosDTO> obtenerHijos() {
         List<HijosDTO> hijos = new ArrayList<>();
         String sql = "SELECT * FROM Hijos";
