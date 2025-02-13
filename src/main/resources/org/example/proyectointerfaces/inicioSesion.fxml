@@ -17,7 +17,7 @@
    <children>
       <Pane prefHeight="629.0" prefWidth="400.0" style="-fx-background-color: white;">
          <children>
-            <ImageView fitHeight="159.0" fitWidth="158.0" layoutX="121.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="159.0" fitWidth="158.0" layoutX="121.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Imagenes/logo.jpg" />
                </image>
@@ -51,7 +51,10 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Label fx:id="errorGlobal" layoutX="113.0" layoutY="520.0" prefHeight="17.0" prefWidth="193.0" text="Ningún campo puede estar vacío" textAlignment="CENTER" textFill="RED" visible="false" />
+            <Label fx:id="errorGlobal" layoutX="27.0" layoutY="18.0" prefHeight="17.0" prefWidth="193.0" text="Ningún campo puede estar vacío" textAlignment="CENTER" textFill="RED" visible="false">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <Label fx:id="errorUsuario" layoutX="89.0" layoutY="340.0" prefHeight="16.0" prefWidth="225.0" textFill="RED">
                <font>
                   <Font size="11.0" />

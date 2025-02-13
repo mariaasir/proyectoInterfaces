@@ -69,17 +69,38 @@ public class InicioSesionController {
     //Metodo para iniciar las variables
     @FXML
     public void initialize() {
-        //Añade los menuItems al MenuButton
+        // Añadir eventos de cambio de texto en los campos
+        usuario.textProperty().addListener((observable, oldValue, newValue) -> limpiarEstilo(usuario, errorUsuario));
+        password.textProperty().addListener((observable, oldValue, newValue) -> limpiarEstilo(password, errorPassword));
+
+        // Añadir idiomas al menú
         idiomas.getItems().addAll(español, ingles, frances);
-        español.setOnAction(e -> cambiarIdioma("Español"));       //Si esta seleccionado el menuItem español, ejecutará el código cambiarIdioma con el String español
+        español.setOnAction(e -> cambiarIdioma("Español"));
+        ingles.setOnAction(e -> cambiarIdioma("Ingles"));
+        frances.setOnAction(e -> cambiarIdioma("Frances"));
+    }
 
-        ingles.setOnAction(e -> cambiarIdioma("Ingles"));        //Si esta seleccionado el menuItem ingles, ejecutará el código cambiarIdioma con el String ingles
+    /**
+     * Metodo para limpiar el estilo de los campos cuando el usuario empieza a escribir.
+     */
+    private void limpiarEstilo(TextField field, Label errorLabel) {
+        field.setStyle("-fx-border-radius: 2px; -fx-border-color: transparent; -fx-border-width: 1px;");
+        errorLabel.setVisible(false);
+    }
 
-        frances.setOnAction(e -> cambiarIdioma("Frances"));      //Si esta seleccionado el menuItem frances, ejecutará el código cambiarIdioma con el String frances
+    /**
+     * Metodo para mostrar el error y hacer que a los 5 segundos desaparezca
+     */
+    public void mostrarErrorGlobal() {
+        errorGlobal.setVisible(true);
+        PauseTransition pausa = new PauseTransition(Duration.seconds(5));
+        pausa.setOnFinished(event -> errorGlobal.setVisible(false));
+        pausa.play();
     }
 
 
     private void cambiarIdioma(String idiomaSeleccionado) {
+
 
     }
 
@@ -148,6 +169,7 @@ public class InicioSesionController {
         });
     }
 
+
     //Cargar una nueva página cuando haces click en el botón de INICIAR SESIÓN.
     //Si el DNI introducido coincide con un Tutor Legal ( que no tiene permisos para generar informes,
     // te llevará a una ventana que mostrará toda su información)
@@ -155,8 +177,7 @@ public class InicioSesionController {
     @FXML
     public void nuevaPagina() {
         if (usuario.getText().isEmpty() || password.getText().isEmpty()) {
-            errorGlobal.setText("Ningún campo puede estar vacío");
-            errorGlobal.setVisible(true);
+            mostrarErrorGlobal();
             return;
         }
         errorGlobal.setVisible(false);
@@ -165,7 +186,7 @@ public class InicioSesionController {
             if (!sincronizacion.comprobarContrasenaTutores(usuario.getText(), password.getText())) {
                 errorPassword.setText("La contraseña es incorrecta.");
                 errorPassword.setVisible(true);
-                password.setStyle("-fx-border-color: red;");
+                password.setStyle("-fx-border-color: red;-fx-border-radius: 2px;-fx-border-width: 1px;");
                 return;
             }
             abrirVentana("/org/example/proyectointerfaces/ventanaTutores.fxml");
@@ -173,12 +194,12 @@ public class InicioSesionController {
             if (!sincronizacion.comprobarContrasenaMonitores(usuario.getText(), password.getText())) {
                 errorPassword.setText("La contraseña es incorrecta.");
                 errorPassword.setVisible(true);
-                password.setStyle("-fx-border-color: red;");
+                password.setStyle("-fx-border-color: red;-fx-border-radius: 2px;-fx-border-width: 1px;");
                 return;
             }
             abrirVentana("/org/example/proyectointerfaces/menuInformes.fxml");
         } else {
-            usuario.setStyle("-fx-border-color: red;");
+            usuario.setStyle("-fx-border-color: red;-fx-border-radius: 2px;-fx-border-width: 1px;");
             errorUsuario.setText("El usuario es incorrecto.");
             errorUsuario.setVisible(true);
         }
