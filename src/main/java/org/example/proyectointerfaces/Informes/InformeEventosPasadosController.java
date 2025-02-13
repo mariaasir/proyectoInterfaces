@@ -25,6 +25,9 @@ import java.util.Map;
 
 import net.sf.jasperreports.engine.*;
 
+/**
+ * Controlador para la generación de informes de eventos pasados en la aplicación.
+ */
 public class InformeEventosPasadosController {
 
     @FXML
@@ -43,6 +46,10 @@ public class InformeEventosPasadosController {
 
     private String ruta;
 
+    /**
+     * Metodo de inicialización del controlador.
+     * Se encarga de llenar el ComboBox con las secciones disponibles.
+     */
     @FXML
     public void initialize() {
         // Agregar las secciones al ComboBox
@@ -53,6 +60,10 @@ public class InformeEventosPasadosController {
 
     }
 
+    /**
+     * Genera un informe de eventos pasados basado en la sección seleccionada.
+     * El informe se genera utilizando JasperReports y se guarda como un archivo PDF.
+     */
     public void generarInforme() {
         String seccionSeleccionada = seccionComboBox.getSelectionModel().getSelectedItem();
         Date fecha = Date.from(Instant.now());
@@ -111,7 +122,12 @@ public class InformeEventosPasadosController {
         }
     }
 
-
+    /**
+     * Muestra una alerta informativa en la interfaz de usuario.
+     *
+     * @param titulo  Título de la alerta.
+     * @param mensaje Mensaje a mostrar en la alerta.
+     */
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle(titulo);
@@ -120,6 +136,11 @@ public class InformeEventosPasadosController {
         alerta.showAndWait();
     }
 
+    /**
+     * Regresa a la pantalla de selección de informes.
+     *
+     * @param event Evento de acción que desencadena el cambio de pantalla.
+     */
     @FXML
     private void volverASelector(ActionEvent event) {
         try {
@@ -135,6 +156,9 @@ public class InformeEventosPasadosController {
         }
     }
 
+    /**
+     * Abre el informe generado en la aplicación predeterminada del sistema.
+     */
     public void visualizarInforme() {
         // Usamos la variable ruta que contiene la ruta del archivo generado
         if (ruta == null || ruta.isEmpty()) {

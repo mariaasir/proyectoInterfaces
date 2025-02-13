@@ -1,9 +1,11 @@
 package org.example.proyectointerfaces.Hijos;
 
-import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDTO;
 
 import java.time.LocalDate;
-import java.util.List;
+
+/**
+ * Clase DTO para representar la información de un hijo.
+ */
 
 public class HijosDTO {
     private int id;
@@ -19,6 +21,18 @@ public class HijosDTO {
     public HijosDTO() {
     }
 
+    /**
+     * Constructor con parámetros para inicializar un objeto HijosDTO.
+     *
+     * @param nombre              Nombre del hijo.
+     * @param apellidos           Apellidos del hijo.
+     * @param dNI_NIE             Documento de identificación (DNI o NIE).
+     * @param fecha_Nacimiento    Fecha de nacimiento.
+     * @param direccion           Dirección de residencia.
+     * @param codigo_Postal       Código postal de la dirección.
+     * @param telefono_Emergencia Teléfono de contacto en caso de emergencia.
+     * @param seccion_Nombre      Nombre de la sección a la que pertenece.
+     */
     public HijosDTO(String nombre, String apellidos, String dNI_NIE, LocalDate fecha_Nacimiento, String direccion, String codigo_Postal, String telefono_Emergencia, String seccion_Nombre) {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -102,6 +116,11 @@ public class HijosDTO {
         this.seccion_Nombre = seccion_Nombre;
     }
 
+    /**
+     * Devuelve una representación en cadena del objeto HijosDTO.
+     *
+     * @return Cadena con los valores de los atributos del objeto.
+     */
     @Override
     public String toString() {
         return "HijosDTO{" +
