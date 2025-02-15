@@ -69,21 +69,6 @@
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label fx:id="labelInicioSesion" layoutX="123.0" layoutY="247.0" text="INICIO DE SESIÓN" textFill="#131a8e">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelDNI" layoutX="91.0" layoutY="294.0" text="DNI / NIE*" textFill="#0000009e">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelContrasena" layoutX="87.0" layoutY="356.0" text="Contraseña*" textFill="#0000009e">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
             <Button fx:id="botonAyuda" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#abrirAyuda" opacity="0.82" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: transparent; -fx-border-color: #131a8e; -fx-border-radius: 16px;" text="Ayuda" textFill="#131a8e" />
          </children>
       </Pane>
