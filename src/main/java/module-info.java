@@ -4,6 +4,7 @@ module org.example.proyectointerfaces {
     requires java.sql;
     requires jasperreports;
     requires java.desktop;
+    requires javafx.web;
 
 
     opens org.example.proyectointerfaces to javafx.fxml;

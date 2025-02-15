@@ -21,6 +21,8 @@ import org.example.proyectointerfaces.Sincronizacion;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
 import org.example.proyectointerfaces.Tutores_hijos.Tutores_hijosDAO;
 import org.example.proyectointerfaces.VentanaTutoresLegales.VentanaTutoresController;
+import javafx.scene.web.WebView;
+import javafx.scene.web.WebEngine;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -40,9 +42,12 @@ public class InicioSesionController {
 
     @FXML
     private Label errorGlobal, labelCrearCuenta, errorUsuario, errorPassword;
+
     @FXML
     private Button botonRegistrarse;
 
+    @FXML
+    private Button botonAyuda;
 
     @FXML
     private Button botonIniciarSesion;
@@ -61,7 +66,6 @@ public class InicioSesionController {
     //Crea el resource para establecer el idioma por defecto
     // ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
 
-
     //Metodo para iniciar las variables
     @FXML
     public void initialize() {
@@ -72,16 +76,12 @@ public class InicioSesionController {
         ingles.setOnAction(e -> cambiarIdioma("Ingles"));        //Si esta seleccionado el menuItem ingles, ejecutará el código cambiarIdioma con el String ingles
 
         frances.setOnAction(e -> cambiarIdioma("Frances"));      //Si esta seleccionado el menuItem frances, ejecutará el código cambiarIdioma con el String frances
-
-
     }
 
 
     private void cambiarIdioma(String idiomaSeleccionado) {
 
-
     }
-
 
     //Pantalla de carga de Orion con su logotipo.
     private void pantallaCarga(Runnable onfinish) {
@@ -148,7 +148,6 @@ public class InicioSesionController {
         });
     }
 
-
     //Cargar una nueva página cuando haces click en el botón de INICIAR SESIÓN.
     //Si el DNI introducido coincide con un Tutor Legal ( que no tiene permisos para generar informes,
     // te llevará a una ventana que mostrará toda su información)
@@ -210,8 +209,6 @@ public class InicioSesionController {
         });
     }
 
-
-
     //Metodo para que al hacer click en el botón de Registrase si aún no tienes cuenta, este botón te lleve a la página de registro.
     public void registrarse() {
         FXMLLoader cargaLI = new FXMLLoader(getClass().
@@ -231,5 +228,21 @@ public class InicioSesionController {
         escenarioSecundario.showAndWait();
     }
 
+    @FXML
+    private void abrirAyuda() {
+        Stage ayudaStage = new Stage();
+        ayudaStage.setTitle("Ayuda");
 
+        WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+
+        // Cargar el HTML desde los recursos del proyecto
+        String url = getClass().getResource("/org/example/proyectointerfaces/index.html").toExternalForm();
+        webEngine.load(url);
+
+        Scene scene = new Scene(webView, 600, 400);
+        ayudaStage.setScene(scene);
+        ayudaStage.initModality(Modality.APPLICATION_MODAL);
+        ayudaStage.show();
+    }
 }

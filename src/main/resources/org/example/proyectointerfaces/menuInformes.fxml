@@ -30,7 +30,7 @@
                 </Text>
 
                 <!-- Menú desplegable para seleccionar el informe deseado (posibilidad de cambiar butones) -->
-                <MenuButton fx:id="tipoInforme" layoutX="135.0" layoutY="315.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;" text="Seleccionar Informe" textFill="#131a8e">
+                <MenuButton fx:id="tipoInforme" layoutX="75.0" layoutY="315.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="263.0" style="-fx-background-color: transparent; -fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;" text="Seleccionar Informe" textFill="#131a8e">
                     <!-- <items>
                          <MenuItem mnemonicParsing="false" text="Informe de X" />
                          <MenuItem mnemonicParsing="false" text="Informe de Y" />
@@ -50,5 +50,6 @@
                  <MenuItem mnemonicParsing="false" text="Inglés" />
              </items> -->
          </MenuButton>
+      <Button fx:id="botonAyuda" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#abrirAyuda" opacity="0.82" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: transparent; -fx-border-color: #131a8e; -fx-border-radius: 16px;" text="Ayuda" textFill="#131a8e" />
      </children>
  </AnchorPane>

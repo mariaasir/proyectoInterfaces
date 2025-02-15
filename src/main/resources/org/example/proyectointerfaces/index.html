@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Orión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+        nav {
+            background: #444;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        nav a:hover {
+            background: #555;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background: white;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+        footer {
+            background-color: black;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header>Manual de Usuario - Orión</header>
+    <nav>
+        <a href="#introduccion">Introducción</a>
+        <a href="#uso">Cómo Usar</a>
+    </nav>
+    <div class="container">
+        <section id="introduccion" class="section">
+            <h2>Introducción</h2>
+            <p>Bienvenido al manual de usuario de Orión. En este documento, te explicaremos cómo utilizar la aplicación de manera eficiente. 
+               Para acceder, necesitarás un perfil de <strong>Tutor Legal</strong> o <strong>Monitor</strong>. 
+               <ul>
+                   <li>Si ingresas como <strong>Tutor Legal</strong>, se mostrará una ventana con tus datos personales y los de tus hijos.</li>
+                   <li>Si eres un <strong>Monitor</strong>, podrás generar diferentes informes basados en la base de datos de la asociación.</li>
+               </ul>
+            </p>
+        </section>
+        <section id="uso" class="section">
+            <h2>Cómo Usar</h2>
+            <p>Para comenzar a utilizar la aplicación, sigue estos pasos:</p>
+            <ol>
+                <li>Al iniciar la aplicación, aparecerá la pantalla de <strong>Inicio de Sesión</strong>.</li>
+                <li>Si ya tienes una cuenta, introduce tu <strong>DNI</strong> y la <strong>contraseña</strong> que creaste al registrarte.</li>
+                <li>Si aún no tienes una cuenta, haz clic en <strong>Registrarse</strong>. Se abrirá una nueva ventana donde deberás completar varios campos.</li>
+                <li>Una vez rellenado el formulario, presiona <strong>Registrar</strong> para finalizar el proceso.</li>
+                <li>Para añadir a tu hijo y vincularlo a tu cuenta, contacta a un monitor.</li>
+            </ol>
+            <h3>Acceso para Monitores</h3>
+            <p>Los monitores tienen acceso a una ventana especial donde pueden generar informes en PDF basados en la base de datos.</p>
+            <ul>
+                <li>La interfaz incluye un desplegable con los distintos tipos de informes disponibles.</li>
+                <li>Cada informe ofrece tres botones clave:
+                    <ul>
+                        <li><strong>Generar Informe:</strong> Crea un informe con los datos de la asociación y permite guardarlo.</li>
+                        <li><strong>Visualizar Informe:</strong> Abre el informe previamente generado.</li>
+                        <li><strong>Volver:</strong> Regresa al menú principal de informes.</li>
+                    </ul>
+                </li>
+                <li>Algunos informes incluyen un desplegable para seleccionar secciones de la asociación.</li>
+            </ul>
+            <h3>Tipos de Informes</h3>
+            <ul>
+                <li><strong>Informe General:</strong> Muestra información de todos los niños agrupados por sección.</li>
+                <li><strong>Informe de Eventos Pasados y Futuros:</strong> Detalla eventos de la asociación según su fecha actual y la sección elegida.</li>
+                <li><strong>Informe de Secciones:</strong> Genera un informe de los niños de una sección específica.</li>
+            </ul>
+        </section>
+    </div>
+    <footer>
+        <p>Esta API ha sido desarrollada por Unai Nieto Jiménez, María López Paton, Gift Omoigui y Javier Martínez Salgado. 
+           Para más información sobre la asociación, visita nuestro <a href="https://www.instagram.com/alh_orion/" style="color: white;">Instagram</a>.
+        </p>
+    </footer>
+</body>
+</html>
