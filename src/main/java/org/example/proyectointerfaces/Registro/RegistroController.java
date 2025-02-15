@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -81,7 +83,6 @@ public class RegistroController {
         frances.setOnAction(e -> cambiarIdioma("Frances"));
     }
 
-
     private void limpiarEstilo(TextField field, Label errorLabel) {
         field.setStyle("-fx-border-radius: 5px; -fx-border-color: transparent; -fx-border-width: 1px;");
         errorLabel.setVisible(false); // Oculta el mensaje de error asociado
@@ -93,7 +94,6 @@ public class RegistroController {
     }
 
     private void actualizarIdioma() {
-
         //Actualiza los idiomas según los campos establecidos en los Resources
         textNombre.setText(bundle.getString("registro.Nombre"));
         textApellidos.setText(bundle.getString("registro.Apellidos"));
@@ -120,7 +120,6 @@ public class RegistroController {
         createAccount.setText(bundle.getString("registro.BotonIniciarSesion"));
         labelcrearCuenta.setText(bundle.getString("registro.LabelIniciarSesion"));
     }
-
 
     /**
      * Metodo para cambiar el idioma de la interfaz.
@@ -153,7 +152,6 @@ public class RegistroController {
         }
         actualizarIdioma();
     }
-
 
     /**
      * Método que se ejecuta al registrar al tutor.

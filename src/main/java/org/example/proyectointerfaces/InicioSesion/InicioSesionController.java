@@ -108,7 +108,6 @@ public class InicioSesionController {
     }
 
     private void actualizarIdioma() {
-
         //Actualiza los idiomas según los campos establecidos en los Resources
         labelInicioSesion.setText(bundle.getString("inicioSesion.Titulo"));
         labelCrearCuenta.setText(bundle.getString("inicioSesion.CrearCuenta"));
