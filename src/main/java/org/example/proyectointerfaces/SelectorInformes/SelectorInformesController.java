@@ -11,6 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,8 +29,8 @@ public class SelectorInformesController {
     @FXML
     private Button botonConfirmar;
 
-  //  private String informeSeleccionado = null;
-
+    @FXML
+    private Button botonAyuda;
 
     @FXML
     private Text textoInformes;
@@ -94,10 +97,7 @@ public class SelectorInformesController {
                 botonConfirmar.setText("Confirm");
                 System.out.println("Language changed to English");
                 break;
-
         }
-
-
     }
     private void mostrarAlerta() {
         Alert alerta = new Alert(Alert.AlertType.WARNING);
@@ -106,6 +106,7 @@ public class SelectorInformesController {
         alerta.setContentText("Por favor, selecciona un informe antes de continuar.");
         alerta.showAndWait();
     }
+
     private void cargarPantalla(String rutaFXML) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFXML));
@@ -118,5 +119,21 @@ public class SelectorInformesController {
         }
     }
 
+    @FXML
+    private void abrirAyuda() {
+        Stage ayudaStage = new Stage();
+        ayudaStage.setTitle("Ayuda");
 
+        WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+
+        // Cargar el HTML desde los recursos del proyecto
+        String url = getClass().getResource("/org/example/proyectointerfaces/index.html").toExternalForm();
+        webEngine.load(url);
+
+        Scene scene = new Scene(webView, 600, 400);
+        ayudaStage.setScene(scene);
+        ayudaStage.initModality(Modality.APPLICATION_MODAL);
+        ayudaStage.show();
+    }
 }

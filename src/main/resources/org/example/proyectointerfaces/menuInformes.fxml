@@ -50,5 +50,6 @@
                  <MenuItem mnemonicParsing="false" text="Inglés" />
              </items> -->
          </MenuButton>
+        <Button fx:id="botonAyuda" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#abrirAyuda" opacity="0.82" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: transparent; -fx-border-color: #131a8e; -fx-border-radius: 16px;" text="Ayuda" textFill="#131a8e" />
      </children>
  </AnchorPane>
