@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -35,14 +37,15 @@ public class InicioSesionController {
     private TextField usuario;
 
     @FXML
+    private TextFlow textFlow;
+    @FXML
     private TextField password;
 
     @FXML
     private MenuButton idiomas;
 
     @FXML
-    private Label errorGlobal, labelCrearCuenta, errorUsuario, errorPassword;
-
+    private Label errorGlobal, labelCrearCuenta, errorUsuario, errorPassword, labelInicioSesion, labelDNI, labelContrasena, labelCampoObligatorio;
     @FXML
     private Button botonRegistrarse;
 
@@ -64,11 +67,17 @@ public class InicioSesionController {
     MenuItem frances = new MenuItem("Frances");
 
     //Crea el resource para establecer el idioma por defecto
-    // ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
+    ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
 
     //Metodo para iniciar las variables
     @FXML
     public void initialize() {
+
+        errorUsuario.setVisible(false);
+        errorPassword.setVisible(false);
+        errorGlobal.setVisible(false);
+
+
         // Añadir eventos de cambio de texto en los campos
         usuario.textProperty().addListener((observable, oldValue, newValue) -> limpiarEstilo(usuario, errorUsuario));
         password.textProperty().addListener((observable, oldValue, newValue) -> limpiarEstilo(password, errorPassword));
@@ -98,10 +107,47 @@ public class InicioSesionController {
         pausa.play();
     }
 
+    private void actualizarIdioma() {
+
+        //Actualiza los idiomas según los campos establecidos en los Resources
+        labelInicioSesion.setText(bundle.getString("inicioSesion.Titulo"));
+        labelCrearCuenta.setText(bundle.getString("inicioSesion.CrearCuenta"));
+        labelContrasena.setText(bundle.getString("inicioSesion.Contrasena"));
+        labelDNI.setText(bundle.getString("inicioSesion.DNI"));
+        botonRegistrarse.setText(bundle.getString("inicioSesion.BotonRegistrarse"));
+        botonIniciarSesion.setText(bundle.getString("inicioSesion.Titulo"));
+        labelCampoObligatorio.setText(bundle.getString("inicioSesion.LabelCampoObligatorio"));
+
+        if (errorUsuario.isVisible()) {
+            errorUsuario.setText(bundle.getString("inicioSesion.ErrorUsuario"));
+        }
+        if (errorPassword.isVisible()) {
+            errorPassword.setText(bundle.getString("inicioSesion.ErrorPassword"));
+        }
+        if (errorGlobal.isVisible()) {
+            errorGlobal.setText(bundle.getString("inicioSesion.ErrorGlobal"));
+        }
+    }
 
     private void cambiarIdioma(String idiomaSeleccionado) {
-
-
+        if ("Español".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
+            idiomas.setText("Español");
+            labelInicioSesion.setLayoutX(125);
+            textFlow.setLayoutX(24);
+        } else if ("Ingles".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("en", "EN"));
+            idiomas.setText("Ingles");
+            labelInicioSesion.setLayoutX(170);
+            textFlow.setLayoutX(60);
+            labelCampoObligatorio.setLayoutX(170);
+        } else if ("Frances".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("fr", "FR"));
+            idiomas.setText("Frances");
+            labelInicioSesion.setLayoutX(130);
+            textFlow.setLayoutX(80);
+        }
+        actualizarIdioma();
     }
 
     //Pantalla de carga de Orion con su logotipo.
@@ -169,7 +215,6 @@ public class InicioSesionController {
         });
     }
 
-
     //Cargar una nueva página cuando haces click en el botón de INICIAR SESIÓN.
     //Si el DNI introducido coincide con un Tutor Legal ( que no tiene permisos para generar informes,
     // te llevará a una ventana que mostrará toda su información)
@@ -177,6 +222,7 @@ public class InicioSesionController {
     @FXML
     public void nuevaPagina() {
         if (usuario.getText().isEmpty() || password.getText().isEmpty()) {
+            errorGlobal.setText(bundle.getString("inicioSesion.ErrorGlobal"));
             mostrarErrorGlobal();
             return;
         }
@@ -184,7 +230,7 @@ public class InicioSesionController {
 
         if (sincronizacion.getTutores(usuario.getText())) {
             if (!sincronizacion.comprobarContrasenaTutores(usuario.getText(), password.getText())) {
-                errorPassword.setText("La contraseña es incorrecta.");
+                errorPassword.setText(bundle.getString("inicioSesion.ErrorPassword"));
                 errorPassword.setVisible(true);
                 password.setStyle("-fx-border-color: red;-fx-border-radius: 2px;-fx-border-width: 1px;");
                 return;
@@ -192,7 +238,7 @@ public class InicioSesionController {
             abrirVentana("/org/example/proyectointerfaces/ventanaTutores.fxml");
         } else if (sincronizacion.getMonitores(usuario.getText())) {
             if (!sincronizacion.comprobarContrasenaMonitores(usuario.getText(), password.getText())) {
-                errorPassword.setText("La contraseña es incorrecta.");
+                errorPassword.setText(bundle.getString("inicioSesion.ErrorPassword"));
                 errorPassword.setVisible(true);
                 password.setStyle("-fx-border-color: red;-fx-border-radius: 2px;-fx-border-width: 1px;");
                 return;
@@ -200,7 +246,7 @@ public class InicioSesionController {
             abrirVentana("/org/example/proyectointerfaces/menuInformes.fxml");
         } else {
             usuario.setStyle("-fx-border-color: red;-fx-border-radius: 2px;-fx-border-width: 1px;");
-            errorUsuario.setText("El usuario es incorrecto.");
+            errorUsuario.setText(bundle.getString("inicioSesion.ErrorUsuario"));
             errorUsuario.setVisible(true);
         }
     }

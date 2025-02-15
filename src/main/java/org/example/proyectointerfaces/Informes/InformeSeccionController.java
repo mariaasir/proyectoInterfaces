@@ -33,6 +33,8 @@ public class InformeSeccionController {
     @FXML
     private Button volverButton;
 
+
+
     private String ruta;
 
     @FXML

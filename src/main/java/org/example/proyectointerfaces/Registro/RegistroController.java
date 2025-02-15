@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -15,6 +17,8 @@ import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDTO;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.time.LocalDate;
 
 /**
@@ -26,8 +30,12 @@ public class RegistroController {
     private TextField nombre, apellidos, dni, telefono, email, direccion, codigoPostal;
 
     @FXML
-    private DatePicker fechaNacimiento;
+    private Text textNombre, textApellidos, textDNI, textFechaNacimiento, textTelefono, textEmail, textDireccion, textCP, titulo;
+    @FXML
+    private DatePicker fechaNacimientoDP;
 
+    @FXML
+    private TextFlow textFlow;
     @FXML
     private PasswordField password;
 
@@ -38,17 +46,18 @@ public class RegistroController {
     private MenuButton idiomas;
 
     @FXML
-    private Button createAccount;
+    private Button createAccount, botonRegistrarse;
 
     @FXML
     private Button botonAyuda;
 
     @FXML
-    private Label errorGlobal, errorNombre, errorApellidos, errorDNI, errorFecha, errorTelefono, errorEmail, errorDireccion, errorCodigoPostal, errorPassword;
+    private Label errorGlobal, errorNombre, errorApellidos, errorDNI, errorFecha, errorTelefono, errorEmail, errorDireccion, errorCodigoPostal, errorPassword, labelCampoObligatorio, labelContrasena, labelcrearCuenta;
 
     MenuItem español = new MenuItem("Español");
     MenuItem ingles = new MenuItem("Ingles");
     MenuItem frances = new MenuItem("Frances");
+    ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
 
     /**
      * Inicializa los elementos de la interfaz y configura los eventos de los menús.
@@ -72,15 +81,6 @@ public class RegistroController {
         frances.setOnAction(e -> cambiarIdioma("Frances"));
     }
 
-    /**
-     * Metodo para cambiar el idioma de la interfaz.
-     *
-     * @param idiomaSeleccionado El idioma que se selecciona.
-     */
-    private void cambiarIdioma(String idiomaSeleccionado) {
-
-
-    }
 
     private void limpiarEstilo(TextField field, Label errorLabel) {
         field.setStyle("-fx-border-radius: 5px; -fx-border-color: transparent; -fx-border-width: 1px;");
@@ -91,6 +91,69 @@ public class RegistroController {
         field.setStyle("-fx-border-radius: 5px; -fx-border-color: transparent; -fx-border-width: 1px;");
         errorLabel.setVisible(false); // Oculta el mensaje de error asociado
     }
+
+    private void actualizarIdioma() {
+
+        //Actualiza los idiomas según los campos establecidos en los Resources
+        textNombre.setText(bundle.getString("registro.Nombre"));
+        textApellidos.setText(bundle.getString("registro.Apellidos"));
+        textDNI.setText(bundle.getString("inicioSesion.DNI"));
+        textFechaNacimiento.setText(bundle.getString("registro.fechaNacimiento"));
+        textTelefono.setText(bundle.getString("registro.Telefono"));
+        textDireccion.setText(bundle.getString("registro.Direccion"));
+        textEmail.setText(bundle.getString("registro.Email"));
+        textCP.setText(bundle.getString("registro.CP"));
+        labelContrasena.setText(bundle.getString("registro.contrasena"));
+        labelCampoObligatorio.setText(bundle.getString("inicioSesion.LabelCampoObligatorio"));
+        titulo.setText(bundle.getString("inicioSesion.BotonRegistrarse"));
+        errorGlobal.setText(bundle.getString("inicioSesion.ErrorGlobal"));
+        errorNombre.setText(bundle.getString("registro.ErrorNombre"));
+        errorApellidos.setText(bundle.getString("registro.ErrorApellidos"));
+        errorDNI.setText(bundle.getString("registro.ErrorDNI"));
+        errorTelefono.setText(bundle.getString("registro.ErrorTelefono"));
+        errorEmail.setText(bundle.getString("registro.ErrorEmail"));
+        errorDireccion.setText(bundle.getString("registro.ErrorDireccion"));
+        errorCodigoPostal.setText(bundle.getString("registro.ErrorCodigoPostal"));
+        errorPassword.setText(bundle.getString("registro.ErrorPassword"));
+        errorFecha.setText(bundle.getString("registro.ErrorFecha"));
+        botonRegistrarse.setText(bundle.getString("inicioSesion.BotonRegistrarse"));
+        createAccount.setText(bundle.getString("registro.BotonIniciarSesion"));
+        labelcrearCuenta.setText(bundle.getString("registro.LabelIniciarSesion"));
+    }
+
+
+    /**
+     * Metodo para cambiar el idioma de la interfaz.
+     *
+     * @param idiomaSeleccionado El idioma que se selecciona.
+     */
+    private void cambiarIdioma(String idiomaSeleccionado) {
+        if ("Español".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
+            idiomas.setText("Español");
+
+
+        } else if ("Ingles".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("en", "EN"));
+            idiomas.setText("Ingles");
+            labelContrasena.setLayoutX(150);
+            labelCampoObligatorio.setLayoutX(170);
+            titulo.setLayoutX(170);
+            password1.setPromptText("Repeat the password");
+            textFlow.setLayoutX(90);
+
+        } else if ("Frances".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("fr", "FR"));
+            idiomas.setText("Frances");
+            labelContrasena.setLayoutX(120);
+            labelCampoObligatorio.setLayoutX(160);
+            textFlow.setLayoutX(90);
+            titulo.setLayoutX(160);
+            password1.setPromptText("Répétez le mot de passe");
+        }
+        actualizarIdioma();
+    }
+
 
     /**
      * Método que se ejecuta al registrar al tutor.
@@ -108,7 +171,7 @@ public class RegistroController {
         String direccionTx = this.direccion.getText().trim();
         String codigoPostalTx = this.codigoPostal.getText().trim();
         String passwordTx = this.password.getText().trim();
-        LocalDate fechaNacimiento = this.fechaNacimiento.getValue();
+        LocalDate fechaNacimiento = this.fechaNacimientoDP.getValue();
 
         boolean hayErrores = false;
         boolean todosCamposVacios = nombreTx.isEmpty() && apellidosTx.isEmpty() && dniTx.isEmpty() && telefonoTx.isEmpty() && emailTx.isEmpty()
@@ -172,8 +235,8 @@ public class RegistroController {
         }
 
         if (fechaNacimiento == null) {
-            errorDNI.setText("Fecha de nacimiento es obligatoria.");
             errorDNI.setVisible(true);
+            fechaNacimientoDP.setStyle("-fx-border-radius: 5px; -fx-border-color: red; -fx-border-width: 1px;");
             hayErrores = true;
         } else if (fechaNacimiento.isAfter(LocalDate.now())) {
             errorDNI.setText("Fecha de nacimiento no válida.");
