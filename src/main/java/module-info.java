@@ -1,8 +1,8 @@
 module org.example.proyectointerfaces {
-    requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
     requires jasperreports;
+    requires javafx.web;
     requires java.desktop;
 
 

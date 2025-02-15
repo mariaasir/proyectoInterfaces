@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.proyectointerfaces.TutoresLegales.TutoresLegalesDAO;
@@ -42,6 +45,9 @@ public class RegistroController {
 
     @FXML
     private MenuButton idiomas;
+
+    @FXML
+    private Button botonAyuda;
 
     @FXML
     private Button createAccount, botonRegistrarse;
@@ -313,5 +319,23 @@ public class RegistroController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void abrirAyuda() {
+        Stage ayudaStage = new Stage();
+        ayudaStage.setTitle("Ayuda");
+
+        WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+
+        // Cargar el HTML desde los recursos del proyecto
+        String url = getClass().getResource("/org/example/proyectointerfaces/index.html").toExternalForm();
+        webEngine.load(url);
+
+        Scene scene = new Scene(webView, 600, 400);
+        ayudaStage.setScene(scene);
+        ayudaStage.initModality(Modality.APPLICATION_MODAL);
+        ayudaStage.show();
     }
 }
