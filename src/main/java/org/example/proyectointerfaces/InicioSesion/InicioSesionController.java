@@ -38,6 +38,7 @@ public class InicioSesionController {
 
     @FXML
     private TextFlow textFlow;
+
     @FXML
     private TextField password;
 
@@ -72,11 +73,9 @@ public class InicioSesionController {
     //Metodo para iniciar las variables
     @FXML
     public void initialize() {
-
         errorUsuario.setVisible(false);
         errorPassword.setVisible(false);
         errorGlobal.setVisible(false);
-
 
         // Añadir eventos de cambio de texto en los campos
         usuario.textProperty().addListener((observable, oldValue, newValue) -> limpiarEstilo(usuario, errorUsuario));

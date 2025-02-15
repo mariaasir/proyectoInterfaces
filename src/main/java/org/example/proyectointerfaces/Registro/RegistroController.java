@@ -6,6 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Modality;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.text.Text;
@@ -233,8 +236,8 @@ public class RegistroController {
         }
 
         if (fechaNacimiento == null) {
+            errorDNI.setText("Fecha de nacimiento es obligatoria.");
             errorDNI.setVisible(true);
-            fechaNacimientoDP.setStyle("-fx-border-radius: 5px; -fx-border-color: red; -fx-border-width: 1px;");
             hayErrores = true;
         } else if (fechaNacimiento.isAfter(LocalDate.now())) {
             errorDNI.setText("Fecha de nacimiento no válida.");
