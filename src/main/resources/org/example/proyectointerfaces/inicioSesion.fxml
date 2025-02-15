@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
 <AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyectointerfaces.InicioSesion.InicioSesionController">
@@ -24,34 +23,19 @@
             </ImageView>
             <TextField fx:id="usuario" layoutX="88.0" layoutY="309.0" prefHeight="31.0" prefWidth="225.0" promptText="23456789C" />
             <PasswordField fx:id="password" layoutX="88.0" layoutY="373.0" prefHeight="31.0" prefWidth="225.0" promptText="moni1234" />
-            <Text fill="#131a8e" layoutX="123.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INICIO DE SESIÓN">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Text>
-            <Text fill="#0000009d" layoutX="88.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DNI / NIE*">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Text>
-            <Text fill="#0000009d" layoutX="88.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña*">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Text>
             <TextFlow fx:id="textFlow" layoutX="53.0" layoutY="429.0" prefHeight="27.0" prefWidth="293.0">
                <children>
-                  <Label fx:id="labelCrearCuenta" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="168.0" text="¿No tienes cuenta?" textAlignment="CENTER" />
-                  <Button fx:id="botonRegistrarse" mnemonicParsing="false" onMouseClicked="#registrarse" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Registrarse" textAlignment="CENTER" textFill="#131a8e" />
+                  <Label fx:id="labelCrearCuenta" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="168.0" text="¿No tienes cuenta?" textAlignment="RIGHT" />
+                  <Button fx:id="botonRegistrarse" mnemonicParsing="false" onMouseClicked="#registrarse" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="Registrarse" textFill="#131a8e" />
                </children>
             </TextFlow>
             <MenuButton fx:id="idiomas" layoutX="309.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Idiomas" textFill="#131a8e" />
-            <Button fx:id="botonInicioSesion" defaultButton="true" layoutX="134.0" layoutY="472.0" mnemonicParsing="false" onAction="#nuevaPagina" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px;" text="INICIAR SESIÓN" textFill="WHITE">
+            <Button fx:id="botonIniciarSesion" defaultButton="true" layoutX="134.0" layoutY="472.0" mnemonicParsing="false" onAction="#nuevaPagina" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px;" text="INICIAR SESIÓN" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Label fx:id="errorGlobal" layoutX="27.0" layoutY="18.0" prefHeight="17.0" prefWidth="193.0" text="Ningún campo puede estar vacío" textAlignment="CENTER" textFill="RED" visible="false">
+            <Label fx:id="errorGlobal" layoutX="27.0" layoutY="18.0" prefHeight="17.0" prefWidth="193.0" textAlignment="CENTER" textFill="RED" visible="false">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
@@ -65,9 +49,24 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Label layoutX="155.0" layoutY="497.0" text="* el campo es obligatorio">
+            <Label fx:id="labelCampoObligatorio" layoutX="155.0" layoutY="501.0" text="* el campo es obligatorio">
                <font>
                   <Font size="8.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelInicioSesion" layoutX="123.0" layoutY="247.0" text="INICIO DE SESIÓN" textFill="#131a8e">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelDNI" layoutX="91.0" layoutY="294.0" text="DNI / NIE*" textFill="#0000009e">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelContrasena" layoutX="87.0" layoutY="356.0" text="Contraseña*" textFill="#0000009e">
+               <font>
+                  <Font size="9.0" />
                </font>
             </Label>
          </children>
