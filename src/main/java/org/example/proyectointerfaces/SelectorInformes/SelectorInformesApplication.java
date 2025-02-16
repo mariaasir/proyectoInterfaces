@@ -22,6 +22,7 @@ public class SelectorInformesApplication extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(SelectorInformesApplication.class.getResource("/org/example/proyectointerfaces/menuInformes.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 646);
+        stage.setResizable(false);
         stage.setTitle("Informes Orión");
         stage.setScene(scene);
         stage.show();

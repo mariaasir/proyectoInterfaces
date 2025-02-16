@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -23,23 +24,30 @@
                 </ImageView>
 
                 <!-- Título de la página -->
-                <Text fill="#131a8e" layoutX="42.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GENERAR INFORMES" textAlignment="CENTER" wrappingWidth="328.39996337890625">
+                <Text fx:id="titulo" fill="#131a8e" layoutX="42.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GENERAR INFORMES" textAlignment="CENTER" wrappingWidth="328.39996337890625">
                     <font>
                         <Font name="System Bold" size="30.0" />
                     </font>
                 </Text>
 
                 <!-- Menú desplegable para seleccionar el informe deseado (posibilidad de cambiar butones) -->
-                <MenuButton fx:id="tipoInforme" layoutX="135.0" layoutY="315.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;" text="Seleccionar Informe" textFill="#131a8e">
+                <HBox alignment="CENTER" layoutX="-100.0" layoutY="329.0" prefWidth="600" spacing="10" xmlns:fx="http://javafx.com/fxml/1">
+               <children>
+                   <!-- MenuButton centrado en el HBox -->
+                   <MenuButton fx:id="tipoInforme" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #131a8e; -fx-border-radius: 10px; -fx-padding: 5px;" text="Seleccionar Informe" textAlignment="RIGHT" textFill="#131a8e">
                     <!-- <items>
                          <MenuItem mnemonicParsing="false" text="Informe de X" />
                          <MenuItem mnemonicParsing="false" text="Informe de Y" />
                          <MenuItem mnemonicParsing="false" text="Informe de Z" />
                      </items> -->
                 </MenuButton>
+               </children>
+
+                </HBox>
+
 
                 <!-- Botón para confirmar  -->
-                <Button fx:id="botonConfirmar" layoutX="125.0" layoutY="411.0" mnemonicParsing="false" onAction="#confirmarSeleccion" prefHeight="30.0" prefWidth="170.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="CONFIRMAR" />
+                <Button fx:id="botonConfirmar" layoutX="118.0" layoutY="410.0" mnemonicParsing="false" onAction="#confirmarSeleccion" prefHeight="30.0" prefWidth="170.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="CONFIRMAR" />
             </children>
         </Pane>
 

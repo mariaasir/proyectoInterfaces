@@ -5,13 +5,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 
 import java.awt.*;
-import java.util.Date;
+import java.util.*;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -24,9 +26,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.time.Instant;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.sf.jasperreports.engine.*;
 
 /**
@@ -34,15 +33,30 @@ import net.sf.jasperreports.engine.*;
  */
 public class InformeEventosFuturosController {
     @FXML
-    private Button generarInformeButton;
+    private Button generarInformeButton, visualizarInformeButton;
 
     @FXML
     private Button volverButton;
 
     @FXML
+    private MenuButton idiomas;
+
+    @FXML
+    private Text titulo , informacion;
+
+    @FXML
     private ComboBox<String> seccionComboBox; // Sección seleccionada
 
     String ruta;
+
+
+    //Crea 3 items para el menuButton
+    MenuItem español = new MenuItem("Español");
+    MenuItem ingles = new MenuItem("Ingles");
+    MenuItem frances = new MenuItem("Frances");
+
+    //Crea el resource para establecer el idioma por defecto
+    ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
 
     /**
      * Metodo de inicialización del controlador.
@@ -53,6 +67,15 @@ public class InformeEventosFuturosController {
         seccionComboBox.getItems().addAll(
                 "Tribu", "Mambos", "Rhygings"
         );
+
+        // Añadir idiomas al menú
+        idiomas.getItems().addAll(español, ingles, frances);
+        español.setOnAction(e -> cambiarIdioma("Español"));
+
+        ingles.setOnAction(e -> cambiarIdioma("Ingles"));
+
+        frances.setOnAction(e -> cambiarIdioma("Frances"));
+
     }
 
     /**
@@ -97,6 +120,7 @@ public class InformeEventosFuturosController {
 
             Stage stage = (Stage) generarInformeButton.getScene().getWindow();
             File file = fileChooser.showSaveDialog(stage);
+            stage.setResizable(false);
 
             if (file != null) {
                 // Exportar el informe a un archivo PDF
@@ -127,6 +151,7 @@ public class InformeEventosFuturosController {
             Parent root = loader.load();
 
             Stage stageActual = (Stage) seccionComboBox.getScene().getWindow();
+            stageActual.setResizable(false);
             stageActual.setScene(new Scene(root));
 
         } catch (IOException e) {
@@ -188,5 +213,43 @@ public class InformeEventosFuturosController {
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         alerta.showAndWait();
+    }
+
+    private void actualizarIdioma() {
+
+        //Actualiza los idiomas según los campos establecidos en los Resources
+        titulo.setText(bundle.getString("informesFuturos.titulo"));
+        informacion.setText(bundle.getString("informesFuturos.informacion"));
+        generarInformeButton.setText(bundle.getString("informes.generarInforme"));
+        visualizarInformeButton.setText(bundle.getString("informes.visualizarInforme"));
+        volverButton.setText(bundle.getString("informes.volver"));
+        seccionComboBox.setPromptText(bundle.getString("informesPasados.comboBox"));
+
+
+    }
+
+    private void cambiarIdioma(String idiomaSeleccionado) {
+        if ("Español".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
+            idiomas.setText("Español");
+            titulo.setLayoutX(70);
+            informacion.setLayoutX(80);
+
+        } else if ("Ingles".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("en", "EN"));
+            idiomas.setText("Ingles");
+            titulo.setLayoutX(95);
+            informacion.setLayoutX(75);
+
+        } else if ("Frances".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("fr", "FR"));
+            idiomas.setText("Frances");
+            titulo.setLayoutX(50);
+            informacion.setLayoutX(75);
+            generarInformeButton.setLayoutX(115);
+
+
+        }
+        actualizarIdioma();
     }
 }

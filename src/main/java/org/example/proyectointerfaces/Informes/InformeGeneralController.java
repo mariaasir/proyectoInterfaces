@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -15,17 +17,44 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import net.sf.jasperreports.engine.*;
 
-public class InformeGeneralController {
+public class InformeGeneralController
+ {
 
     @FXML
-    private Button generarInformeButton;
+    private Button generarInformeButton, visualizarInforme, volverButton;
 
     @FXML
-    private Button volverButton;
+    private Text titulo, informacion;
+
+    @FXML
+    private MenuButton idiomas;
 
     String ruta;
+
+    // Crear 3 items para el menuButton
+    javafx.scene.control.MenuItem español = new javafx.scene.control.MenuItem("Español");
+    javafx.scene.control.MenuItem ingles = new javafx.scene.control.MenuItem("Ingles");
+    javafx.scene.control.MenuItem frances = new javafx.scene.control.MenuItem("Frances");
+
+    // Crear el resource para establecer el idioma por defecto
+    ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
+
+    @FXML
+    public void initialize() {
+
+        // Añadir idiomas al menú una sola vez
+        idiomas.getItems().addAll(español, ingles, frances);
+
+        // Definir las acciones para cada elemento del menú
+        español.setOnAction(e -> cambiarIdioma("Español"));
+        ingles.setOnAction(e -> cambiarIdioma("Ingles"));
+        frances.setOnAction(e -> cambiarIdioma("Frances"));
+    }
 
     public void generarInforme() {
         try {
@@ -43,6 +72,7 @@ public class InformeGeneralController {
             fileChooser.setInitialFileName("hijos_informe.pdf");
 
             Stage stage = (Stage) generarInformeButton.getScene().getWindow();
+            stage.setResizable(false);
             File file = fileChooser.showSaveDialog(stage);
 
             // Si el usuario selecciona una ubicación para guardar
@@ -80,6 +110,7 @@ public class InformeGeneralController {
             Parent root = loader.load();
 
             Stage stageActual = (Stage) volverButton.getScene().getWindow();
+            stageActual.setResizable(false);
             stageActual.setScene(new Scene(root));
 
         } catch (IOException e) {
@@ -125,4 +156,32 @@ public class InformeGeneralController {
             alert.showAndWait();
         }
     }
+
+    private void actualizarIdioma() {
+        // Actualiza los idiomas según los campos establecidos en los Resources
+        titulo.setText(bundle.getString("informesGeneral.titulo"));
+        informacion.setText(bundle.getString("informesGeneral.informacion"));
+        generarInformeButton.setText(bundle.getString("informes.generarInforme"));
+        visualizarInforme.setText(bundle.getString("informes.visualizarInforme"));
+        volverButton.setText(bundle.getString("informes.volver"));
+    }
+
+    private void cambiarIdioma(String idiomaSeleccionado) {
+        if ("Español".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
+            idiomas.setText("Español");
+            titulo.setLayoutX(70);
+        } else if ("Ingles".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("en", "EN"));
+            idiomas.setText("Ingles");
+            titulo.setLayoutX(95);
+        } else if ("Frances".equals(idiomaSeleccionado)) {
+            bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("fr", "FR"));
+            idiomas.setText("Frances");
+            titulo.setLayoutX(70);
+            generarInformeButton.setLayoutX(122);
+        }
+        actualizarIdioma();
+    }
 }
+

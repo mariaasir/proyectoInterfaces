@@ -25,6 +25,7 @@ public class RegistroApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 400, 646);
         stage.setTitle("Registro");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

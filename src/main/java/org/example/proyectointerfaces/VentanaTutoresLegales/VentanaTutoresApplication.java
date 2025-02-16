@@ -15,6 +15,7 @@ public class VentanaTutoresApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 400, 629);
         stage.setTitle("Cuenta de tutor");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

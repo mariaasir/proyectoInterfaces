@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,38 +19,41 @@
         <Pane prefHeight="629.0" prefWidth="400.0" style="-fx-background-color: white;">
             <children>
                 <!-- Logo -->
-                <ImageView fitHeight="120.0" fitWidth="129.0" layoutX="136.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="120.0" fitWidth="129.0" layoutX="140.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@Imagenes/logo.jpg" />
                     </image>
                 </ImageView>
 
                 <!-- Título -->
-                <Text fill="#131a8e" layoutX="55.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INFORME DE EVENTOS PASADOS">
+                <Text fx:id="titulo" fill="#131a8e" layoutX="55.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INFORME DE EVENTOS PASADOS">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
 
                 <!-- ComboBox para selección de sección -->
-                <ComboBox fx:id="seccionComboBox" layoutX="75.0" layoutY="270.0" prefWidth="250.0" style="-fx-border-color: #131a8e; -fx-background-color: #f2f2f2; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-padding: 5px;">
+                <ComboBox fx:id="seccionComboBox" layoutX="75.0" layoutY="272.0" prefWidth="250.0" style="-fx-border-color: #131a8e; -fx-background-color: #f2f2f2; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-padding: 5px;">
                     <promptText>
                         <String fx:value="Selecciona una sección" />
                     </promptText>
                 </ComboBox>
 
                 <!-- Label y DatePicker para la fecha -->
-                <Label layoutX="78.0" layoutY="209.0" prefHeight="57.0" prefWidth="259.0" text="Se generará un informe con todos los eventos hasta la fecha actual de la sección seleccionada" textAlignment="CENTER" textFill="#131a8e" wrapText="true" />
+                <Label fx:id="informacion" layoutX="78.0" layoutY="209.0" prefHeight="57.0" prefWidth="259.0" text="Se generará un informe con todos los eventos hasta la fecha actual de la sección seleccionada" textAlignment="CENTER" textFill="#131a8e" wrapText="true" />
 
                 <!-- Botón para generar informe -->
-                <Button fx:id="generarInformeButton" layoutX="133.0" layoutY="338.0" mnemonicParsing="false" onAction="#generarInforme" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="GENERAR INFORME">
+                <Button fx:id="generarInformeButton" layoutX="124.0" layoutY="345.0" mnemonicParsing="false" onAction="#generarInforme" prefHeight="30.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="GENERAR INFORME" textAlignment="CENTER">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
                 </Button>
 
                 <!-- Botón para visualizar informe -->
-                <Button fx:id="visualizarInformeButton" layoutX="124.0" layoutY="389.0" mnemonicParsing="false" onAction="#visualizarInforme" prefHeight="30.0" prefWidth="154.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="VISUALIZAR INFORME">
+                <Button fx:id="visualizarInformeButton" layoutX="124.0" layoutY="389.0" mnemonicParsing="false" onAction="#visualizarInforme" prefHeight="30.0" prefWidth="154.0" style="-fx-background-color: #131a8e; -fx-background-radius: 20px; -fx-text-fill: white;" text="VISUALIZAR INFORME" textAlignment="CENTER">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -58,6 +63,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <MenuButton fx:id="idiomas" layoutX="316.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Idiomas" textFill="#131a8e" />
             </children>
         </Pane>
     </children>
