@@ -1,0 +1,11 @@
+module:org.example.proyectointerfaces
+org.example.proyectointerfaces
+org.example.proyectointerfaces.Hijos
+org.example.proyectointerfaces.Informes
+org.example.proyectointerfaces.InicioSesion
+org.example.proyectointerfaces.Monitores
+org.example.proyectointerfaces.Registro
+org.example.proyectointerfaces.SelectorInformes
+org.example.proyectointerfaces.Tutores_hijos
+org.example.proyectointerfaces.TutoresLegales
+org.example.proyectointerfaces.VentanaTutoresLegales
