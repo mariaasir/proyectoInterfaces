@@ -82,19 +82,32 @@ public class RegistroController {
         frances.setOnAction(e -> cambiarIdioma("Frances"));
     }
 
-
+    /**
+     * Limpia el estilo de los campos de entrada cuando el usuario empieza a escribir.
+     *
+     * @param field      Campo de entrada.
+     * @param errorLabel Etiqueta de error asociada al campo.
+     */
     private void limpiarEstilo(TextField field, Label errorLabel) {
         field.setStyle("-fx-border-radius: 5px; -fx-border-color: transparent; -fx-border-width: 1px;");
         errorLabel.setVisible(false); // Oculta el mensaje de error asociado
     }
 
+    /**
+     * Limpia el estilo de los campos de entrada cuando el usuario empieza a escribir.
+     *
+     * @param field      Campo de entrada pero en este caso de la contraseña.
+     * @param errorLabel Etiqueta de error asociada al campo.
+     */
     private void limpiarEstilo(PasswordField field, Label errorLabel) {
         field.setStyle("-fx-border-radius: 5px; -fx-border-color: transparent; -fx-border-width: 1px;");
         errorLabel.setVisible(false); // Oculta el mensaje de error asociado
     }
 
+    /**
+     * Metodo para actualizar el idioma en los campos de la interfaz.
+     */
     private void actualizarIdioma() {
-
         //Actualiza los idiomas según los campos establecidos en los Resources
         textNombre.setText(bundle.getString("registro.Nombre"));
         textApellidos.setText(bundle.getString("registro.Apellidos"));
@@ -120,11 +133,7 @@ public class RegistroController {
         botonRegistrarse.setText(bundle.getString("inicioSesion.BotonRegistrarse"));
         createAccount.setText(bundle.getString("registro.BotonIniciarSesion"));
         labelcrearCuenta.setText(bundle.getString("registro.LabelIniciarSesion"));
-
-
-
     }
-
 
     /**
      * Metodo para cambiar el idioma de la interfaz.
@@ -135,8 +144,6 @@ public class RegistroController {
         if ("Español".equals(idiomaSeleccionado)) {
             bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
             idiomas.setText("Español");
-
-
         } else if ("Ingles".equals(idiomaSeleccionado)) {
             bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("en", "EN"));
             idiomas.setText("Ingles");
@@ -145,7 +152,6 @@ public class RegistroController {
             titulo.setLayoutX(170);
             password1.setPromptText("Repeat the password");
             textFlow.setLayoutX(90);
-
         } else if ("Frances".equals(idiomaSeleccionado)) {
             bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("fr", "FR"));
             idiomas.setText("Frances");
@@ -154,15 +160,12 @@ public class RegistroController {
             textFlow.setLayoutX(90);
             titulo.setLayoutX(160);
             password1.setPromptText("Répétez le mot de passe");
-
-
         }
         actualizarIdioma();
     }
 
-
     /**
-     * Método que se ejecuta al registrar al tutor.
+     * Metodo que se ejecuta al registrar al tutor.
      * Realiza validaciones de los campos y registra al tutor si no hay errores.
      */
     public void registrarse() {
@@ -298,7 +301,6 @@ public class RegistroController {
         errorPassword.setVisible(false);
     }
 
-
     /**
      * Metodo para redirigir al usuario a la pantalla de inicio de sesión.
      */
@@ -321,6 +323,9 @@ public class RegistroController {
         }
     }
 
+    /**
+     * Metodo para abrir la ventana de ayuda.
+     */
     @FXML
     private void abrirAyuda() {
         Stage ayudaStage = new Stage();

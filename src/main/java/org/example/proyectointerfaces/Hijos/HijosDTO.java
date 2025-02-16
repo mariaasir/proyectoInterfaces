@@ -6,7 +6,6 @@ import java.time.LocalDate;
 /**
  * Clase DTO para representar la información de un hijo.
  */
-
 public class HijosDTO {
     private int id;
     private String nombre;

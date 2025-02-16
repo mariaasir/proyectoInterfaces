@@ -41,7 +41,7 @@ public class MonitoresDAO {
                 String email = rs.getString("Email");
                 String seccion = rs.getString("Seccion_Nombre");
 
-                MonitoresDTO nuevoMonitor = new MonitoresDTO(nombre, apellido,password, dni, fechaNacimiento, direccion, CP, telefono,  email,   seccion);
+                MonitoresDTO nuevoMonitor = new MonitoresDTO(nombre, apellido, password, dni, fechaNacimiento, direccion, CP, telefono, email, seccion);
                 nuevoMonitor.setId(id);
                 listaMonitores.add(nuevoMonitor);
             }

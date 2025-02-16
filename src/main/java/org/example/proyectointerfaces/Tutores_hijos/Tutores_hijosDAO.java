@@ -9,18 +9,31 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de acceso a datos para la tabla "tutores_hijos".
+ * Permite la obtención de las relaciones entre tutores e hijos desde la base de datos.
+ */
 public class Tutores_hijosDAO {
     Connection con = Conexion.getConexion();
 
+    /**
+     * Constructor vacío de la clase.
+     * La conexión a la base de datos se obtiene a través de la clase {@link Conexion}.
+     */
     public Tutores_hijosDAO() {
     }
 
-    public List<Tutores_hijosDTO> getTutores_hijos(){
+    /**
+     * Recupera la lista de relaciones entre tutores e hijos desde la base de datos.
+     *
+     * @return Lista de objetos con la información de tutores e hijos. En caso de error, retorna una lista vacía.
+     */
+    public List<Tutores_hijosDTO> getTutores_hijos() {
         List<Tutores_hijosDTO> lista = new ArrayList<>();
         String sql = "SELECT * FROM tutores_hijos";
 
         try (Statement sentencia = con.createStatement();
-             ResultSet rs = sentencia.executeQuery(sql)){
+             ResultSet rs = sentencia.executeQuery(sql)) {
 
             while (rs.next()) {
                 int id_padre = rs.getInt("TutorId");

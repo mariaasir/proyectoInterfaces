@@ -26,14 +26,15 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la generación de informes segun la seccion.
+ */
 public class InformeSeccionController {
-
     @FXML
     private ComboBox<String> seccionComboBox;
 
     @FXML
     private Button generarInformeButton, visualizarInforme, volverButton;
-
 
     @FXML
     private MenuButton idiomas;
@@ -54,30 +55,25 @@ public class InformeSeccionController {
     //Crea el resource para establecer el idioma por defecto
     ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
 
-
+    /**
+     * Metodo de inicialización del controlador.
+     * Se encarga de llenar el ComboBox con las secciones disponibles.
+     */
     @FXML
     public void initialize() {
-        // Agregar las secciones al ComboBox
-        seccionComboBox.getItems().addAll(
-                "Tribu", "Mambos", "Rhygings"
-        );
-
-
-        // Añadir idiomas al menú
+        seccionComboBox.getItems().addAll("Tribu", "Mambos", "Rhygings");
         idiomas.getItems().addAll(español, ingles, frances);
-
-
         español.setOnAction(e -> cambiarIdioma("Español"));
-
         ingles.setOnAction(e -> cambiarIdioma("Ingles"));
-
         frances.setOnAction(e -> cambiarIdioma("Frances"));
-
     }
 
+    /**
+     * Genera un informe de eventos futuros basado en la sección seleccionada.
+     * El informe se genera utilizando JasperReports y se guarda como un archivo PDF.
+     */
     public void generarInforme() {
         String seccionSeleccionada = seccionComboBox.getSelectionModel().getSelectedItem();
-
 
         // Validar si se ha seleccionado una sección y fecha
         if (seccionSeleccionada == null || seccionSeleccionada.isEmpty()) {
@@ -124,6 +120,12 @@ public class InformeSeccionController {
         }
     }
 
+    /**
+     * Muestra una alerta informativa en la interfaz de usuario.
+     *
+     * @param titulo  Título de la alerta.
+     * @param mensaje Mensaje a mostrar en la alerta.
+     */
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle(titulo);
@@ -132,6 +134,11 @@ public class InformeSeccionController {
         alerta.showAndWait();
     }
 
+    /**
+     * Regresa a la pantalla de selección de informes.
+     *
+     * @param event Evento de acción que desencadena el cambio de pantalla.
+     */
     @FXML
     private void volverASelector(ActionEvent event) {
         try {
@@ -148,6 +155,9 @@ public class InformeSeccionController {
         }
     }
 
+    /**
+     * Abre el informe generado en la aplicación predeterminada del sistema.
+     */
     public void visualizarInforme() {
         // Usamos la variable ruta que contiene la ruta del archivo generado
         if (ruta == null || ruta.isEmpty()) {
@@ -186,45 +196,41 @@ public class InformeSeccionController {
         }
     }
 
+    /**
+     * Metodo para actualizar el idioma en los componentes de la interfaz
+     */
     private void actualizarIdioma() {
-
-        //Actualiza los idiomas según los campos establecidos en los Resources
         titulo.setText(bundle.getString("informesSecciones.titulo"));
         informacion.setText(bundle.getString("informesSecciones.informacion"));
         generarInformeButton.setText(bundle.getString("informes.generarInforme"));
         visualizarInforme.setText(bundle.getString("informes.visualizarInforme"));
         volverButton.setText(bundle.getString("informes.volver"));
         seccionComboBox.setPromptText(bundle.getString("informesPasados.comboBox"));
-
-
     }
 
+    /**
+     * Metodo para detectar y cambia el idioma de la interfaz cuando el usuario interactue con el combobox
+     *
+     * @param idiomaSeleccionado es el texto que tiene el combobox para saber a que idioma se cambia.
+     */
     private void cambiarIdioma(String idiomaSeleccionado) {
         if ("Español".equals(idiomaSeleccionado)) {
             bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
             idiomas.setText("Español");
             titulo.setLayoutX(70);
             informacion.setLayoutX(80);
-
         } else if ("Ingles".equals(idiomaSeleccionado)) {
             bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("en", "EN"));
             idiomas.setText("Ingles");
             titulo.setLayoutX(125);
             informacion.setLayoutX(45);
-
         } else if ("Frances".equals(idiomaSeleccionado)) {
             bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("fr", "FR"));
             idiomas.setText("Frances");
             titulo.setLayoutX(100);
             informacion.setLayoutX(40);
             generarInformeButton.setLayoutX(120);
-
-
         }
         actualizarIdioma();
     }
-
 }
-
-
-

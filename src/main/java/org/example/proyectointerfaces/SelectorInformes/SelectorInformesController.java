@@ -18,8 +18,11 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la selección de informes en la aplicación.
+ * Permite al usuario elegir un tipo de informe y un idioma.
+ */
 public class SelectorInformesController {
-
     @FXML
     private MenuButton tipoInforme;
 
@@ -52,6 +55,9 @@ public class SelectorInformesController {
     // ResourceBundle para el idioma por defecto
     ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
 
+    /**
+     * Inicializa la interfaz de usuario, agregando opciones de informes e idiomas.
+     */
     @FXML
     public void initialize() {
         // Agregar los informes al MenuButton
@@ -70,6 +76,11 @@ public class SelectorInformesController {
         frances.setOnAction(e -> cambiarIdioma("Frances"));
     }
 
+    /**
+     * Confirma la selección del informe y carga la pantalla correspondiente.
+     *
+     * @param event Evento de acción del botón confirmar.
+     */
     @FXML
     private void confirmarSeleccion(ActionEvent event) {
         String selectedInforme = tipoInforme.getText();
@@ -93,6 +104,9 @@ public class SelectorInformesController {
         }
     }
 
+    /**
+     * Actualiza los textos de la interfaz según el idioma seleccionado.
+     */
     private void actualizarIdioma() {
         // Actualiza los textos de la interfaz de usuario con los textos del ResourceBundle
         titulo.setText(bundle.getString("informes.titulo"));
@@ -104,6 +118,11 @@ public class SelectorInformesController {
         informeZ.setText(bundle.getString("informes.secciones"));
     }
 
+    /**
+     * Cambia el idioma de la interfaz de usuario.
+     *
+     * @param idiomaSeleccionado Nombre del idioma seleccionado.
+     */
     private void cambiarIdioma(String idiomaSeleccionado) {
         // Cambia el idioma y actualiza la interfaz
         if ("Español".equals(idiomaSeleccionado)) {
@@ -116,10 +135,12 @@ public class SelectorInformesController {
             bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("fr", "FR"));
             idiomas.setText("Frances");
         }
-        // Actualizar los textos después de cambiar el idioma
         actualizarIdioma();
     }
 
+    /**
+     * Muestra una alerta si el usuario no ha seleccionado un informe.
+     */
     private void mostrarAlerta() {
         // Muestra una alerta si no se ha seleccionado un informe
         Alert alerta = new Alert(Alert.AlertType.WARNING);
@@ -129,6 +150,11 @@ public class SelectorInformesController {
         alerta.showAndWait();
     }
 
+    /**
+     * Carga una nueva pantalla según el informe seleccionado.
+     *
+     * @param rutaFXML Ruta del archivo FXML a cargar.
+     */
     private void cargarPantalla(String rutaFXML) {
         // Carga la pantalla de acuerdo al informe seleccionado
         try {
@@ -143,6 +169,9 @@ public class SelectorInformesController {
         }
     }
 
+    /**
+     * Metodo que abre la ventana de ayuda.
+     */
     @FXML
     private void abrirAyuda() {
         Stage ayudaStage = new Stage();

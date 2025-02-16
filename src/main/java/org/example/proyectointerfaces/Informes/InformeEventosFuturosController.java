@@ -11,7 +11,6 @@ import java.awt.*;
 import java.util.*;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -42,13 +41,12 @@ public class InformeEventosFuturosController {
     private MenuButton idiomas;
 
     @FXML
-    private Text titulo , informacion;
+    private Text titulo, informacion;
 
     @FXML
     private ComboBox<String> seccionComboBox; // Sección seleccionada
 
     String ruta;
-
 
     //Crea 3 items para el menuButton
     MenuItem español = new MenuItem("Español");
@@ -64,18 +62,11 @@ public class InformeEventosFuturosController {
      */
     @FXML
     public void initialize() {
-        seccionComboBox.getItems().addAll(
-                "Tribu", "Mambos", "Rhygings"
-        );
-
-        // Añadir idiomas al menú
+        seccionComboBox.getItems().addAll("Tribu", "Mambos", "Rhygings");
         idiomas.getItems().addAll(español, ingles, frances);
         español.setOnAction(e -> cambiarIdioma("Español"));
-
         ingles.setOnAction(e -> cambiarIdioma("Ingles"));
-
         frances.setOnAction(e -> cambiarIdioma("Frances"));
-
     }
 
     /**
@@ -215,8 +206,10 @@ public class InformeEventosFuturosController {
         alerta.showAndWait();
     }
 
+    /**
+     * Metodo para actualizar el idioma en los componentes de la interfaz
+     */
     private void actualizarIdioma() {
-
         //Actualiza los idiomas según los campos establecidos en los Resources
         titulo.setText(bundle.getString("informesFuturos.titulo"));
         informacion.setText(bundle.getString("informesFuturos.informacion"));
@@ -224,10 +217,13 @@ public class InformeEventosFuturosController {
         visualizarInformeButton.setText(bundle.getString("informes.visualizarInforme"));
         volverButton.setText(bundle.getString("informes.volver"));
         seccionComboBox.setPromptText(bundle.getString("informesPasados.comboBox"));
-
-
     }
 
+    /**
+     * Metodo para detectar y cambia el idioma de la interfaz cuando el usuario interactue con el combobox
+     *
+     * @param idiomaSeleccionado es el texto que tiene el combobox para saber a que idioma se cambia.
+     */
     private void cambiarIdioma(String idiomaSeleccionado) {
         if ("Español".equals(idiomaSeleccionado)) {
             bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
@@ -247,8 +243,6 @@ public class InformeEventosFuturosController {
             titulo.setLayoutX(50);
             informacion.setLayoutX(75);
             generarInformeButton.setLayoutX(115);
-
-
         }
         actualizarIdioma();
     }

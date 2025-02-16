@@ -1,10 +1,11 @@
 package org.example.proyectointerfaces.TutoresLegales;
 
-import org.example.proyectointerfaces.Hijos.HijosDTO;
-
 import java.time.LocalDate;
-import java.util.List;
 
+/**
+ * Clase DTO que representa un tutor legal.
+ * Se utiliza para transferir datos entre las capas de la aplicación.
+ */
 public class TutoresLegalesDTO {
     private int id;
     private String nombre;
@@ -17,8 +18,18 @@ public class TutoresLegalesDTO {
     private String CP;
     private String password;
 
-
-
+    /**
+     * Constructor de la clase para inicializar un objeto con los datos del tutor legal.
+     * @param nombre          Nombre del tutor.
+     * @param apellido        Apellido del tutor.
+     * @param dni             DNI del tutor.
+     * @param fechaNacimiento Fecha de nacimiento del tutor.
+     * @param telefono        Teléfono del tutor.
+     * @param email           Correo electrónico del tutor.
+     * @param direccion       Dirección del tutor.
+     * @param CP              Código Postal del tutor.
+     * @param password        Contraseña del tutor.
+     */
     public TutoresLegalesDTO(String nombre, String apellido, String dni, LocalDate fechaNacimiento, String telefono, String email, String direccion, String CP, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -111,6 +122,10 @@ public class TutoresLegalesDTO {
         this.password = password;
     }
 
+    /**
+     * Representación en cadena del objeto TutoresLegalesDTO.
+     * @return Una cadena con los valores de los atributos.
+     */
     @Override
     public String toString() {
         return "TutoresLegalesDTO{" +

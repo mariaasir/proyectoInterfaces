@@ -43,7 +43,6 @@ public class Conexion {
         return conexion;
     }
 
-
     /**
      * Metodo para cerrar la conexión
      */

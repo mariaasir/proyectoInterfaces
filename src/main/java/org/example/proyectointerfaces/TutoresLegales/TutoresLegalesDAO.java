@@ -3,20 +3,29 @@ package org.example.proyectointerfaces.TutoresLegales;
 import org.example.proyectointerfaces.Conexion;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
+/**
+ * Clase DAO para la gestión de tutores legales en la base de datos.
+ * Proporciona métodos para insertar y recuperar tutores legales.
+ */
 public class TutoresLegalesDAO {
     private Connection conexion = Conexion.getConexion();
 
-
-
+    /**
+     * Constructor vacío de la clase TutoresLegalesDAO.
+     */
     public TutoresLegalesDAO() {
     }
 
+    /**
+     * Inserta un nuevo tutor legal en la base de datos.
+     *
+     * @param tutoresLegal Objeto TutoresLegalesDTO que contiene los datos del tutor a insertar.
+     * @throws RuntimeException se lanza si ocurre un error durante la inserción.
+     */
     public void insertTutorLegal(TutoresLegalesDTO tutoresLegal) {
         String insertSql = "INSERT INTO tutoreslegales (Nombre, Apellidos, Password, DNI_NIE, Fecha_Nacimiento, Direccion, Codigo_Postal, Telefono, Email) VALUES (?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement insertStmt = conexion.prepareStatement(insertSql)) {
@@ -38,9 +47,11 @@ public class TutoresLegalesDAO {
         }
     }
 
-
-
-
+    /**
+     * Recupera la lista de todos los tutores legales almacenados en la base de datos.
+     *
+     * @return Lista de objetos TutoresLegalesDTO con los datos de cada tutor.
+     */
     public List<TutoresLegalesDTO> getTutores() {
         List<TutoresLegalesDTO> listaTutores = new ArrayList<>();
         String select = "SELECT * from tutoreslegales";
@@ -70,12 +81,6 @@ public class TutoresLegalesDAO {
             e.printStackTrace();
             return new ArrayList<>();
         }
-
-
         return listaTutores;
     }
-
-
-
-
 }

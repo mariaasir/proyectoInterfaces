@@ -22,9 +22,10 @@ import java.util.ResourceBundle;
 
 import net.sf.jasperreports.engine.*;
 
-public class InformeGeneralController
- {
-
+/**
+ * Controlador para la generación de informe general.
+ */
+public class InformeGeneralController {
     @FXML
     private Button generarInformeButton, visualizarInforme, volverButton;
 
@@ -44,18 +45,22 @@ public class InformeGeneralController
     // Crear el resource para establecer el idioma por defecto
     ResourceBundle bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
 
+    /**
+     * Metodo de inicialización del controlador.
+     * Se encarga de llenar el ComboBox con las secciones disponibles.
+     */
     @FXML
     public void initialize() {
-
-        // Añadir idiomas al menú una sola vez
         idiomas.getItems().addAll(español, ingles, frances);
-
-        // Definir las acciones para cada elemento del menú
         español.setOnAction(e -> cambiarIdioma("Español"));
         ingles.setOnAction(e -> cambiarIdioma("Ingles"));
         frances.setOnAction(e -> cambiarIdioma("Frances"));
     }
 
+    /**
+     * Genera un informe de eventos futuros basado en la sección seleccionada.
+     * El informe se genera utilizando JasperReports y se guarda como un archivo PDF.
+     */
     public void generarInforme() {
         try {
             // Conexión a la base de datos
@@ -103,6 +108,11 @@ public class InformeGeneralController
         }
     }
 
+    /**
+     * Regresa a la pantalla de selección de informes.
+     *
+     * @param event Evento de acción que desencadena el cambio de pantalla.
+     */
     @FXML
     private void volverASelector(ActionEvent event) {
         try {
@@ -119,6 +129,9 @@ public class InformeGeneralController
         }
     }
 
+    /**
+     * Abre el informe generado en la aplicación predeterminada del sistema.
+     */
     public void visualizarInforme() {
         // Usamos la variable ruta que contiene la ruta del archivo generado
         if (ruta == null || ruta.isEmpty()) {
@@ -157,6 +170,9 @@ public class InformeGeneralController
         }
     }
 
+    /**
+     * Metodo para actualizar el idioma en los componentes de la interfaz
+     */
     private void actualizarIdioma() {
         // Actualiza los idiomas según los campos establecidos en los Resources
         titulo.setText(bundle.getString("informesGeneral.titulo"));
@@ -166,6 +182,11 @@ public class InformeGeneralController
         volverButton.setText(bundle.getString("informes.volver"));
     }
 
+    /**
+     * Metodo para detectar y cambia el idioma de la interfaz cuando el usuario interactue con el combobox
+     *
+     * @param idiomaSeleccionado es el texto que tiene el combobox para saber a que idioma se cambia.
+     */
     private void cambiarIdioma(String idiomaSeleccionado) {
         if ("Español".equals(idiomaSeleccionado)) {
             bundle = ResourceBundle.getBundle("resourceIdiomas", new Locale("es", "ES"));
